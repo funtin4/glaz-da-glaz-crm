@@ -1,0 +1,323 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Глаз Да Глаз CRM 3.4</title>
+<style>
+:root{--b:#0b4f9c;--b2:#1473d1;--bg:#f4f7fb;--c:#fff;--t:#111827;--m:#667085;--l:#e6eaf0;--sh:0 18px 55px rgba(15,23,42,.09)}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:linear-gradient(#f8fbff,#edf3fb);color:var(--t)}
+.app{display:grid;grid-template-columns:300px 1fr;min-height:100vh}.side{background:#ffffffd9;border-right:1px solid var(--l);padding:24px;position:sticky;top:0;height:100vh}
+.brand{display:flex;gap:12px;align-items:center;margin-bottom:20px}.logo{width:52px;height:52px;border-radius:18px;background:linear-gradient(135deg,var(--b),var(--b2));color:#fff;display:flex;align-items:center;justify-content:center;font-size:26px;font-weight:900;box-shadow:var(--sh)}
+h1{font-size:22px;margin:0}.brand p{margin:3px 0 0;color:var(--m);font-size:13px}.stat{background:#fff;border:1px solid var(--l);border-radius:18px;padding:14px;margin:9px 0;box-shadow:0 8px 25px #0f172a0a}.stat span{display:block;color:var(--m);font-size:12px;font-weight:800;text-transform:uppercase}.stat b{font-size:25px}
+.nav{display:grid;gap:9px;margin-top:18px}.nav button,.btn{border:0;border-radius:15px;padding:13px 15px;font-weight:800;cursor:pointer;font-size:14px}.nav button{text-align:left;background:#f2f6fb}.nav button.active,.btn.primary{background:linear-gradient(135deg,var(--b),var(--b2));color:white}.btn{background:#fff;border:1px solid var(--l)}.btn.green{background:#16a34a;color:white;border:0}.btn.red{background:#fee2e2;color:#991b1b;border:0}.btn.small{padding:8px 10px;border-radius:11px;font-size:12px}
+.main{padding:26px}.top{display:flex;gap:12px;align-items:center;margin-bottom:20px}.search{flex:1}.search input{width:100%;padding:15px;border:1px solid var(--l);border-radius:18px;font-size:15px;box-shadow:0 8px 24px #0f172a0a}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:20px}.card{background:#fffffff2;border:1px solid var(--l);border-radius:22px;box-shadow:var(--sh);overflow:hidden}.card h2{margin:0;padding:18px 20px;border-bottom:1px solid var(--l);font-size:20px}
+.form{padding:18px 20px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field{display:grid;gap:6px}.w2{grid-column:span 2}.w3{grid-column:span 3}.w4{grid-column:span 4}label{font-size:11px;color:var(--m);text-transform:uppercase;font-weight:900}
+input,select,textarea{width:100%;border:1px solid #d9e2ee;background:#fbfdff;border-radius:14px;padding:11px 12px;font-size:14px}textarea{min-height:70px}.actions{grid-column:span 4;display:flex;gap:10px;justify-content:flex-end;flex-wrap:wrap}
+.page{display:none}.page.active{display:block}.orders{display:grid;gap:10px;padding:16px;max-height:650px;overflow:auto}.order{background:#fff;border:1px solid var(--l);border-radius:17px;padding:14px;cursor:pointer}.order:hover{border-color:#bfdbfe;box-shadow:0 10px 24px #0f172a14}.oh{display:flex;justify-content:space-between;gap:8px}.name{font-size:16px;font-weight:900}.meta{font-size:13px;color:var(--m);margin-top:5px;line-height:1.35}.pill{padding:6px 10px;border-radius:99px;font-size:12px;font-weight:900;white-space:nowrap}.new{background:#fee2e2;color:#991b1b}.ordered{background:#dbeafe;color:#1d4ed8}.work{background:#fef3c7;color:#92400e}.ready{background:#dcfce7;color:#166534}.done{background:#f3f4f6;color:#374151}.sale{background:#ede9fe;color:#5b21b6}
+.detail{padding:18px 20px;display:grid;gap:14px}.empty{padding:45px;text-align:center;color:var(--m)}.kv{display:grid;grid-template-columns:150px 1fr;gap:8px;font-size:14px}.money{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.money div{background:#f8fafc;border:1px solid var(--l);border-radius:16px;padding:13px}.money span{display:block;color:var(--m);font-size:11px;font-weight:900;text-transform:uppercase}.money b{font-size:21px}
+.items{grid-column:span 4;border:1px solid var(--l);border-radius:18px;overflow:hidden;background:#fff}.items-head,.item-row{display:grid;grid-template-columns:1.3fr .55fr .75fr .75fr 44px;gap:8px;align-items:center;padding:10px;border-bottom:1px solid var(--l)}.items-head{background:#f3f7fc;font-size:12px;color:var(--m);font-weight:900;text-transform:uppercase}.item-row input{padding:9px;border-radius:10px}.quick{grid-column:span 4;display:flex;gap:8px;flex-wrap:wrap}.quick .btn{font-size:12px;padding:9px 10px}.notice{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:16px;padding:12px;font-size:13px;font-weight:750}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:12px;border-bottom:1px solid var(--l);text-align:left;font-size:14px}.table th{font-size:12px;text-transform:uppercase;color:var(--m);background:#f8fafc}.hidden{display:none}
+.print-only{display:none}@media print{body{background:white}.app{display:block}.side,.top,.screen{display:none!important}.print-only{display:block!important}}.sheet{width:210mm;min-height:297mm;padding:8mm;background:white;color:black;font-family:Arial}.blank{height:137mm;border:1.5px solid #111;margin-bottom:7mm;padding:7mm;display:grid;grid-template-rows:auto 1fr auto}.bhead{display:flex;justify-content:space-between;border-bottom:2px solid #111;padding-bottom:6px;margin-bottom:6px}.bhead h3{margin:0;font-size:19px}.bhead div{font-size:12px;text-align:right;line-height:1.35}.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-size:13px}.full{grid-column:span 2}.recipe,.itab{border-collapse:collapse;width:100%;margin:4px 0}.recipe td,.recipe th,.itab td,.itab th{border:1px solid #555;padding:4px;text-align:center;font-size:12px}.itab th{background:#eee}.sign{display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:12px}.clientHint{grid-column:span 4;background:#eef6ff;border:1px solid #bfdbfe;color:#1d4ed8;border-radius:14px;padding:10px 12px;font-size:13px;font-weight:800;display:none}.orderNo{font-size:22px;font-weight:900;border:2px solid #111;padding:5px 8px;display:inline-block;margin-bottom:4px}
+@media(max-width:1050px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.grid{grid-template-columns:1fr}.form{grid-template-columns:repeat(2,1fr)}.w3,.w4,.actions,.items,.quick{grid-column:span 2}}
+</style></head><body>
+<div class="app screen"><aside class="side"><div class="brand"><div class="logo">Г</div><div><h1>Глаз Да Глаз</h1><p>Косухина 37А · 8 919 270-61-64<br>CRM 3.4 · клиенты, фильтры, бланки</p></div></div>
+<div class="stat"><span>Активные</span><b id="stActive">0</b></div><div class="stat"><span>Готово</span><b id="stReady">0</b></div><div class="stat"><span>Остаток</span><b id="stDebt">0 ₽</b></div><div class="stat"><span>Сегодня</span><b id="stToday">0 ₽</b></div>
+<div class="nav"><button type="button" class="active" onclick="showPage('orders',this)">📋 Заказы</button><button type="button" onclick="showPage('newGlasses',this)">👓 Изготовление</button><button type="button" onclick="showPage('repair',this)">🔧 Ремонт</button><button type="button" onclick="showPage('quickSale',this)">🕶 Аксессуары / солнце</button><button type="button" onclick="showPage('clients',this)">👥 Клиенты</button><button type="button" onclick="showPage('stats',this)">📊 Статистика</button><button type="button" onclick="showPage('catalog',this)">📦 Номенклатура</button></div></aside>
+<main class="main"><div class="top"><div class="search"><input id="search" oninput="renderAll()" placeholder="Поиск: фамилия, телефон, номер заказа"></div><button type="button" class="btn" onclick="exportExcel()">Экспорт Excel</button><button type="button" class="btn" onclick="backup()">💾 Сохранить базу</button><button type="button" class="btn" onclick="restoreClick()">Загрузить базу</button><input id="restoreFile" type="file" accept=".json" class="hidden" onchange="restore(event)"></div>
+<section id="orders" class="page active"><div class="grid"><div class="card"><h2>Все операции <span id="countBadge"></span></h2><div class="orders" id="ordersList"></div></div><div class="card"><h2>Карточка</h2><div id="detail" class="detail empty">Выбери заказ или создай новый.</div></div></div></section>
+<section id="newGlasses" class="page"><div class="card"><h2>👓 Изготовление очков</h2><div class="form">
+<div class="field w2"><label>Фамилия</label><input id="g_last"></div><div class="field w2"><label>Имя</label><input id="g_first"></div><div class="field w2"><label>Телефон</label><input id="g_phone" list="clientsList" oninput="suggestClient('g')" onblur="cleanPhoneField('g')"></div><div class="field w2"><label>Статус</label><select id="g_status"><option>Принят</option><option>Заказан</option><option>В мастерской</option><option>Готов</option><option>Выдан</option></select></div><div id="g_clientHint" class="clientHint"></div>
+<div class="field"><label>OD SPH</label><input id="g_odSph"></div><div class="field"><label>OD CYL</label><input id="g_odCyl"></div><div class="field"><label>OD AX</label><input id="g_odAx"></div><div class="field"><label>OD ADD</label><input id="g_odAdd"></div><div class="field"><label>OS SPH</label><input id="g_osSph"></div><div class="field"><label>OS CYL</label><input id="g_osCyl"></div><div class="field"><label>OS AX</label><input id="g_osAx"></div><div class="field"><label>OS ADD</label><input id="g_osAdd"></div><div class="field"><label>PD</label><input id="g_pd"></div><div class="field w3"><label>Комментарий</label><input id="g_comment"></div>
+<div class="quick"><button type="button" class="btn" onclick="pullClientToForm('g')">↻ Подтянуть клиента/рецепт</button><button type="button" class="btn" onclick="addItem('glasses','Оправа',1,0)">+ Оправа</button><button type="button" class="btn" onclick="addItem('glasses','Линзы',2,0)">+ Линзы</button><button type="button" class="btn" onclick="addItem('glasses','Изготовление ободковых',1,1000)">+ Ободковые 1000</button><button type="button" class="btn" onclick="addItem('glasses','Полуободковые',1,1500)">+ Полуободковые 1500</button><button type="button" class="btn" onclick="addItem('glasses','Безободковые',1,2000)">+ Безободковые 2000</button><button type="button" class="btn" onclick="addItem('glasses','Скидка',1,-1000)">+ Скидка</button></div>
+<div class="items"><div class="items-head"><div>Наименование</div><div>Кол-во</div><div>Цена</div><div>Сумма</div><div></div></div><div id="g_items"></div></div>
+<div class="field"><label>Итого</label><input id="g_total" readonly></div><div class="field"><label>Оплачено</label><input id="g_paid" oninput="calc('glasses')"></div><div class="field"><label>Доплата</label><input id="g_rest" readonly></div><div class="field"><label>Дата готовности</label><input id="g_ready" type="date"></div><div class="actions"><button type="button" class="btn" onclick="clearGlasses()">Очистить</button><button type="button" class="btn primary" onclick="saveGlasses()">Сохранить изготовление</button></div></div></div></section>
+<section id="repair" class="page"><div class="card"><h2>🔧 Ремонт очков</h2><div class="form">
+<div class="field w2"><label>Фамилия</label><input id="r_last"></div><div class="field w2"><label>Имя</label><input id="r_first"></div><div class="field w2"><label>Телефон</label><input id="r_phone" list="clientsList" oninput="suggestClient('r')" onblur="cleanPhoneField('r')"></div><div class="field w2"><label>Статус</label><select id="r_status"><option>Принят</option><option>В ремонте</option><option>Готов</option><option>Выдан</option></select></div><div id="r_clientHint" class="clientHint"></div>
+<div class="quick"><button type="button" class="btn" onclick="pullClientToForm('r')">↻ Подтянуть клиента</button><button type="button" class="btn" onclick="addItem('repair','Замена носоупоров',1,350)">+ Носоупоры 350</button><button type="button" class="btn" onclick="addItem('repair','Замена заушника',1,1000)">+ Заушник 1000</button><button type="button" class="btn" onclick="addItem('repair','Замена флекса',1,2500)">+ Флекс 2500</button><button type="button" class="btn" onclick="addItem('repair','Замена лески',1,500)">+ Леска 500</button><button type="button" class="btn" onclick="addItem('repair','Пайка',1,1500)">+ Пайка 1500</button><button type="button" class="btn" onclick="addItem('repair','Выправка',1,0)">+ Выправка</button></div>
+<div class="items"><div class="items-head"><div>Работа</div><div>Кол-во</div><div>Цена</div><div>Сумма</div><div></div></div><div id="r_items"></div></div>
+<div class="field"><label>Итого</label><input id="r_total" readonly></div><div class="field"><label>Оплачено</label><input id="r_paid" oninput="calc('repair')"></div><div class="field"><label>Доплата</label><input id="r_rest" readonly></div><div class="field"><label>Дата готовности</label><input id="r_ready" type="date"></div><div class="field w4"><label>Комментарий</label><textarea id="r_comment"></textarea></div><div class="actions"><button type="button" class="btn" onclick="clearRepair()">Очистить</button><button type="button" class="btn primary" onclick="saveRepair()">Сохранить ремонт</button></div></div></div></section>
+<section id="quickSale" class="page"><div class="card"><h2>🕶 Быстрая продажа</h2><div class="form"><div class="field w2"><label>Тип</label><select id="s_type"><option>Аксессуары</option><option>Солнцезащитные очки</option></select></div><div class="field w2"><label>Клиент / телефон необязательно</label><input id="s_client" list="clientsList"></div>
+<div class="quick"><button type="button" class="btn" onclick="addItem('sale','Футляр',1,500)">+ Футляр 500</button><button type="button" class="btn" onclick="addItem('sale','Салфетка',1,150)">+ Салфетка 150</button><button type="button" class="btn" onclick="addItem('sale','Спрей',1,350)">+ Спрей 350</button><button type="button" class="btn" onclick="addItem('sale','Цепочка/шнурок',1,300)">+ Цепочка 300</button><button type="button" class="btn" onclick="addItem('sale','Солнцезащитные очки',1,0)">+ Солнцезащитные</button></div>
+<div class="items"><div class="items-head"><div>Позиция</div><div>Кол-во</div><div>Цена</div><div>Сумма</div><div></div></div><div id="s_items"></div></div><div class="field"><label>Итого</label><input id="s_total" readonly></div><div class="field"><label>Оплачено</label><input id="s_paid" oninput="calc('sale')"></div><div class="field"><label>Доплата</label><input id="s_rest" readonly></div><div class="field"><label>Комментарий</label><input id="s_comment"></div><div class="actions"><button type="button" class="btn" onclick="clearSale()">Очистить</button><button type="button" class="btn primary" onclick="saveSale()">Продано</button></div></div></div></section>
+<section id="clients" class="page"><div class="card"><h2>👥 Клиенты</h2><div style="padding:18px;overflow:auto"><table class="table" id="clientsTable"></table></div></div></section><section id="stats" class="page"><div class="card"><h2>📊 Статистика</h2>
+<div class="form">
+  <div class="field"><label>Дата с</label><input id="stat_from" type="date" onchange="renderStatsBox()"></div>
+  <div class="field"><label>Дата по</label><input id="stat_to" type="date" onchange="renderStatsBox()"></div>
+  <div class="field"><label>Тип</label><select id="stat_type" onchange="renderStatsBox()"><option value="all">Все</option><option value="glasses">Изготовление</option><option value="repair">Ремонт</option><option value="sale">Аксессуары / солнце</option></select></div>
+  <div class="field"><label>Статус</label><select id="stat_status" onchange="renderStatsBox()"><option value="all">Все</option><option>Принят</option><option>Заказан</option><option>В мастерской</option><option>В ремонте</option><option>Готов</option><option>Выдан</option><option>Продано</option></select></div>
+  <div class="field"><label>Быстро</label><select onchange="quickStatPeriod(this.value);this.value='';"><option value="">Выбрать</option><option value="today">Сегодня</option><option value="week">7 дней</option><option value="month">Этот месяц</option><option value="clear">Сбросить</option></select></div>
+</div>
+<div style="padding:18px" id="statsBox"></div></div></section>
+
+<section id="catalog" class="page">
+  <div class="card">
+    <h2>📦 Номенклатура</h2>
+    <div class="form">
+      <div class="field w2"><label>Тип</label><select id="cat_type"><option>Линзы</option><option>Оправы</option><option>Работа</option><option>Аксессуары</option><option>Ремонт</option></select></div>
+      <div class="field w2"><label>Название</label><input id="cat_name" placeholder="Например: Crizal Rock 1.6"></div>
+      <div class="field"><label>Цена</label><input id="cat_price" placeholder="0"></div>
+      <div class="field w3"><label>Комментарий</label><input id="cat_comment" placeholder="Поставщик / индекс / покрытие"></div>
+      <div class="actions"><button type="button" class="btn primary" onclick="addCatalog()">Добавить в базу</button></div>
+      <div class="field w4"><label>Быстрый импорт</label><textarea id="cat_bulk" placeholder="Вставь из Excel строки: Название;Цена;Тип&#10;Crizal Rock 1.6;3500;Линзы&#10;Ray-Ban 7140;5000;Оправы"></textarea></div>
+      <div class="actions"><button type="button" class="btn" onclick="bulkCatalog()">Импортировать строки</button></div>
+      <div class="field w4"><label>Список номенклатуры</label><div style="overflow:auto;max-height:420px"><table class="table" id="catalogTable"></table></div></div>
+    </div>
+  </div>
+</section>
+<datalist id="clientsList"></datalist>
+<datalist id="catalogList"></datalist>
+</main></div><section class="print-only"><div class="sheet"><div class="blank" id="p1"></div><div class="blank" id="p2"></div></div></section>
+<script>
+const APP_META={app:'glaz-da-glaz-crm',appName:'Глаз Да Глаз CRM',version:'3.4',schemaVersion:1};
+const KEY='gdz_crm3_data_v1';
+const OLD_KEYS=['gdz_crm3_data_v1','glaz_da_glaz_orders_v2'];function emptyDb(){return {app:APP_META.app,version:APP_META.version,schemaVersion:APP_META.schemaVersion,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),orders:[],catalog:[]}}
+function normalizeDb(raw){
+  let data=raw;
+  if(!data) return emptyDb();
+  if(Array.isArray(data)) data={orders:data};
+  if(data.orders===undefined && data.app===undefined) data={orders:[]};
+  if(!Array.isArray(data.orders)) data.orders=[]; if(!Array.isArray(data.catalog)) data.catalog=[];
+  data.app=data.app||APP_META.app;
+  data.version=data.version||'legacy';
+  data.schemaVersion=data.schemaVersion||1;
+  data.createdAt=data.createdAt||new Date().toISOString();
+  data.updatedAt=new Date().toISOString();
+  data.orders=data.orders.map(o=>({
+    id:o.id||String(Date.now()+Math.random()),
+    type:o.type||'glasses',
+    typeName:o.typeName||(o.type==='repair'?'Ремонт':o.type==='sale'?'Продажа':'Изготовление'),
+    number:o.number||0,
+    created:o.created||o.createdAt||now(),
+    last:o.last||o.lastName||'',
+    first:o.first||o.firstName||'',
+    phone:o.phone||'',
+    status:o.status||'Принят',
+    comment:o.comment||'',
+    items:Array.isArray(o.items)?o.items:[],
+    total:n(o.total),
+    paid:n(o.paid),
+    rest:n(o.rest),
+    ready:o.ready||o.readyDate||'',
+    odSph:o.odSph||'',odCyl:o.odCyl||'',odAx:o.odAx||'',odAdd:o.odAdd||'',
+    osSph:o.osSph||'',osCyl:o.osCyl||'',osAx:o.osAx||'',osAdd:o.osAdd||'',pd:o.pd||''
+  }));
+  return data;
+}
+function loadDb(){
+  for(const k of OLD_KEYS){
+    const raw=localStorage.getItem(k);
+    if(raw){
+      try{return normalizeDb(JSON.parse(raw))}catch(e){}
+    }
+  }
+  return emptyDb();
+}
+let db=loadDb(),editId=null,buffers={glasses:[],repair:[],sale:[]};
+function gid(id){return document.getElementById(id)}function v(id){return gid(id).value.trim()}function sv(id,x){gid(id).value=x??''}function n(x){return Number(String(x||'').replace(/\s/g,'').replace(',','.'))||0}function money(x){return n(x).toLocaleString('ru-RU')+' ₽'}function now(){return new Date().toLocaleString('ru-RU')}function today(){return new Date().toLocaleDateString('ru-RU')}function save(){db.app=APP_META.app;db.version=APP_META.version;db.schemaVersion=APP_META.schemaVersion;db.updatedAt=new Date().toISOString();localStorage.setItem(KEY,JSON.stringify(db));renderAll()}function numNext(t){return db.orders.filter(o=>o.type===t).reduce((m,o)=>Math.max(m,o.number||0),0)+1}
+function pref(b){return b==='glasses'?'g':b==='repair'?'r':'s'}function addItem(b,name,qty,price){buffers[b].push({name,qty,price});renderItems(b)}function rem(b,i){buffers[b].splice(i,1);renderItems(b)}function sum(b){return buffers[b].reduce((s,i)=>s+n(i.qty)*n(i.price),0)}function calc(b){let p=pref(b),t=sum(b);sv(p+'_total',t);sv(p+'_rest',Math.max(t-n(v(p+'_paid')),0))}
+function commitItem(b,i,field,value){
+  if(!buffers[b] || !buffers[b][i]) return;
+  if(field==='name') buffers[b][i].name=value;
+  if(field==='qty') buffers[b][i].qty=n(value);
+  if(field==='price') buffers[b][i].price=n(value);
+  renderItems(b);
+}
+function renderItems(b){
+  let p=pref(b);
+  gid(p+'_items').innerHTML=buffers[b].map((it,i)=>`
+    <div class="item-row">
+      <input list="catalogList" value="${it.name||''}" onchange="commitItem('${b}',${i},'name',this.value)">
+      <input value="${it.qty||''}" onchange="commitItem('${b}',${i},'qty',this.value)">
+      <input value="${it.price||''}" onchange="commitItem('${b}',${i},'price',this.value)">
+      <b>${money(n(it.qty)*n(it.price))}</b>
+      <button type="button" class="btn small red" onclick="rem('${b}',${i})">×</button>
+    </div>`).join('');
+  calc(b);
+}
+function upsert(o){let i=db.orders.findIndex(x=>x.id===o.id);i>=0?db.orders[i]=o:db.orders.unshift(o);editId=null;save()}
+function saveGlasses(){if(!v('g_last')&&!v('g_first')&&!v('g_phone'))return alert('Укажи клиента');let old=db.orders.find(x=>x.id===editId)||{};upsert({id:editId||String(Date.now()),type:'glasses',typeName:'Изготовление',number:old.number||numNext('glasses'),created:old.created||now(),last:v('g_last'),first:v('g_first'),phone:v('g_phone'),status:v('g_status'),odSph:v('g_odSph'),odCyl:v('g_odCyl'),odAx:v('g_odAx'),odAdd:v('g_odAdd'),osSph:v('g_osSph'),osCyl:v('g_osCyl'),osAx:v('g_osAx'),osAdd:v('g_osAdd'),pd:v('g_pd'),comment:v('g_comment'),items:[...buffers.glasses],total:n(v('g_total')),paid:n(v('g_paid')),rest:n(v('g_rest')),ready:v('g_ready')});clearGlasses();showPageById('orders')}
+function saveRepair(){if(!v('r_last')&&!v('r_first')&&!v('r_phone'))return alert('Укажи клиента');let old=db.orders.find(x=>x.id===editId)||{};upsert({id:editId||String(Date.now()),type:'repair',typeName:'Ремонт',number:old.number||numNext('repair'),created:old.created||now(),last:v('r_last'),first:v('r_first'),phone:v('r_phone'),status:v('r_status'),comment:v('r_comment'),items:[...buffers.repair],total:n(v('r_total')),paid:n(v('r_paid')),rest:n(v('r_rest')),ready:v('r_ready')});clearRepair();showPageById('orders')}
+function saveSale(){let raw=v('s_client');upsert({id:String(Date.now()),type:'sale',typeName:v('s_type'),number:numNext('sale'),created:now(),last:raw,first:'',phone:'',status:'Продано',comment:v('s_comment'),items:[...buffers.sale],total:n(v('s_total')),paid:n(v('s_paid'))||n(v('s_total')),rest:n(v('s_rest'))});clearSale();showPageById('orders')}
+function clearGlasses(){editId=null;['last','first','phone','odSph','odCyl','odAx','odAdd','osSph','osCyl','osAx','osAdd','pd','comment','paid','total','rest','ready'].forEach(k=>sv('g_'+k,''));sv('g_status','Принят');buffers.glasses=[];renderItems('glasses')}
+function clearRepair(){editId=null;['last','first','phone','comment','paid','total','rest','ready'].forEach(k=>sv('r_'+k,''));sv('r_status','Принят');buffers.repair=[];renderItems('repair')}function clearSale(){['client','comment','paid','total','rest'].forEach(k=>sv('s_'+k,''));buffers.sale=[];renderItems('sale')}
+function cls(s,t){return t==='sale'?'sale':s==='Принят'?'new':(s==='Заказан'||s==='В ремонте')?'ordered':s==='В мастерской'?'work':s==='Готов'?'ready':'done'}
+function renderOrders(){let q=v('search').toLowerCase();let list=db.orders.filter(o=>[o.number,o.typeName,o.last,o.first,o.phone,o.status,...(o.items||[]).map(i=>i.name)].join(' ').toLowerCase().includes(q));gid('countBadge').textContent=list.length+' шт.';gid('ordersList').innerHTML=list.length?list.map(o=>`<div class="order" onclick="select('${o.id}')"><div class="oh"><div><div class="name">${o.last||''} ${o.first||''}</div><div class="meta">${o.typeName} №${o.number} · ${o.created}</div></div><span class="pill ${cls(o.status,o.type)}">${o.status}</span></div><div class="meta">${o.phone||''}</div><div class="meta">Итого: <b>${money(o.total)}</b> · Остаток: <b>${money(o.rest)}</b></div></div>`).join(''):'<div class="empty">Ничего не найдено</div>'}
+function select(id){
+  let o=db.orders.find(x=>x.id===id);
+  if(!o)return;
+  let rec='';
+  if(o.type==='glasses'){
+    rec=`<div class="kv"><b>Рецепт</b><span>
+      OD ${o.odSph||''} ${o.odCyl||''} x${o.odAx||''}<br>
+      OS ${o.osSph||''} ${o.osCyl||''} x${o.osAx||''}<br>
+      PD ${o.pd||''}
+    </span></div>`;
+  }
+  let items=(o.items||[]).map(i=>`${i.name} — ${i.qty} × ${money(i.price)} = ${money(n(i.qty)*n(i.price))}`).join('<br>');
+  let buttons=`<button type="button" class="btn primary" onclick="printDoc('${o.id}')">Печать</button>`;
+  if(o.type!=='sale'){
+    buttons+=`<button type="button" class="btn" onclick="editOrder('${o.id}')">Редактировать</button>`;
+    buttons+=`<button type="button" class="btn green" onclick="setStatus('${o.id}','Готов')">Готов</button>`;
+    buttons+=`<button type="button" class="btn" onclick="setStatus('${o.id}','Выдан')">Выдан</button>`;
+  }
+  buttons+=`<button type="button" class="btn red" onclick="delOrder('${o.id}')">Удалить</button>`;
+  gid('detail').className='detail';
+  gid('detail').innerHTML=`
+    <div class="oh">
+      <div><h2 style="padding:0;border:0;margin:0">${o.typeName} №${o.number}</h2><div class="meta">${o.created}</div></div>
+      <span class="pill ${cls(o.status,o.type)}">${o.status}</span>
+    </div>
+    <div class="kv"><b>Клиент</b><span>${o.last||''} ${o.first||''}</span></div>
+    <div class="kv"><b>Телефон</b><span>${o.phone||''}</span></div>
+    ${rec}
+    <div class="kv"><b>Состав</b><span>${items||'—'}</span></div>
+    <div class="money"><div><span>Итого</span><b>${money(o.total)}</b></div><div><span>Оплачено</span><b>${money(o.paid)}</b></div><div><span>Остаток</span><b>${money(o.rest)}</b></div></div>
+    ${o.rest>0?'<div class="notice">⚠ Остаток к оплате: '+money(o.rest)+'</div>':''}
+    <div class="kv"><b>Комментарий</b><span>${o.comment||''}</span></div>
+    <div class="actions" style="justify-content:flex-start">${buttons}</div>`;
+}
+function editOrder(id){let o=db.orders.find(x=>x.id===id);if(!o)return;editId=id;if(o.type==='glasses'){showPageById('newGlasses');['last','first','phone','status','odSph','odCyl','odAx','odAdd','osSph','osCyl','osAx','osAdd','pd','comment','paid','ready'].forEach(k=>sv('g_'+k,o[k]));buffers.glasses=[...(o.items||[])];renderItems('glasses')}if(o.type==='repair'){showPageById('repair');['last','first','phone','status','comment','paid','ready'].forEach(k=>sv('r_'+k,o[k]));buffers.repair=[...(o.items||[])];renderItems('repair')}}
+function setStatus(id,s){let o=db.orders.find(x=>x.id===id);if(o){o.status=s;if(s==='Выдан')o.rest=0;save();select(id)}}function delOrder(id){if(confirm('Удалить запись?')){db.orders=db.orders.filter(o=>o.id!==id);gid('detail').className='detail empty';gid('detail').innerHTML='Выбери заказ или создай новый.';save()}}
+function renderStats(){gid('stActive').textContent=db.orders.filter(o=>o.type!=='sale'&&o.status!=='Выдан').length;gid('stReady').textContent=db.orders.filter(o=>o.status==='Готов').length;gid('stDebt').textContent=money(db.orders.filter(o=>o.status!=='Выдан').reduce((s,o)=>s+n(o.rest),0));gid('stToday').textContent=money(db.orders.filter(o=>(o.created||'').startsWith(today())).reduce((s,o)=>s+n(o.paid),0))}
+function renderClients(){let m={};db.orders.forEach(o=>{let k=(o.phone||o.last||'Без имени').trim();if(!m[k])m[k]={name:(o.last+' '+(o.first||'')).trim(),phone:o.phone,count:0,sum:0,last:''};m[k].count++;m[k].sum+=n(o.total);m[k].last=o.created});let rows=Object.values(m).sort((a,b)=>b.count-a.count);gid('clientsTable').innerHTML='<tr><th>Клиент</th><th>Телефон</th><th>Посещений</th><th>Сумма</th><th>Последний визит</th></tr>'+rows.map(r=>`<tr><td>${r.name||'—'}</td><td>${r.phone||'—'}</td><td>${r.count}</td><td>${money(r.sum)}</td><td>${r.last}</td></tr>`).join('')}
+
+function parseCreatedDate(s){
+  if(!s) return null;
+  let d=(s.split(',')[0]||s).trim();
+  let p=d.split('.');
+  if(p.length<3) return null;
+  return new Date(Number(p[2]), Number(p[1])-1, Number(p[0]));
+}
+function isoDate(d){return d.toISOString().slice(0,10)}
+function quickStatPeriod(kind){
+  let nowD=new Date(), from='', to='';
+  if(kind==='today'){from=to=isoDate(nowD)}
+  if(kind==='week'){let f=new Date(nowD);f.setDate(f.getDate()-6);from=isoDate(f);to=isoDate(nowD)}
+  if(kind==='month'){from=isoDate(new Date(nowD.getFullYear(),nowD.getMonth(),1));to=isoDate(nowD)}
+  if(kind==='clear'){from='';to=''}
+  sv('stat_from',from); sv('stat_to',to); renderStatsBox();
+}
+function filteredOrdersForStats(){
+  let from=gid('stat_from')?v('stat_from'):'', to=gid('stat_to')?v('stat_to'):'', type=gid('stat_type')?v('stat_type'):'all', status=gid('stat_status')?v('stat_status'):'all';
+  let fromD=from?new Date(from+'T00:00:00'):null, toD=to?new Date(to+'T23:59:59'):null;
+  return db.orders.filter(o=>{
+    if(type && type!=='all' && o.type!==type) return false;
+    if(status && status!=='all' && o.status!==status) return false;
+    let d=parseCreatedDate(o.created);
+    if(fromD && d && d<fromD) return false;
+    if(toD && d && d>toD) return false;
+    return true;
+  });
+}
+function renderStatsBox(){
+  let arr=filteredOrdersForStats();
+  let total=arr.reduce((s,o)=>s+n(o.total),0), paid=arr.reduce((s,o)=>s+n(o.paid),0), debt=arr.reduce((s,o)=>s+n(o.rest),0);
+  let byType={glasses:0,repair:0,sale:0}, byTypeSum={glasses:0,repair:0,sale:0}, byStatus={};
+  arr.forEach(o=>{byType[o.type]=(byType[o.type]||0)+1;byTypeSum[o.type]=(byTypeSum[o.type]||0)+n(o.total); byStatus[o.status]=(byStatus[o.status]||0)+1});
+  let avg=arr.length?total/arr.length:0;
+  gid('statsBox').innerHTML=`<div class="money"><div><span>Всего</span><b>${money(total)}</b></div><div><span>Оплачено</span><b>${money(paid)}</b></div><div><span>Остаток</span><b>${money(debt)}</b></div></div><br>
+  <div class="money"><div><span>Заказов</span><b>${arr.length}</b></div><div><span>Средний чек</span><b>${money(avg)}</b></div><div><span>Клиентов</span><b>${new Set(arr.map(o=>o.phone||o.last).filter(Boolean)).size}</b></div></div><br>
+  <table class="table"><tr><th>Статус</th><th>Количество</th><th></th></tr>${Object.keys(byStatus).map(k=>`<tr><td>${k}</td><td>${byStatus[k]}</td><td></td></tr>`).join('')}</table><br><table class="table"><tr><th>Тип</th><th>Количество</th><th>Сумма</th></tr>
+  <tr><td>Изготовление</td><td>${byType.glasses||0}</td><td>${money(byTypeSum.glasses||0)}</td></tr>
+  <tr><td>Ремонт</td><td>${byType.repair||0}</td><td>${money(byTypeSum.repair||0)}</td></tr>
+  <tr><td>Аксессуары / солнце</td><td>${byType.sale||0}</td><td>${money(byTypeSum.sale||0)}</td></tr></table>`;
+}
+
+function digits(x){return String(x||'').replace(/\D/g,'')}
+function cleanPhoneField(prefix){
+  let raw=v(prefix+'_phone');
+  // если выбрали клиента из выпадающего списка вида "телефон — имя", оставляем только телефон
+  if(raw.includes('—')) sv(prefix+'_phone',raw.split('—')[0].trim());
+}
+function findClientByQuery(q){
+  let raw=String(q||'').trim().toLowerCase();
+  let qDigits=digits(raw);
+  let matches=db.orders.filter(o=>{
+    let phone=digits(o.phone||'');
+    let name=((o.last||'')+' '+(o.first||'')).toLowerCase();
+    return (qDigits && phone.includes(qDigits)) || (raw && name.includes(raw));
+  }).sort((a,b)=>String(b.created||'').localeCompare(String(a.created||'')));
+  return matches.length?matches[0]:null;
+}
+function pullClientToForm(prefix){
+  cleanPhoneField(prefix);
+  let phone=v(prefix+'_phone'), last=v(prefix+'_last'), first=v(prefix+'_first');
+  let q=phone||last||first;
+  let o=findClientByQuery(q);
+  if(!o){alert('Клиент не найден в базе');return;}
+  sv(prefix+'_last',o.last||''); sv(prefix+'_first',o.first||''); sv(prefix+'_phone',o.phone||'');
+  if(prefix==='g'){
+    ['odSph','odCyl','odAx','odAdd','osSph','osCyl','osAx','osAdd','pd'].forEach(k=>sv('g_'+k,o[k]||''));
+  }
+  let h=gid(prefix+'_clientHint');
+  if(h){h.style.display='block';h.innerHTML='✓ Клиент подтянут из базы: '+(o.last||'')+' '+(o.first||'')+' · '+(o.phone||'')}
+}
+function suggestClient(prefix){
+  let q=v(prefix+'_phone');
+  let h=gid(prefix+'_clientHint');
+  if(!h) return;
+  let o=findClientByQuery(q);
+  if(q && o){
+    h.style.display='block';
+    h.innerHTML='Клиент уже есть в базе: <b>'+(o.last||'')+' '+(o.first||'')+'</b> · '+(o.phone||'')+' <button type="button" class="btn small" onclick="pullClientToForm(\''+prefix+'\')">Подтянуть</button>';
+  } else {
+    h.style.display='none'; h.innerHTML='';
+  }
+}
+function renderClientDatalist(){
+  let seen=new Set(), html='';
+  db.orders.forEach(o=>{
+    let phone=(o.phone||'').trim();
+    let name=((o.last||'')+' '+(o.first||'')).trim();
+    if(phone && !seen.has(phone)){seen.add(phone); html+=`<option value="${phone}" label="${name}"></option>`}
+  });
+  if(gid('clientsList')) gid('clientsList').innerHTML=html;
+}
+function renderCatalogDatalist(){
+  let html=(db.catalog||[]).map(c=>`<option value="${c.name}">${c.type||''} ${c.price?money(c.price):''}</option>`).join('');
+  if(gid('catalogList')) gid('catalogList').innerHTML=html;
+}
+function renderCatalog(){
+  if(!gid('catalogTable')) return;
+  let rows=(db.catalog||[]);
+  gid('catalogTable').innerHTML='<tr><th>Тип</th><th>Название</th><th>Цена</th><th>Комментарий</th><th></th></tr>'+rows.map((c,i)=>`<tr><td>${c.type||''}</td><td>${c.name||''}</td><td>${money(c.price||0)}</td><td>${c.comment||''}</td><td><button type="button" class="btn small red" onclick="deleteCatalog(${i})">Удалить</button></td></tr>`).join('');
+}
+function addCatalog(){
+  let c={type:v('cat_type'),name:v('cat_name'),price:n(v('cat_price')),comment:v('cat_comment')};
+  if(!c.name){alert('Укажи название');return;}
+  db.catalog=db.catalog||[]; db.catalog.push(c);
+  sv('cat_name','');sv('cat_price','');sv('cat_comment','');save();
+}
+function bulkCatalog(){
+  let lines=v('cat_bulk').split(/\n+/).map(x=>x.trim()).filter(Boolean);
+  db.catalog=db.catalog||[];
+  lines.forEach(line=>{
+    let parts=line.split(/[;\t]/).map(x=>x.trim());
+    let name=parts[0]||'', price=n(parts[1]), type=parts[2]||v('cat_type')||'Прочее';
+    if(name) db.catalog.push({type,name,price,comment:''});
+  });
+  sv('cat_bulk','');save();
+}
+function deleteCatalog(i){db.catalog.splice(i,1);save();}
+function renderAll(){renderStats();renderOrders();renderClients();renderStatsBox();renderClientDatalist();renderCatalogDatalist();renderCatalog()}function showPage(id,b){showPageById(id);document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active')}function showPageById(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));gid(id).classList.add('active')}
+function blank(o,title){let rows=(o.items||[]).map(i=>`<tr><td>${i.name}</td><td>${i.qty}</td><td>${money(i.price)}</td><td>${money(n(i.qty)*n(i.price))}</td></tr>`).join('');let rec=o.type==='glasses'?`<table class="recipe"><tr><th></th><th>SPH</th><th>CYL</th><th>AX</th><th>ADD</th></tr><tr><th>OD</th><td>${o.odSph||''}</td><td>${o.odCyl||''}</td><td>${o.odAx||''}</td><td>${o.odAdd||''}</td></tr><tr><th>OS</th><td>${o.osSph||''}</td><td>${o.osCyl||''}</td><td>${o.osAx||''}</td><td>${o.osAdd||''}</td></tr></table><div>PD: <b>${o.pd||''}</b></div>`:'';return `<div class="bhead"><h3>Глаз Да Глаз<br><small>${title}</small></h3><div><span class="orderNo">ЗАКАЗ №${o.number}</span><br><span style="font-size:12px;font-weight:400">Косухина, 37А<br>8 (919) 270-61-64</span></div></div><div class="bgrid"><div>Дата: ${o.created}</div><div>Статус: ${o.status}</div><div>Клиент: <b>${o.last||''} ${o.first||''}</b></div><div>Телефон: ${o.phone||''}</div><div class="full">${rec}</div><div class="full"><table class="itab"><tr><th>Наименование</th><th>Кол-во</th><th>Цена</th><th>Сумма</th></tr>${rows}</table></div><div>Итого: <b>${money(o.total)}</b></div><div>Оплачено: <b>${money(o.paid)}</b> Остаток: <b>${money(o.rest)}</b></div><div class="full">Комментарий: ${o.comment||''}</div></div><div class="sign"><div>Подпись клиента: __________________</div><div>Подпись врача/специалиста: __________________</div></div><div style="font-size:12px;color:#333">Сохраняйте бланк до получения заказа.</div>`}
+function printDoc(id){let o=db.orders.find(x=>x.id===id);if(!o)return;let t=o.type==='repair'?'Квитанция ремонта':o.type==='sale'?'Товарный бланк':'Бланк заказа';gid('p1').innerHTML=blank(o,t+' — клиенту');gid('p2').innerHTML=blank(o,t+' — в оптику');window.print()}
+function exportExcel(){let h=['Дата','Тип','№','Клиент','Телефон','Статус','Состав','Итого','Оплачено','Остаток','Комментарий'];let rows=db.orders.map(o=>[o.created,o.typeName,o.number,(o.last+' '+(o.first||'')).trim(),o.phone,o.status,(o.items||[]).map(i=>i.name+' '+i.qty+'×'+i.price).join('; '),o.total,o.paid,o.rest,o.comment]);let html='<table><tr>'+h.map(x=>'<th>'+x+'</th>').join('')+'</tr>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+String(c??'').replaceAll('&','&amp;').replaceAll('<','&lt;')+'</td>').join('')+'</tr>').join('')+'</table>';dl('База_Глаз_Да_Глаз.xls',html,'application/vnd.ms-excel;charset=utf-8')}
+function backup(){
+  db.app=APP_META.app;db.version=APP_META.version;db.schemaVersion=APP_META.schemaVersion;db.updatedAt=new Date().toISOString();
+  const stamp=new Date().toISOString().replaceAll(':','-').slice(0,19);
+  dl('glaz_da_glaz_backup_v'+APP_META.version.replace('.','_')+'_'+stamp+'.json',JSON.stringify(db,null,2),'application/json')
+}function restoreClick(){gid('restoreFile').click()}function restore(e){
+  let f=e.target.files[0];if(!f)return;
+  let r=new FileReader();
+  r.onload=()=>{
+    try{
+      let incoming=normalizeDb(JSON.parse(r.result));
+      if(db.orders.length && !confirm('Заменить текущую базу импортируемой? Перед заменой лучше нажать «Сохранить базу».')) return;
+      db=incoming;save();alert('База загружена. Заказы и клиенты перенесены.')
+    }catch(err){alert('Не удалось прочитать файл базы')}
+  };
+  r.readAsText(f)
+}function dl(name,content,type){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
+renderAll();
+</script></body></html>
