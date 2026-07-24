@@ -1,0 +1,344 @@
+{
+  "meta": {
+    "version": "1.0.0",
+    "generatedAt": "2026-07-24",
+    "language": "ru",
+    "docsPath": "docs/optics-knowledge/",
+    "confidenceEnum": ["confirmed", "expert_judgment", "unknown"],
+    "notes": [
+      "Statements support Lens Path digital consultant (practical/optimal/premium).",
+      "Not medical diagnosis. Escalation thresholds marked requires_owner_approval are configurable drafts.",
+      "source_ids resolve in docs/optics-knowledge/13-sources.md (to be authored)."
+    ]
+  },
+  "facts": [
+    {
+      "id": "rx.od-os-ou",
+      "statement": "OD — правый глаз, OS — левый, OU — оба глаза.",
+      "category": "prescription",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-RX-001"],
+      "applies_to_project": "Parse and display prescription eye labels; never invent missing eye data."
+    },
+    {
+      "id": "rx.sph-cyl-axis",
+      "statement": "SPH — сфера (D), CYL — цилиндр (D), AXIS — ось 0–180° только при ненулевом CYL.",
+      "category": "prescription",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-RX-002"],
+      "applies_to_project": "Hard-filter SKUs by sph/cyl ranges; require axis when cyl ≠ 0."
+    },
+    {
+      "id": "rx.cylinder-transposition",
+      "statement": "Транспозиция цилиндра меняет SPH/CYL/AXIS при оптической эквивалентности; прайс обычно в минус-цилиндре.",
+      "category": "prescription",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-RX-003"],
+      "applies_to_project": "Normalize incoming Rx to one cylinder form before catalog matching."
+    },
+    {
+      "id": "rx.add",
+      "statement": "ADD — добавка для близи относительно дали; используется в progressive, office, bifocal и расчёте SV near.",
+      "category": "prescription",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-RX-004"],
+      "applies_to_project": "If ADD>0, prefer multifocal/office families for full-day or near tasks."
+    },
+    {
+      "id": "rx.pd-mono-bino",
+      "statement": "PD бывает бинокулярным (одно число) или монокулярным (OD/OS); для прогрессивов предпочтительны монокулярные PD.",
+      "category": "prescription",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-RX-005", "SRC-PROG-001"],
+      "applies_to_project": "Allow SV remote price without mono PD; progressive = class+range only without fitting data."
+    },
+    {
+      "id": "rx.prism-escalate",
+      "statement": "Наличие призмы в рецепте требует очной проверки возможности изготовления, не автоматического онлайн-заказа.",
+      "category": "escalation",
+      "confidence": "expert_judgment",
+      "source_ids": ["SRC-RX-006"],
+      "applies_to_project": "Hard escalate when prism present; do not finalize online order."
+    },
+    {
+      "id": "rx.spherical-equivalent",
+      "statement": "SE ≈ SPH + CYL/2 в согласованной форме цилиндра; грубая оценка силы, не замена торического заказа.",
+      "category": "prescription",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-RX-009"],
+      "applies_to_project": "Internal thinness/index heuristics only; do not show SE as simplified Rx to client."
+    },
+    {
+      "id": "rx.thickness-not-sph-alone",
+      "statement": "Толщина линзы зависит от SPH/CYL, знака, диаметра, оправы, decentration, индекса, дизайна, PD и призмы — не только от SPH.",
+      "category": "materials",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-MAT-001", "SRC-DES-001"],
+      "applies_to_project": "Ban copy that equates diopters alone with final thickness."
+    },
+    {
+      "id": "rx.photo-ocr-limits",
+      "statement": "Фото рецепта не гарантирует OCR-точность, актуальность, PD, посадку, режим ношения и примечания (призма и др.).",
+      "category": "prescription",
+      "confidence": "expert_judgment",
+      "source_ids": [],
+      "applies_to_project": "Mark OCR fields requires_verification; confirm critical values before order."
+    },
+    {
+      "id": "escalation.thresholds-configurable",
+      "statement": "Черновые пороги эскалации (|SPH|>8, |CYL|>3, анизометропия>2D, призма, age<14, ADD без измерений) — CONFIGURABLE requires_owner_approval, не медицинский закон.",
+      "category": "escalation",
+      "confidence": "expert_judgment",
+      "source_ids": [],
+      "applies_to_project": "Store as owner-approved config flags; never present as absolute clinical law."
+    },
+    {
+      "id": "type.sv",
+      "statement": "Однофокальная линза — одна сила по зоне; для дали, близи или постоянного ношения без мультифокальной задачи.",
+      "category": "lens_types",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-TYPE-001"],
+      "applies_to_project": "Default family for young clients and single-task use; remote price when Rx complete."
+    },
+    {
+      "id": "type.progressive-online-limit",
+      "statement": "Онлайн для прогрессивов допустимы только класс и ценовой диапазон, не финальный заказ без измерений.",
+      "category": "progressive",
+      "confidence": "expert_judgment",
+      "source_ids": ["SRC-PROG-001"],
+      "applies_to_project": "Portfolio shows progressive class + price range; CTA to in-person fitting."
+    },
+    {
+      "id": "type.myopia-control-escalate",
+      "statement": "Детский myopia control обычно отсутствует в прайсах салона и требует эскалации к специалисту.",
+      "category": "escalation",
+      "confidence": "expert_judgment",
+      "source_ids": ["SRC-TYPE-006"],
+      "applies_to_project": "Do not substitute adult progressive/SV; escalate kids myopia-control requests."
+    },
+    {
+      "id": "type.office-vs-pal",
+      "statement": "Office — indoor ближние/средние дистанции; progressive — одна пара с далью; SV near — только близь.",
+      "category": "office",
+      "confidence": "expert_judgment",
+      "source_ids": ["SRC-OFF-001", "SRC-TYPE-003", "SRC-TYPE-004"],
+      "applies_to_project": "purpose=computer+ADD/age≥40 → prefer office; purpose=daily+ADD → discuss progressive."
+    },
+    {
+      "id": "mat.higher-index-not-always-better",
+      "statement": "Более высокий индекс не всегда лучше: дороже, ниже Abbe, сильнее блики без AR, избыточен при низкой коррекции.",
+      "category": "materials",
+      "confidence": "expert_judgment",
+      "source_ids": ["SRC-MAT-001", "SRC-MAT-005"],
+      "applies_to_project": "Penalty for 1.74 at low |SPH|; penalty for 1.50 at high |SPH|."
+    },
+    {
+      "id": "mat.abbe.cr39",
+      "statement": "Типичный Abbe для CR-39 (~1.50) около 58.",
+      "category": "materials",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-ABB-001"],
+      "applies_to_project": "Explain chromatic tradeoff when upselling high index."
+    },
+    {
+      "id": "mat.abbe.160-range",
+      "statement": "Типичный Abbe для ~1.60 смол около 36–42 в зависимости от материала.",
+      "category": "materials",
+      "confidence": "expert_judgment",
+      "source_ids": ["SRC-ABB-004"],
+      "applies_to_project": "Do not quote a single Abbe for all 1.60 SKUs without supplier sheet."
+    },
+    {
+      "id": "mat.abbe.167",
+      "statement": "Типичный Abbe для ~1.67 около 32.",
+      "category": "materials",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-ABB-005"],
+      "applies_to_project": "Pair 1.67 recommendations with quality AR."
+    },
+    {
+      "id": "mat.abbe.174",
+      "statement": "Типичный Abbe для ~1.74 около 33.",
+      "category": "materials",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-ABB-006"],
+      "applies_to_project": "Avoid promising superior clarity vs mid-index solely due to thinness."
+    },
+    {
+      "id": "mat.abbe.pc",
+      "statement": "Типичный Abbe поликарбоната (~1.59) около 30.",
+      "category": "materials",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-ABB-003"],
+      "applies_to_project": "Prefer PC/Trivex for impact needs (kids/sport) despite lower Abbe."
+    },
+    {
+      "id": "mat.shamir-altolite-16-abbe",
+      "statement": "Shamir Altolite 1.6 по спецификациям дистрибьюторов часто Abbe 42 / MR-8.",
+      "category": "materials",
+      "confidence": "expert_judgment",
+      "source_ids": ["SRC-SHAM-ALTOLITE-16"],
+      "applies_to_project": "Verify against current Shamir distributor sheet before citing in client copy."
+    },
+    {
+      "id": "mat.plus-vs-minus-thickness",
+      "statement": "Минусовые линзы толще по краю; плюсовые — в центре; высокий индекс утоньшает соответствующую зону.",
+      "category": "materials",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-MAT-001"],
+      "applies_to_project": "Frame-type and sign-aware thinness messaging."
+    },
+    {
+      "id": "design.banned-phrases",
+      "statement": "Запрещены обещания: идеальное зрение, без искажений, никогда не царапаются.",
+      "category": "designs",
+      "confidence": "expert_judgment",
+      "source_ids": [],
+      "applies_to_project": "Client-copy linter / content rules for recommendation cards."
+    },
+    {
+      "id": "design.aspheric-vs-spherical",
+      "statement": "Асферический дизайн часто снижает периферийные аберрации и/или толщину относительно сферического той же силы — не устраняет все искажения.",
+      "category": "designs",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-DES-003"],
+      "applies_to_project": "Upgrade aspheric in optimal/premium for |SPH|≳2–3 or plus lenses."
+    },
+    {
+      "id": "design.individual-needs-measurements",
+      "statement": "Индивидуальный freeform без CVD/tilt/wrap/PD использует стандартные параметры лаборатории, а не персональный расчёт.",
+      "category": "designs",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-DES-008", "SRC-ROD-IFU-001"],
+      "applies_to_project": "Sell individual as class pending measurements; do not claim personalized optics online."
+    },
+    {
+      "id": "rod.ifu-defaults",
+      "statement": "Rodenstock IFU: если individual-параметры не заказаны, типичные стандарты PT≈8°, FFA≈5°, CVD≈13 mm.",
+      "category": "progressive",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-ROD-IFU-001"],
+      "applies_to_project": "Staff/explainability note only; not client-specific fitting values."
+    },
+    {
+      "id": "coat.ar-high-index",
+      "statement": "На high-index многослойный AR practically необходим из-за более сильных френелевских отражений.",
+      "category": "coatings",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-COAT-001", "SRC-COAT-003"],
+      "applies_to_project": "Require AR on 1.67/1.74 in optimal/premium bands."
+    },
+    {
+      "id": "coat.hard-not-scratchproof",
+      "statement": "Hard coat повышает стойкость к абразиву, но не делает линзу нецарапаемой.",
+      "category": "coatings",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-COAT-002"],
+      "applies_to_project": "Ban everlasting scratch claims in UI copy."
+    },
+    {
+      "id": "coat.blue-light-uncertainty",
+      "statement": "Blue/HEV-фильтр ослабляет часть спектра; не доказан как лечение болезней и не устраняет всю экранную усталость; evidence uncertainty.",
+      "category": "coatings",
+      "confidence": "unknown",
+      "source_ids": ["SRC-COAT-009", "SRC-BLUE-EVIDENCE-001"],
+      "applies_to_project": "Offer as preference for computer purpose; never medical cure language."
+    },
+    {
+      "id": "coat.residual-reflex",
+      "statement": "Остаточный цветовой рефлекс у AR — норма, не брак.",
+      "category": "coatings",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-COAT-004"],
+      "applies_to_project": "Support FAQ / objection handling in staff mode."
+    },
+    {
+      "id": "photo.windshield-uv",
+      "statement": "Лобовое стекло автомобиля сильно ослабляет UV, поэтому классический UV-фотохром за рулём затемняется слабо.",
+      "category": "photochromic",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-PHOTO-005"],
+      "applies_to_project": "purpose=car: warn on standard photochromic; prefer sun Rx/polar or XTRActive-type."
+    },
+    {
+      "id": "photo.temperature",
+      "statement": "На холоде фотохром обычно темнее и медленнее просветляется; в жару максимальное затемнение слабее.",
+      "category": "photochromic",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-PHOTO-003"],
+      "applies_to_project": "Set expectations in photochromic explanations."
+    },
+    {
+      "id": "photo.xtractive-visible",
+      "statement": "Transitions XTRActive-тип заявляет активацию видимым светом и более тёмный residual в помещении/авто vs clear photochromic.",
+      "category": "photochromic",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-PHOTO-006"],
+      "applies_to_project": "Premium/optimal path for drivers wanting one pair; note residual indoor tint."
+    },
+    {
+      "id": "sun.tint-cat4-no-drive",
+      "statement": "Тонировка категории 4 не предназначена для вождения.",
+      "category": "sun",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-SUN-001"],
+      "applies_to_project": "Hard-exclude cat.4 for car purpose recommendations."
+    },
+    {
+      "id": "sun.polar-day-glare",
+      "statement": "Поляризация снижает блики от горизонтальных поверхностей днём; может мешать части LCD; не для ночного вождения как затемнённая линза.",
+      "category": "sun",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-SUN-003", "SRC-SUN-004"],
+      "applies_to_project": "Boost polar for daytime driving/water; block tinted polar for night driving."
+    },
+    {
+      "id": "prog.zones",
+      "statement": "Прогрессив: зона дали, коридор/intermediate, зона близи с ADD; периферия содержит нежелательный астигматизм дизайна.",
+      "category": "progressive",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-PROG-002", "SRC-PROG-003"],
+      "applies_to_project": "Education copy for progressive cards; adaptation expectations."
+    },
+    {
+      "id": "prog.min-mounting-height",
+      "statement": "Минимальная высота монтажа задаётся дизайном; оправа ниже минимума требует другого дизайна или оправы.",
+      "category": "progressive",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-PROG-008"],
+      "applies_to_project": "Escalate when frame too small for progressive; do not finalize online."
+    },
+    {
+      "id": "prog.adaptation-failures",
+      "statement": "Частые причины отказа: ошибка PD/высоты, короткий коридор, скачок ADD, неверные ожидания, анизометропия/призма, старый рецепт.",
+      "category": "progressive",
+      "confidence": "expert_judgment",
+      "source_ids": ["SRC-PROG-005"],
+      "applies_to_project": "On adaptation complaints escalate to fitter; do not randomly swap SKU online."
+    },
+    {
+      "id": "office.degression",
+      "statement": "Degression — снижение силы от близи кверху в office-дизайне; величина/имена (book/desk/room) зависят от бренда.",
+      "category": "office",
+      "confidence": "confirmed",
+      "source_ids": ["SRC-OFF-002"],
+      "applies_to_project": "Ask working distances before locking degression SKU; else estimate only."
+    },
+    {
+      "id": "portfolio.three-tiers",
+      "statement": "Выдача консультанта: practical (достаточно), optimal (лучший баланс), premium (макс. комфорт/дизайн) в рамках допустимого семейства линз.",
+      "category": "product",
+      "confidence": "expert_judgment",
+      "source_ids": [],
+      "applies_to_project": "recommend.ts portfolio construction; explanations must reference Rx and purpose."
+    },
+    {
+      "id": "scope.no-diagnosis",
+      "statement": "Продукт не ставит диагноз и не назначает лечение; только подбор класса линз по рецепту и задаче.",
+      "category": "product",
+      "confidence": "confirmed",
+      "source_ids": [],
+      "applies_to_project": "Global disclaimer on all client-facing recommendation surfaces."
+    }
+  ]
+}
