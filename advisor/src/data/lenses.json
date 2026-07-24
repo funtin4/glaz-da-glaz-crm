@@ -1,6 +1,6 @@
 {
   "meta": {
-    "version": "1.0.0",
+    "version": "1.0.1-owner",
     "generatedAt": "2026-07-24",
     "suppliers": [
       "Shamir",
@@ -13,7 +13,7 @@
     "notes": [
       "Prices are retail per 1 lens as in supplier HTML price lists.",
       "Pair price = 2 × lens price. Manufacturing labor is separate (services).",
-      "Rodenstock SPH ranges are typical RX envelopes — refine per manufacturer catalog when available."
+      "Rodenstock SPH ranges in this file are NOT trusted for hard-filtering (invented envelopes). Engine skips SPH hard-reject for Rodenstock until catalog SPH is verified."
     ]
   },
   "lenses": [

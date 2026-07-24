@@ -2,7 +2,7 @@ import { useEffect, useMemo, useState } from 'react';
 import { useParams, useSearchParams } from 'react-router-dom';
 import { RecommendationCards } from '../components/RecommendationCards';
 import { OptionButton, Progress, Shell, ThicknessVisual } from '../components/ui';
-import { softenWarning } from '../engine/clientCopy';
+import { ctaAfterChoice, softenWarning } from '../engine/clientCopy';
 import { recommendedThinness } from '../engine/rules';
 import {
   chooseTier,
@@ -288,7 +288,10 @@ export function SelectPage() {
           {step === 'budget' && (
             <>
               <h2>На линзы примерно сколько?</h2>
-              <p className="lead">Только линзы. За вставку скажу отдельно — обычно 800–2000 ₽.</p>
+              <p className="lead">
+                Ориентир, не жёсткий потолок. Только линзы — за вставку скажу отдельно (обычно
+                800–2000 ₽).
+              </p>
               <div className="options">
                 {[
                   [8000, 'До 8 тысяч'],
@@ -317,12 +320,10 @@ export function SelectPage() {
           {step === 'results' && session.recommendation && (
             <>
               <h2>Вот что я бы поставил</h2>
-              <p className="lead">Три варианта. Средний — то, что ставлю чаще всего.</p>
-              {session.chosen ? (
-                <div className="success">
-                  Принял. Напишите мне в Авито «беру вот этот» — уточним оправу и срок.
-                </div>
-              ) : null}
+              <p className="lead">
+                Три варианта. Средний — как я обычно ставлю. Бренды названы открыто.
+              </p>
+              {session.chosen ? <div className="success">{ctaAfterChoice()}</div> : null}
               {clientWarnings.length ? (
                 <div className="warns">
                   {clientWarnings.map((w) => (

@@ -3,6 +3,9 @@ import type { ScoredLens, Tier } from '../engine/types';
 import {
   clientReasons,
   clientTitle,
+  ctaAfterChoice,
+  ctaPhoneHref,
+  ctaPhoneLabel,
   priceLine,
   tierClientLabel,
 } from '../engine/clientCopy';
@@ -80,8 +83,16 @@ function RecoCard({
       </ul>
       <div style={{ display: 'grid', gap: 8 }}>
         <button type="button" className={`btn ${featured ? 'solid' : 'quiet'} block`} onClick={onChoose}>
-          {chosen ? 'Выбрал ✓ напишите мне в Авито' : 'Беру этот'}
+          {chosen ? 'Выбрал ✓' : 'Беру этот'}
         </button>
+        {chosen ? (
+          <div className="price-note" style={{ lineHeight: 1.45 }}>
+            {ctaAfterChoice()}{' '}
+            <a href={ctaPhoneHref()} style={{ color: 'inherit', fontWeight: 600 }}>
+              {ctaPhoneLabel()}
+            </a>
+          </div>
+        ) : null}
         <button type="button" className="btn quiet block" onClick={() => setOpen((v) => !v)}>
           {open ? 'Свернуть' : 'Чем отличаются'}
         </button>
@@ -95,10 +106,14 @@ function RecoCard({
           ) : (
             <div>Нормальный вариант, без подводных камней для вашего случая.</div>
           )}
+          <div style={{ marginTop: 8 }}>
+            <b>Бренд:</b> {lens.supplier}
+            {lens.name ? ` · ${lens.name}` : ''}
+          </div>
           {staffMode ? (
             <div style={{ marginTop: 10, opacity: 0.85 }}>
-              <b>Себе:</b> {lens.supplier} · {lens.name} · {lens.index} · {lens.coating} ·{' '}
-              {formatMoneyPair(item)}
+              <b>Себе:</b> {lens.index} · {lens.coating} · {formatMoneyPair(item)} · score{' '}
+              {Math.round(item.score)}
             </div>
           ) : null}
         </div>

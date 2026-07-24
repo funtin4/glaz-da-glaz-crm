@@ -1,6 +1,12 @@
 import type { Answers, LensSku, Prescription, Purpose } from './types';
+import {
+  blueFilterOnlyIfAsked,
+  budgetIsSoft,
+  childAgeLimit,
+  photoCarDisclaimer,
+} from './ownerConfig';
 
-export const RULESET_VERSION = '2026.07.1';
+export const RULESET_VERSION = '2026.07.2-owner';
 
 /** Strongest sphere magnitude across both eyes (absolute). */
 export function maxAbsSph(rx: Prescription): number {
@@ -38,8 +44,9 @@ export function suggestedLensFamily(purpose: Purpose | null, rx: Prescription): 
     return { prefer: add || (age != null && age >= 45) ? ['office', 'bifocal', 'progressive', 'single_vision'] : ['single_vision', 'office'], warnProgressive };
   }
   if (purpose === 'daily' || purpose === 'distance' || purpose === 'car' || purpose === 'unknown' || !purpose) {
-    if (add || (age != null && age >= 50)) {
-      return { prefer: ['progressive', 'bifocal', 'single_vision'], warnProgressive: true };
+    // Возраст сам по себе не назначает progressive — только ADD / явная нужда
+    if (add) {
+      return { prefer: ['progressive', 'office', 'bifocal', 'single_vision'], warnProgressive: true };
     }
     return { prefer: ['single_vision'], warnProgressive };
   }
@@ -86,44 +93,57 @@ export function evaluateSoftRules(
   const thicknessPref = answers.thickness;
   const minThin = recommendedThinness(rx, answers.frameType);
 
-  // Index vs power
-  if (sph < 2 && lens.index != null && lens.index >= 1.74) {
+  // Index vs power — owner-config 2026-07-24
+  // 1.50–1.56: max recommend ±3.0
+  if (sph > 3 && lens.index != null && lens.index <= 1.56) {
     hits.push({
-      code: 'overkill_174',
-      weight: -35,
-      reason: '1.74 избыточен при низкой коррекции',
-      clientReason: 'Для вашего рецепта сверхтонкие линзы обычно не нужны',
+      code: 'index_150_156_over_cap',
+      weight: -40,
+      reason: '1.50–1.56 выше потолка владельца ±3.0',
+      clientReason: 'При ваших диоптриях обычные линзы будут заметно толще — лучше потоньше',
     });
   }
-  if (sph < 1.5 && lens.index != null && lens.index >= 1.67 && !lens.photochromic) {
+  // 1.60 ok even from ~0 — mild boost as solid default, never penalize as overkill
+  if (lens.index != null && lens.index >= 1.59 && lens.index < 1.65) {
     hits.push({
-      code: 'overkill_167',
-      weight: -12,
-      reason: 'Высокий индекс слабо оправдан при SPH < 1.5',
+      code: 'index_160_ok',
+      weight: sph <= 3 ? 8 : 12,
+      reason: '1.60 допустим с любой малой/средней коррекцией',
+      clientReason: sph > 3 ? 'Заметно тоньше в оправе' : 'Аккуратный вариант по толщине',
     });
   }
-  if (sph >= 6 && lens.index != null && lens.index <= 1.5) {
+  // 1.67 almost required from ±4…±5
+  if (sph >= 4 && lens.index != null && lens.index >= 1.66 && lens.index < 1.72) {
     hits.push({
-      code: 'too_thick_high_minus',
-      weight: -50,
-      reason: 'Толстые линзы при высокой коррекции',
-      clientReason: 'При ваших диоптриях стандартные линзы будут толстыми и тяжёлыми',
+      code: 'index_167_preferred',
+      weight: 28,
+      reason: '1.67 почти обязателен от ±4…±5',
+      clientReason: 'При таких диоптриях обычно ставят потоньше — так край аккуратнее',
     });
   }
-  if (sph >= 4 && lens.index != null && lens.index < 1.6) {
+  if (sph >= 4 && lens.index != null && lens.index < 1.66) {
     hits.push({
-      code: 'prefer_160_plus',
-      weight: -18,
-      reason: 'Ниже 1.60 при |SPH|≥4',
+      code: 'below_167_when_needed',
+      weight: -30,
+      reason: 'Ниже 1.67 при |SPH|≥4',
       clientReason: 'Есть смысл взять потоньше',
     });
   }
-  if (sph >= 4 && (lens.thinness >= 2 || (lens.index != null && lens.index >= 1.6))) {
+  // 1.74: interim — don't oversell below ±4; ok as premium thin for high Rx
+  if (sph < 4 && lens.index != null && lens.index >= 1.74) {
     hits.push({
-      code: 'good_for_high',
-      weight: 18,
-      reason: 'Подходит высоким диоптриям',
-      clientReason: 'Хорошо смотрятся при ваших диоптриях',
+      code: 'overkill_174',
+      weight: -32,
+      reason: '1.74 рано при |SPH|<4 (порог владельца ещё уточняется)',
+      clientReason: 'Сверхтонкий индекс для вашего рецепта обычно не обязателен',
+    });
+  }
+  if (sph >= 6 && lens.index != null && lens.index >= 1.74) {
+    hits.push({
+      code: '174_high_rx',
+      weight: 14,
+      reason: '1.74 уместен на высокой коррекции',
+      clientReason: 'Очень тонкие — меньше «линзы-донца»',
     });
   }
 
@@ -147,15 +167,26 @@ export function evaluateSoftRules(
     hits.push({ code: 'auto_thin_floor', weight: -15, reason: 'Ниже рекомендованной тонкости' });
   }
 
-  // Purpose
+  // Purpose — computer: AR/comfort first; blue-filter only if asked (owner policy)
   if (purpose === 'computer') {
-    if (lens.blueFilter || lens.suitableComputer || lens.office || lens.accommodationSupport) {
+    if (lens.coatingLevel >= 3 || lens.suitableComputer || lens.office || lens.accommodationSupport) {
       hits.push({
         code: 'computer_fit',
-        weight: 22,
-        reason: 'Подходит для экранов',
-        clientReason: 'Лучше подходят для компьютера',
+        weight: 14,
+        reason: 'Подходит для работы у экрана',
+        clientReason: 'Меньше бликов — удобнее у экрана',
       });
+    }
+    // owner: blue-filter only if client asks (priority=computer), not just purpose=computer
+    if (priority === 'computer' && lens.blueFilter) {
+      hits.push({
+        code: 'blue_on_request',
+        weight: 10,
+        reason: 'Blue-filter по запросу клиента',
+        clientReason: 'Есть фильтр части сине-фиолетового света — комфорт у экрана индивидуален',
+      });
+    } else if (lens.blueFilter && blueFilterOnlyIfAsked()) {
+      hits.push({ code: 'blue_optional', weight: 0, reason: 'Blue-filter без явного запроса' });
     }
     if (lens.polarized) {
       hits.push({ code: 'polar_vs_pc', weight: -25, reason: 'Поляризация не нужна для ПК' });
@@ -174,8 +205,8 @@ export function evaluateSoftRules(
       hits.push({
         code: 'photo_in_car_weak',
         weight: -8,
-        reason: 'Обычный фотохром слабо работает за лобовым',
-        clientReason: 'Обычные «хамелеоны» в машине темнеют слабее',
+        reason: 'Обычный фотохром в авто',
+        clientReason: photoCarDisclaimer(),
       });
     }
     if (lens.polarized) {
@@ -234,12 +265,14 @@ export function evaluateSoftRules(
       clientReason: 'Максимальный комфорт',
     });
   }
-  if (priority === 'computer' && (lens.blueFilter || lens.accommodationSupport)) {
+  if (priority === 'computer' && (lens.blueFilter || lens.accommodationSupport || lens.coatingLevel >= 3)) {
     hits.push({
       code: 'prio_pc',
-      weight: 18,
-      reason: 'Защита/поддержка для ПК',
-      clientReason: 'Лучше подходят для компьютера',
+      weight: lens.blueFilter ? 12 : 10,
+      reason: 'Приоритет экранов',
+      clientReason: lens.blueFilter
+        ? 'Фильтр части сине-фиолетового света; комфорт индивидуален'
+        : 'Меньше бликов у экрана',
     });
   }
   if (priority === 'anti_glare' && lens.coatingLevel >= 3) {
@@ -286,8 +319,8 @@ export function evaluateSoftRules(
     }
   }
 
-  // Kids
-  if (rx.age != null && rx.age < 14) {
+  // Kids — owner: under 16
+  if (rx.age != null && rx.age < childAgeLimit()) {
     if (lens.kids) hits.push({ code: 'kids_sku', weight: 20, reason: 'Детский SKU' });
     if (lens.type === 'progressive') hits.push({ code: 'kids_prog', weight: -40, reason: 'Прогрессив детям без показаний' });
   }
@@ -306,13 +339,34 @@ export function evaluateSoftRules(
     hits.push({ code: 'rx_for_cyl', weight: 8, reason: 'Рецептурные при высоком CYL' });
   }
 
+  // Soft budget nudge (owner: soft mode)
+  if (budgetIsSoft() && answers.budgetPair != null) {
+    if (lens.pricePairMin <= answers.budgetPair) {
+      hits.push({ code: 'in_budget', weight: 10, reason: 'Внутри бюджета' });
+    } else if (lens.pricePairMin <= answers.budgetPair * 1.2) {
+      hits.push({
+        code: 'slightly_over_budget',
+        weight: -6,
+        reason: 'Чуть выше ориентира',
+        clientReason: 'Чуть выше вашего ориентира по деньгам',
+      });
+    } else {
+      hits.push({
+        code: 'over_budget_soft',
+        weight: -18,
+        reason: 'Выше бюджета (мягкий режим)',
+        clientReason: 'Дороже вашего ориентира — можно обсудить',
+      });
+    }
+  }
+
   // Popular mid-market sweet spot
   if (lens.supplier === 'Shamir' && lens.coatingLevel >= 3 && lens.index != null && lens.index >= 1.5 && lens.index <= 1.67) {
     hits.push({
       code: 'popular_choice',
       weight: 5,
       reason: 'Частый выбор салона',
-      clientReason: 'Самый популярный выбор',
+      clientReason: 'Так часто ставлю',
     });
   }
 
@@ -327,13 +381,20 @@ export function hardReject(
   const spheres = [rx.od.sph, rx.os.sph].filter((v): v is number => v != null);
   const cyls = [rx.od.cyl, rx.os.cyl].filter((v): v is number => v != null);
 
-  for (const s of spheres) {
-    if (lens.sphMin != null && s < lens.sphMin) return 'SPH ниже диапазона';
-    if (lens.sphMax != null && s > lens.sphMax) return 'SPH выше диапазона';
+  // Rodenstock SPH in legacy lenses.json were invented — do not hard-filter on them
+  const trustSphRange = lens.supplier !== 'Rodenstock';
+
+  if (trustSphRange) {
+    for (const s of spheres) {
+      if (lens.sphMin != null && s < lens.sphMin) return 'SPH ниже диапазона';
+      if (lens.sphMax != null && s > lens.sphMax) return 'SPH выше диапазона';
+    }
   }
   for (const c of cyls) {
     const abs = Math.abs(c);
-    if (lens.cylMax != null && abs > Math.abs(lens.cylMax) + 0.01) return 'CYL вне диапазона';
+    if (lens.cylMax != null && abs > Math.abs(lens.cylMax) + 0.01) {
+      if (trustSphRange) return 'CYL вне диапазона';
+    }
   }
 
   if (answers.photochromic === 'yes' && !lens.photochromic) return 'Нужен фотохром';
@@ -344,17 +405,15 @@ export function hardReject(
     return 'Поляризация только без диоптрий в этой позиции';
   }
 
-  // Budget hard cut for min_price priority: drop very expensive
-  if (answers.priority === 'min_price' && answers.budgetPair != null) {
-    if (lens.pricePairMin > answers.budgetPair * 1.05) return 'Выше бюджета';
-  } else if (answers.budgetPair != null && lens.pricePairMin > answers.budgetPair * 1.15) {
-    // soft room 15%
-    return 'Существенно выше бюджета';
-  }
-
-  // Kids diameter when age known
-  if (rx.age != null && rx.age < 12 && lens.diameter === '75' && !lens.kids) {
-    // not hard reject
+  // Budget: soft mode — never hard-reject on price (owner 2026-07-24)
+  if (!budgetIsSoft()) {
+    if (answers.priority === 'min_price' && answers.budgetPair != null) {
+      if (lens.pricePairMin > answers.budgetPair * 1.05) return 'Выше бюджета';
+    } else if (answers.budgetPair != null && lens.pricePairMin > answers.budgetPair * 1.15) {
+      return 'Существенно выше бюджета';
+    }
+  } else if (answers.budgetPair != null && lens.pricePairMin > answers.budgetPair * 1.35) {
+    // even soft mode: extreme outliers get soft handled in scoring, not hard reject here
   }
 
   return null;

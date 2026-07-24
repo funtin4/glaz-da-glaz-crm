@@ -1,5 +1,6 @@
 import { Link, useNavigate } from 'react-router-dom';
 import { Shell } from '../components/ui';
+import { ctaPhoneHref, ctaPhoneLabel } from '../engine/clientCopy';
 import { createSession, ensureDemoSession } from '../engine/sessions';
 
 export function HomePage() {
@@ -10,8 +11,12 @@ export function HomePage() {
       <section className="hero">
         <h1>Вставлю линзы в вашу оправу</h1>
         <p>
-          Напишите в Авито «хочу вставить линзы» и пришлите рецепт — я пришлю ссылку. Там без прайсов
-          и сложных названий: пару вопросов и три понятных варианта.
+          Напишите в Авито «хочу вставить линзы» и пришлите рецепт — пришлю ссылку. Пара вопросов и
+          три варианта с понятными брендами. Или сразу звоните:{' '}
+          <a href={ctaPhoneHref()} style={{ color: 'inherit', fontWeight: 600 }}>
+            {ctaPhoneLabel()}
+          </a>
+          .
         </p>
         <div className="hero-actions">
           <button
@@ -36,7 +41,10 @@ export function HomePage() {
 
       <div className="panel" style={{ marginTop: 18 }}>
         <h2>Как это у меня работает</h2>
-        <p className="lead">Не магазин и не салон в классическом виде — частный мастер, Курск.</p>
+        <p className="lead">
+          Частный мастер + салон в Москве (ул. Декабристов, 21, ежедневно 10:00–20:00). Основной поток —
+          Авито.
+        </p>
         <div className="options">
           <div className="option" style={{ cursor: 'default' }}>
             Пишете в Авито и кидаете рецепт

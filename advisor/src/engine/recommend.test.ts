@@ -1,11 +1,14 @@
 /**
  * Offline fixtures for the expert engine.
- * Run: npx tsx src/engine/recommend.test.ts
- * or: node --experimental-strip-types (fallback via vite-node)
+ * Run: npm run test:engine
  */
 import { recommend } from './recommend';
+import { hardReject } from './rules';
 import { emptyAnswers, emptyRx } from './types';
-import type { Answers, Prescription } from './types';
+import type { Answers, LensSku, Prescription } from './types';
+import { getCatalog } from './recommend';
+import { isChildCase, budgetIsSoft, brandsVisible } from './ownerConfig';
+import { clientTitle, softenWarning } from './clientCopy';
 
 function assert(cond: unknown, msg: string) {
   if (!cond) throw new Error(msg);
@@ -57,6 +60,29 @@ function caseHighMyopia() {
   console.log('✓ high myopia prefers thin', rec.optimal!.lens.name, idx);
 }
 
+function caseIndex167From4() {
+  const rx: Prescription = {
+    ...emptyRx(),
+    od: { sph: -4.5, cyl: null, ax: null, add: null },
+    os: { sph: -4.25, cyl: null, ax: null, add: null },
+    age: 32,
+  };
+  const answers: Answers = {
+    ...emptyAnswers(),
+    purpose: 'daily',
+    priority: 'thin',
+    thickness: 3,
+    photochromic: 'no',
+    budgetPair: 40000,
+    frameType: 'full_rim',
+  };
+  const rec = recommend(rx, answers);
+  assert(rec.optimal, 'expected optimal');
+  const idx = rec.optimal!.lens.index ?? 0;
+  assert(idx >= 1.66, `owner: from ±4 prefer ~1.67, got ${idx}`);
+  console.log('✓ ±4.5 prefers 1.67+', rec.optimal!.lens.name, idx);
+}
+
 function caseComputer() {
   const rx: Prescription = {
     ...emptyRx(),
@@ -77,7 +103,7 @@ function caseComputer() {
   assert(rec.optimal, 'expected optimal');
   const l = rec.optimal!.lens;
   assert(
-    l.blueFilter || l.suitableComputer || l.accommodationSupport || l.office,
+    l.blueFilter || l.suitableComputer || l.accommodationSupport || l.office || l.coatingLevel >= 3,
     'computer case should surface screen-oriented lens',
   );
   console.log('✓ computer boost', l.name);
@@ -101,7 +127,38 @@ function casePresbyopiaWarning() {
   };
   const rec = recommend(rx, answers);
   assert(rec.warnings.length > 0, 'expected progressive/office warning');
-  console.log('✓ age/ADD warnings', rec.warnings[0]);
+  console.log('✓ ADD warnings', rec.warnings[0]);
+}
+
+function caseAgeAloneNoProgressiveFamily() {
+  const rx: Prescription = {
+    ...emptyRx(),
+    od: { sph: -1, cyl: null, ax: null, add: null },
+    os: { sph: -1, cyl: null, ax: null, add: null },
+    age: 55,
+  };
+  const answers: Answers = {
+    ...emptyAnswers(),
+    purpose: 'daily',
+    priority: 'comfort',
+    thickness: 2,
+    photochromic: 'no',
+    budgetPair: 25000,
+    frameType: 'full_rim',
+  };
+  const rec = recommend(rx, answers);
+  // age alone should not force progressive as optimal
+  if (rec.optimal) {
+    assert(
+      rec.optimal.lens.type !== 'progressive' || hasSoftProgWarning(rec.warnings),
+      'age alone should not auto-pick progressive without ADD',
+    );
+  }
+  console.log('✓ age alone does not force progressive', rec.optimal?.lens.type);
+}
+
+function hasSoftProgWarning(warnings: string[]) {
+  return warnings.some((w) => /вблизи|чтени/i.test(w));
 }
 
 function casePhotoFilter() {
@@ -127,9 +184,96 @@ function casePhotoFilter() {
   console.log('✓ photochromic hard filter');
 }
 
+function caseSoftBudget() {
+  assert(budgetIsSoft(), 'owner budget soft');
+  const rx: Prescription = {
+    ...emptyRx(),
+    od: { sph: -2, cyl: null, ax: null, add: null },
+    os: { sph: -2, cyl: null, ax: null, add: null },
+    age: 30,
+  };
+  const answers: Answers = {
+    ...emptyAnswers(),
+    purpose: 'daily',
+    priority: 'comfort',
+    thickness: 2,
+    photochromic: 'no',
+    budgetPair: 8000,
+    frameType: 'full_rim',
+  };
+  const rec = recommend(rx, answers);
+  assert(rec.eligibleCount > 0, 'soft budget should keep eligible lenses');
+  // should still produce portfolio somehow
+  assert(rec.optimal || rec.practical, 'expected at least one tier');
+  console.log('✓ soft budget keeps options', rec.eligibleCount);
+}
+
+function caseRodenstockSphNotHardFiltered() {
+  const rod = getCatalog().find((l) => l.supplier === 'Rodenstock' && l.sphMin != null);
+  assert(rod, 'need a Rodenstock sku');
+  const lens = rod as LensSku;
+  const rx: Prescription = {
+    ...emptyRx(),
+    od: { sph: -12, cyl: null, ax: null, add: null },
+    os: { sph: -12, cyl: null, ax: null, add: null },
+    age: 40,
+  };
+  const answers: Answers = {
+    ...emptyAnswers(),
+    purpose: 'daily',
+    priority: 'thin',
+    thickness: 3,
+    photochromic: 'no',
+    budgetPair: null,
+    frameType: 'full_rim',
+  };
+  const reason = hardReject(lens, rx, answers);
+  assert(reason !== 'SPH ниже диапазона' && reason !== 'SPH выше диапазона', `Rodenstock SPH must not hard-reject, got ${reason}`);
+  console.log('✓ Rodenstock SPH not trusted for hard reject');
+}
+
+function caseChildEscalation() {
+  assert(isChildCase(15), '15 is child');
+  assert(!isChildCase(16), '16 not child under exclusive');
+  const rx: Prescription = {
+    ...emptyRx(),
+    od: { sph: -1, cyl: null, ax: null, add: null },
+    os: { sph: -1, cyl: null, ax: null, add: null },
+    age: 12,
+  };
+  const answers: Answers = {
+    ...emptyAnswers(),
+    purpose: 'daily',
+    priority: 'comfort',
+    thickness: 2,
+    photochromic: 'no',
+    budgetPair: 15000,
+    frameType: 'full_rim',
+  };
+  const rec = recommend(rx, answers);
+  assert(rec.warnings.some((w) => /16|Декабристов|салон/i.test(w)), 'child → salon');
+  const soft = softenWarning(rec.warnings.find((w) => /16|Декабристов/i.test(w))!);
+  assert(soft && /Декабристов/.test(soft), 'salon address must survive soften');
+  console.log('✓ child escalation to Moscow salon');
+}
+
+function caseBrandsVisible() {
+  assert(brandsVisible(), 'brands visible');
+  const lens = getCatalog()[0];
+  const title = clientTitle(lens);
+  assert(title.includes(lens.supplier), `title should include brand, got ${title}`);
+  console.log('✓ brands in client title', title);
+}
+
 caseLowMyopia();
 caseHighMyopia();
+caseIndex167From4();
 caseComputer();
 casePresbyopiaWarning();
+caseAgeAloneNoProgressiveFamily();
 casePhotoFilter();
+caseSoftBudget();
+caseRodenstockSphNotHardFiltered();
+caseChildEscalation();
+caseBrandsVisible();
 console.log('All engine fixtures passed');
