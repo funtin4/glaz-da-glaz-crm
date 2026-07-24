@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Прайс Shamir — Глаз Да Глаз</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #eef2f8;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      width: 1536px;
+      min-height: 2048px;
+      margin: 0 auto 24px;
+      background: #ffffff;
+      padding: 56px 52px 64px;
+      page-break-after: always;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 28px;
+      padding-bottom: 20px;
+      border-bottom: 3px solid #0A66D8;
+    }
+
+    .brand { display: flex; align-items: center; gap: 16px; }
+
+    .logo {
+      width: 68px; height: 68px; border-radius: 18px;
+      background: linear-gradient(135deg, #0A66D8 0%, #0952b0 100%);
+      color: white; display: flex; align-items: center; justify-content: center;
+      font-size: 22px; font-weight: 800; letter-spacing: -0.5px;
+    }
+
+    .brand h1 { font-size: 38px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1; }
+    .brand p { margin-top: 4px; font-size: 20px; color: #64748b; font-weight: 500; }
+
+    .badges { display: flex; gap: 10px; flex-wrap: wrap; justify-content: flex-end; }
+
+    .badge {
+      background: #eff6ff; color: #0A66D8; border: 2px solid #bfdbfe;
+      border-radius: 999px; padding: 10px 18px; font-size: 16px; font-weight: 700;
+    }
+
+    .badge.dark {
+      background: #0f172a; color: #fff; border-color: #0f172a;
+    }
+
+    .section-title {
+      font-size: 22px; font-weight: 800; color: #0A66D8;
+      margin: 22px 0 12px; display: flex; align-items: center; gap: 10px;
+    }
+
+    .section-title::before {
+      content: ''; width: 8px; height: 24px; border-radius: 4px; background: #0A66D8;
+    }
+
+    table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      border: 1px solid #dbe4f0; border-radius: 14px; overflow: hidden;
+      margin-bottom: 6px;
+    }
+
+    thead th {
+      background: #0A66D8; color: white; text-align: left;
+      padding: 11px 12px; font-size: 14px; font-weight: 700;
+    }
+
+    tbody td {
+      padding: 10px 12px; border-bottom: 1px solid #e8edf5;
+      vertical-align: middle; line-height: 1.3; font-size: 16px;
+    }
+
+    tbody tr:nth-child(even) td { background: #f8fafc; }
+    tbody tr:last-child td { border-bottom: none; }
+
+    .name { font-weight: 700; }
+    .sub { color: #64748b; font-size: 13px; font-weight: 500; margin-top: 2px; }
+    .price {
+      font-weight: 800; color: #0A66D8; white-space: nowrap;
+      font-size: 17px; text-align: right;
+    }
+    .price-range { color: #0A66D8; }
+
+    .footer {
+      margin-top: 28px; text-align: center; color: #94a3b8; font-size: 15px;
+    }
+
+    .hint {
+      margin-top: 14px; font-size: 14px; color: #64748b; text-align: center;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: 1.50 / 1.56 -->
+  <div class="page" id="p1">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1>Глаз Да Глаз</h1>
+          <p>Прайс Shamir · Altolite 1.50 / 1.56</p>
+        </div>
+      </div>
+      <div class="badges">
+        <div class="badge dark">SHAMIR</div>
+        <div class="badge">Цена за 1 линзу · ₽</div>
+      </div>
+    </div>
+
+    <div class="section-title">Индекс 1.50</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th><th>Покрытие</th><th>SPH</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="name">Altolite 1.50</div><div class="sub">Окрашиваемые · до 80%</div></td>
+          <td>Tintable</td><td>−8.00 … +8.00</td><td>65/70</td>
+          <td class="price">900</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.50 HMC</div><div class="sub">AR · рефлекс зелёный</div></td>
+          <td>HMC</td><td>−8.00 … +8.00</td><td>65/70</td>
+          <td class="price">1 600 – 2 000</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.50 HMC Big</div><div class="sub">Для больших оправ</div></td>
+          <td>HMC</td><td>0.00 … +4.00</td><td>75</td>
+          <td class="price">2 500</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.50 HMC Kids</div><div class="sub">Детский диаметр</div></td>
+          <td>HMC</td><td>+0.25 … +6.00</td><td>60</td>
+          <td class="price">1 700</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.50 Glacier</div><div class="sub">AR + гидрофоб + антистатик</div></td>
+          <td>Glacier</td><td>−6.00 … +6.00</td><td>65/70</td>
+          <td class="price">3 900 – 5 000</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite Blue Zero 1.50 Glacier</div><div class="sub">HEV / blue filter · UV-400</div></td>
+          <td>Glacier</td><td>−6.00 … +4.00</td><td>70</td>
+          <td class="price">4 500</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Индекс 1.56</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th><th>Покрытие</th><th>SPH</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="name">Altolite 1.56 HMC</div><div class="sub">AR · рефлекс зелёный</div></td>
+          <td>HMC</td><td>−8.00 … +6.00</td><td>65–72</td>
+          <td class="price">2 400</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.56 Glacier Blue-Shield</div><div class="sub">Blue-Shield · UV-400 · рефлекс сиреневый</div></td>
+          <td>Glacier BS</td><td>−6.00 … +4.00</td><td>65/73</td>
+          <td class="price">4 400</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite Eyezen Lite 1.56 Glacier</div><div class="sub">Поддержка аккомодации +0.40D · Blue Zero</div></td>
+          <td>Glacier</td><td>+3.00 … −5.00</td><td>70</td>
+          <td class="price">7 500</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="hint">Диапазон цен — зависит от цилиндра / крайних диоптрий. Цена за 1 линзу.</p>
+    <div class="footer">г. Курск · салон оптики «Глаз Да Глаз» · Shamir Optical</div>
+  </div>
+
+  <!-- PAGE 2: 1.60 / 1.67 -->
+  <div class="page" id="p2">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1>Глаз Да Глаз</h1>
+          <p>Прайс Shamir · Altolite 1.60 / 1.67</p>
+        </div>
+      </div>
+      <div class="badges">
+        <div class="badge dark">SHAMIR</div>
+        <div class="badge">Цена за 1 линзу · ₽</div>
+      </div>
+    </div>
+
+    <div class="section-title">Индекс 1.60</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th><th>Покрытие</th><th>SPH</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="name">Altolite 1.60 HMC</div><div class="sub">Высокий индекс · UV-400</div></td>
+          <td>HMC</td><td>−10.00 … +6.00</td><td>70/75</td>
+          <td class="price">4 500</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.60 Glacier</div><div class="sub">AR + гидрофоб + антистатик</div></td>
+          <td>Glacier</td><td>−10.00 … +6.00</td><td>65–75</td>
+          <td class="price">5 800</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite Blue Zero 1.60 Glacier</div><div class="sub">HEV / blue filter · UV-400</div></td>
+          <td>Glacier</td><td>−8.00 … +8.00</td><td>65–75</td>
+          <td class="price">7 300</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.60 Glacier Expression</div><div class="sub">Premium · рефлекс светло-фиолетовый</div></td>
+          <td>Expression</td><td>−6.00 … +6.00</td><td>65/75</td>
+          <td class="price">11 100</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.60 AS HMC</div><div class="sub">Асферика · UV-400</div></td>
+          <td>AS HMC</td><td>−12.00 … +6.00</td><td>70/75</td>
+          <td class="price">5 100</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.60 AS Glacier</div><div class="sub">Асферика · Glacier</div></td>
+          <td>AS Glacier</td><td>−10.00 … +6.00</td><td>65–75</td>
+          <td class="price">7 000</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.60 AS Glacier Plus</div><div class="sub">Асферика · Glacier Plus</div></td>
+          <td>AS Glacier+</td><td>−12.00 … +8.00</td><td>65–75</td>
+          <td class="price">7 900</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Индекс 1.67</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th><th>Покрытие</th><th>SPH</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="name">Altolite 1.67 AS Glacier</div><div class="sub">Асферика · сфера и астигматика</div></td>
+          <td>AS Glacier</td><td>−15.00 … +7.00</td><td>65–75</td>
+          <td class="price">8 900</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite Blue Zero 1.67 AS Glacier</div><div class="sub">HEV / blue filter · асферика</div></td>
+          <td>AS Glacier</td><td>−8.00 … +8.00</td><td>65–75</td>
+          <td class="price">9 800</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.67 AS Glacier Plus</div><div class="sub">Асферика · Glacier Plus</div></td>
+          <td>AS Glacier+</td><td>−6.00 … 0.00</td><td>75</td>
+          <td class="price">11 100</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">г. Курск · салон оптики «Глаз Да Глаз» · Shamir Optical</div>
+  </div>
+
+  <!-- PAGE 3: 1.74 + photo / polar / office -->
+  <div class="page" id="p3">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1>Глаз Да Глаз</h1>
+          <p>Прайс Shamir · 1.74 · фотохром · поляризация · офис</p>
+        </div>
+      </div>
+      <div class="badges">
+        <div class="badge dark">SHAMIR</div>
+        <div class="badge">Цена за 1 линзу · ₽</div>
+      </div>
+    </div>
+
+    <div class="section-title">Индекс 1.74</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th><th>Покрытие</th><th>SPH</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="name">Altolite 1.74 AS Glacier</div><div class="sub">Асферика · минус</div></td>
+          <td>AS Glacier</td><td>−3.00 … −15.00</td><td>70/75</td>
+          <td class="price">14 200</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.74 AS Glacier</div><div class="sub">Астигматика</div></td>
+          <td>AS Glacier</td><td>+8.00 … −10.00</td><td>65–75</td>
+          <td class="price">11 100</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Фотохром</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th><th>Цвет</th><th>SPH</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="name">Crossover 1.50 SunMax Glacier</div><div class="sub">Автоадаптация · UV 100%</div></td>
+          <td>Brown / Grey</td><td>−6.00 … +4.00</td><td>70</td>
+          <td class="price">7 400</td>
+        </tr>
+        <tr>
+          <td><div class="name">Transitions XTRActive NG 1.50 HMC+</div><div class="sub">Для водителей · затемнение даже в помещении</div></td>
+          <td>Grey</td><td>−4.00 … +4.00</td><td>65/70</td>
+          <td class="price">15 500</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.56 SunSwift Glacier</div><div class="sub">Ежедневное ношение · астигматика</div></td>
+          <td>Brown / Grey</td><td>−8.00 … +6.00</td><td>65/70</td>
+          <td class="price">4 700</td>
+        </tr>
+        <tr>
+          <td><div class="name">Crossover 1.60 AS SunMax Glacier</div><div class="sub">Асферика · автоадаптация</div></td>
+          <td>Brown / Grey</td><td>−8.00 … +6.00</td><td>70/75</td>
+          <td class="price">12 600</td>
+        </tr>
+        <tr>
+          <td><div class="name">Transitions XTRActive NG 1.60 AS HMC+</div><div class="sub">Асферика · для водителей</div></td>
+          <td>Grey</td><td>−8.00 … +4.00</td><td>65–75</td>
+          <td class="price">22 100</td>
+        </tr>
+        <tr>
+          <td><div class="name">Crossover 1.67 AS SunMax Glacier</div><div class="sub">Асферика · высокий индекс</div></td>
+          <td>Brown / Grey</td><td>−10.00 … +6.00</td><td>70/75</td>
+          <td class="price">16 400</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Поляризация · офис</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th><th>Вариант</th><th>SPH</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="name">Altolite 1.50 Polarized Glacier</div><div class="sub">Поляризация · база 600</div></td>
+          <td>Brown / Green / Grey / Yellow</td><td>0.00</td><td>75</td>
+          <td class="price">5 200</td>
+        </tr>
+        <tr>
+          <td><div class="name">Altolite 1.50 HMC Office</div><div class="sub">Офисные · Degression Power 1.00</div></td>
+          <td>HMC</td><td>+1.00 … +3.00 чтение</td><td>65/70</td>
+          <td class="price">5 700</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">г. Курск · салон оптики «Глаз Да Глаз» · Shamir Optical</div>
+  </div>
+
+</body>
+</html>

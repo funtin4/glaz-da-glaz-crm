@@ -1,0 +1,5 @@
+node_modules/
+advisor/node_modules/
+advisor/dist/
+.DS_Store
+*.log

@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Прайс-листы — Глаз Да Глаз</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #eef2f8;
+      color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    .page {
+      width: 1536px;
+      min-height: 2048px;
+      margin: 0 auto;
+      background: #ffffff;
+      padding: 64px 56px 72px;
+      page-break-after: always;
+    }
+
+    .header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 36px;
+      padding-bottom: 24px;
+      border-bottom: 3px solid #0A66D8;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+
+    .logo {
+      width: 72px;
+      height: 72px;
+      border-radius: 20px;
+      background: linear-gradient(135deg, #0A66D8 0%, #0952b0 100%);
+      color: white;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -1px;
+    }
+
+    .brand h1 {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      line-height: 1.1;
+    }
+
+    .brand p {
+      margin-top: 6px;
+      font-size: 22px;
+      color: #64748b;
+      font-weight: 500;
+    }
+
+    .badge {
+      background: #eff6ff;
+      color: #0A66D8;
+      border: 2px solid #bfdbfe;
+      border-radius: 999px;
+      padding: 12px 22px;
+      font-size: 18px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .section-title {
+      font-size: 24px;
+      font-weight: 800;
+      color: #0A66D8;
+      margin: 28px 0 14px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .section-title::before {
+      content: '';
+      width: 8px;
+      height: 28px;
+      border-radius: 4px;
+      background: #0A66D8;
+    }
+
+    table {
+      width: 100%;
+      border-collapse: separate;
+      border-spacing: 0;
+      font-size: 17px;
+      border: 1px solid #dbe4f0;
+      border-radius: 16px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    thead th {
+      background: #0A66D8;
+      color: white;
+      text-align: left;
+      padding: 14px 12px;
+      font-size: 15px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    tbody td {
+      padding: 12px 12px;
+      border-bottom: 1px solid #e8edf5;
+      vertical-align: top;
+      line-height: 1.35;
+    }
+
+    tbody tr:nth-child(even) td { background: #f8fafc; }
+    tbody tr:last-child td { border-bottom: none; }
+
+    .price {
+      font-weight: 800;
+      color: #0A66D8;
+      white-space: nowrap;
+      font-size: 18px;
+      text-align: right;
+    }
+
+    .muted { color: #64748b; font-size: 15px; }
+    .type { font-weight: 700; }
+    .note {
+      margin-top: 24px;
+      padding: 16px 18px;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: 14px;
+      font-size: 16px;
+      color: #92400e;
+      line-height: 1.45;
+    }
+
+    .footer {
+      margin-top: 32px;
+      text-align: center;
+      color: #94a3b8;
+      font-size: 16px;
+    }
+
+    .handwritten {
+      font-style: italic;
+      color: #1d4ed8;
+    }
+
+    .compact thead th,
+    .compact tbody td {
+      padding: 10px 12px;
+      font-size: 16px;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- СТРАНИЦА 1: ЛИНЗЫ -->
+  <div class="page" id="lenses">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1>Глаз Да Глаз</h1>
+          <p>Прайс-лист на линзы</p>
+        </div>
+      </div>
+      <div class="badge">Розничные цены · ₽</div>
+    </div>
+
+    <div class="section-title">Стекло</div>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Тип</th><th>Индекс</th><th>Покрытие</th><th>SPH</th><th>CYL</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="type">Минеральная</td><td>1.523</td><td>Без покрытия</td>
+          <td>−6.00 … +6.00</td><td>до +4</td><td>65/70</td><td class="price">3 200</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Полимер</div>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Тип</th><th>Индекс</th><th>Покрытие</th><th>SPH</th><th>CYL</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="type">CR39</td><td>1.50</td><td>Без покрытия</td><td>−6.00 … +6.00</td><td>до ±4</td><td>65/70</td><td class="price">2 000</td></tr>
+        <tr><td class="type">HMC</td><td>1.56</td><td>Антиблик</td><td>−6.00 … +6.00</td><td>до ±4</td><td>65/70</td><td class="price">2 600</td></tr>
+        <tr><td class="type">HMC</td><td>1.56</td><td>Blue Block</td><td>−6.00 … +6.00</td><td>до ±4</td><td>65/70</td><td class="price">3 200</td></tr>
+        <tr><td class="type">MR-8</td><td>1.61</td><td>HMC</td><td>−8.00 … +8.00</td><td>до ±4</td><td>65/70/75</td><td class="price">4 800</td></tr>
+        <tr><td class="type">MR-8</td><td>1.61</td><td>Blue Block</td><td>−8.00 … +8.00</td><td>до ±4</td><td>65/70/75</td><td class="price">5 200</td></tr>
+        <tr><td class="type">AS</td><td>1.67</td><td>HMC</td><td>−12.00 … +8.00</td><td>до ±4</td><td>65/70/75</td><td class="price">6 900</td></tr>
+        <tr><td class="type">AS</td><td>1.67</td><td>Blue Block</td><td>−12.00 … +8.00</td><td>до ±4</td><td>65/70/75</td><td class="price">7 300</td></tr>
+        <tr><td class="type">Ultra Thin</td><td>1.74</td><td>Макс. тонкие</td><td>−15.00 … +10.00</td><td>до ±4</td><td>65/70/75</td><td class="price">13 000</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Фотохром</div>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Тип</th><th>Индекс</th><th>Цвет</th><th>SPH</th><th>CYL</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="type">Photo</td><td>1.56</td><td>Grey / Brown</td><td>−6.00 … +6.00</td><td>до ±2</td><td>70/75</td><td class="price">4 800</td></tr>
+        <tr><td class="type">Photo</td><td>1.61</td><td>Grey / Brown</td><td>−8.00 … +8.00</td><td>до ±2</td><td>70/75</td><td class="price">6 400</td></tr>
+        <tr><td class="type">Photo</td><td>1.67</td><td>Grey / Brown</td><td>−8.00 … +8.00</td><td>до ±2</td><td>70/75</td><td class="price">7 900</td></tr>
+        <tr><td class="type">Photo</td><td>1.74</td><td>Grey / Brown</td><td>−10.00 … +8.00</td><td>до ±2</td><td>70/75</td><td class="price">14 000</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Поляризация</div>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Тип</th><th>Индекс</th><th>Покрытие</th><th>SPH</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="type">Polarized</td><td>1.56</td><td>Sun</td><td>−6.00 … +4.00</td><td>70/75</td><td class="price">5 500</td></tr>
+        <tr><td class="type">Polarized AR</td><td>1.56</td><td>Premium</td><td>−6.00 … +4.00</td><td>75/80</td><td class="price">5 900</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Пресбиопия</div>
+    <table class="compact">
+      <thead>
+        <tr>
+          <th>Тип</th><th>Индекс</th><th>Покрытие</th><th>SPH</th><th>ADD</th><th>Ø</th><th style="text-align:right">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td class="type">Bifocal</td><td>1.56</td><td>Flat Top</td><td>−4.00 … +4.00</td><td>+1 … +3</td><td>70</td><td class="price">8 000</td></tr>
+        <tr><td class="type">Progressive</td><td>1.56</td><td>AR</td><td>−6.00 … +4.00</td><td>+1 … +3</td><td>65/75</td><td class="price">12 500</td></tr>
+        <tr><td class="type">Office</td><td>1.56</td><td>Office</td><td>−4.00 … +4.00</td><td>+0.5 … +3</td><td>65/70</td><td class="price">10 900</td></tr>
+      </tbody>
+    </table>
+
+    <div class="footer">г. Курск · салон оптики «Глаз Да Глаз»</div>
+  </div>
+
+  <!-- СТРАНИЦА 2: УСЛУГИ -->
+  <div class="page" id="services">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1>Глаз Да Глаз</h1>
+          <p>Прайс-лист на услуги</p>
+        </div>
+      </div>
+      <div class="badge">Розничные цены · ₽</div>
+    </div>
+
+    <div class="section-title">Ремонт очков</div>
+    <table>
+      <thead>
+        <tr><th>Услуга</th><th style="text-align:right">Цена</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="type">Замена флекса</td><td class="price">2 500</td></tr>
+        <tr><td class="type">Замена заушника (1 шт)</td><td class="price">1 000</td></tr>
+        <tr><td class="type">Замена носовых упоров</td><td class="price">350</td></tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Изготовление очков</div>
+    <table>
+      <thead>
+        <tr><th>Услуга</th><th style="text-align:right">Цена</th></tr>
+      </thead>
+      <tbody>
+        <tr><td class="type">Ободковые оправы</td><td class="price">800</td></tr>
+        <tr><td class="type">Полуободковые оправы</td><td class="price">1 300</td></tr>
+        <tr><td class="type">Безободковые оправы</td><td class="price">2 000</td></tr>
+        <tr><td class="type handwritten">В свою оправу (ободковая)</td><td class="price">1 500</td></tr>
+        <tr><td class="type handwritten">В свою оправу (безободковая / полуободковая)</td><td class="price">2 000</td></tr>
+      </tbody>
+    </table>
+
+    <div class="footer">г. Курск · салон оптики «Глаз Да Глаз»</div>
+  </div>
+
+</body>
+</html>
