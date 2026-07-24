@@ -1,0 +1,23 @@
+{
+  "id": "thickness_chart_owner_2026_07_24",
+  "title": "Сравнение толщины линзы",
+  "type": "owner_visual_reference",
+  "applies_to": "minus_lenses_edge_thickness_qualitative",
+  "axes": {
+    "indexes": [1.5, 1.56, 1.6, 1.67, 1.74],
+    "powers_minus": [-2.0, -4.0, -6.0, -8.0]
+  },
+  "relative_edge_thickness_score": {
+    "comment": "1=thinnest visual band, 5=thickest; discretized from owner chart, not lab mm",
+    "confidence": "owner_chart_derived",
+    "grid": {
+      "2.0": { "1.50": 3, "1.56": 3, "1.60": 2, "1.67": 2, "1.74": 1 },
+      "4.0": { "1.50": 4, "1.56": 4, "1.60": 3, "1.67": 2, "1.74": 2 },
+      "6.0": { "1.50": 5, "1.56": 5, "1.60": 4, "1.67": 3, "1.74": 2 },
+      "8.0": { "1.50": 5, "1.56": 5, "1.60": 4, "1.67": 3, "1.74": 2 }
+    }
+  },
+  "aligns_with_owner_index_policy": true,
+  "client_promise": "qualitative_thinner_ok_before_measure",
+  "do_not": ["promise_mm", "apply_blindly_to_plus_lenses", "ignore_frame_size"]
+}

@@ -26,8 +26,9 @@
     "data/normalized/catalog_summary.json"
   ],
   "knowledge": [
-    "knowledge/domain-facts.json",
-    "knowledge/PERSISTENCE.md"
+    "knowledge/PACK_INDEX.json",
+    "knowledge/PERSISTENCE.md",
+    "knowledge/domain-facts.json"
   ],
   "rules": [
     "rules/rules.draft.json"

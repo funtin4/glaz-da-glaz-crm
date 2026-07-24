@@ -11,9 +11,11 @@
 5. `docs/optics-knowledge/13-sources.md`
 6. `docs/optics-knowledge/15-open-questions.md`
 7. `knowledge/domain-facts.json`
-8. `data/normalized/catalog.json` (+ `catalog_summary.json`)
-9. `rules/rules.draft.json`
-10. `tests/scenarios/scenarios_v1.json`
+8. `knowledge/thickness-chart.json` + `docs/optics-knowledge/18-thickness-chart.md`
+9. `data/normalized/catalog.json` (+ `catalog_summary.json`)
+10. `rules/rules.draft.json`
+11. `rules/owner-config.json`
+12. `tests/scenarios/scenarios_v1.json`
 
 Полный учебный корпус: `docs/optics-knowledge/01` … `15`.
 
