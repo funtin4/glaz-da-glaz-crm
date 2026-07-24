@@ -1,0 +1,48 @@
+{
+  "id": "bbgr_thickness_chart",
+  "title": "BBGR lens thickness comparison (Ct / Et)",
+  "manufacturer_chart": "BBGR",
+  "received_from_owner": "2026-07-24",
+  "type": "industry_reference_table",
+  "reliability": "manufacturer_chart_secondary",
+  "notes": [
+    "Plus lenses: center thickness (Ct), blank diameter assumption 65 mm per chart note",
+    "Minus lenses: edge thickness (Et), blank diameter assumption 70 mm per chart note",
+    "Values are reference for a fixed blank size — real job depends on frame aperture, decentration, min edge, aspheric design, lab min thickness",
+    "Do NOT quote as exact promise for client frame without calculation"
+  ],
+  "assumptions": {
+    "plus_blank_diameter_mm": 65,
+    "minus_blank_diameter_mm": 70
+  },
+  "indexes": [1.5, 1.56, 1.6, 1.67, 1.74],
+  "column_labels": {
+    "1.5": "CR39 / ORMA / UNOR",
+    "1.56": "HI-INDEX / ORLITE",
+    "1.6": "INDEX / ASPHER",
+    "1.67": "INDEX / ASPHER",
+    "1.74": "INDEX / ASPHER"
+  },
+  "plus_center_thickness_mm": {
+    "+6.00": { "1.5": 8.1, "1.56": 7.6, "1.6": 7.0, "1.67": 6.3, "1.74": 5.6 },
+    "+4.00": { "1.5": 6.1, "1.56": 5.8, "1.6": 5.4, "1.67": 4.9, "1.74": 4.3 },
+    "+2.00": { "1.5": 4.1, "1.56": 3.9, "1.6": 3.7, "1.67": 3.4, "1.74": 3.1 }
+  },
+  "minus_edge_thickness_mm": {
+    "-2.00": { "1.5": 4.5, "1.56": 4.2, "1.6": 3.9, "1.67": 3.5, "1.74": 3.1 },
+    "-4.00": { "1.5": 6.9, "1.56": 6.5, "1.6": 6.0, "1.67": 5.3, "1.74": 4.6 },
+    "-6.00": { "1.5": 9.3, "1.56": 8.7, "1.6": 8.0, "1.67": 7.1, "1.74": 6.1 },
+    "-10.00": { "1.5": 14.1, "1.56": 13.1, "1.6": 12.1, "1.67": 10.6, "1.74": 9.1 }
+  },
+  "derived_deltas_example": {
+    "comment": "Illustrative savings vs 1.5 at same power (mm), from this table only",
+    "minus_6_edge_1.67_vs_1.5_mm": 2.2,
+    "minus_10_edge_1.74_vs_1.5_mm": 5.0,
+    "plus_6_center_1.74_vs_1.5_mm": 2.5
+  },
+  "aligns_with_owner_policy": {
+    "index_150_156_max_abs_sph_3": "At -4.00 Et already 6.9/6.5 mm on 1.5/1.56 vs 6.0 on 1.6 — supports capping low indexes around ±3",
+    "prefer_167_from_abs_4_to_5": "At -4.00…-6.00 1.67 cuts ~1.6–2.2 mm vs 1.5 on this blank size",
+    "index_160_ok_low_rx": "At -2.00 / +2.00 differences are smaller (tenths of mm) — 1.6 still fine, 1.74 optional"
+  }
+}

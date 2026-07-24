@@ -12,6 +12,7 @@
 6. `docs/optics-knowledge/15-open-questions.md`
 7. `knowledge/domain-facts.json`
 8. `knowledge/thickness-chart.json` + `docs/optics-knowledge/18-thickness-chart.md`
+8b. `knowledge/thickness-chart-bbgr.json` + `docs/optics-knowledge/19-thickness-chart-bbgr.md` (мм Ct/Et, Ø65/70)
 9. `data/normalized/catalog.json` (+ `catalog_summary.json`)
 10. `rules/rules.draft.json`
 11. `rules/owner-config.json`

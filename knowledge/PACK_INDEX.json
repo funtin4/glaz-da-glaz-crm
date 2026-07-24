@@ -19,6 +19,8 @@
     "docs/optics-knowledge/15-open-questions.md",
     "docs/optics-knowledge/16-decision-model.md",
     "docs/optics-knowledge/17-client-questions.md",
+    "docs/optics-knowledge/18-thickness-chart.md",
+    "docs/optics-knowledge/19-thickness-chart-bbgr.md",
     "docs/optics-knowledge/research-report.md"
   ],
   "data_normalized": [
@@ -28,7 +30,9 @@
   "knowledge": [
     "knowledge/PACK_INDEX.json",
     "knowledge/PERSISTENCE.md",
-    "knowledge/domain-facts.json"
+    "knowledge/domain-facts.json",
+    "knowledge/thickness-chart-bbgr.json",
+    "knowledge/thickness-chart.json"
   ],
   "rules": [
     "rules/rules.draft.json"
