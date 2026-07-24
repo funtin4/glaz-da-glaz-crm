@@ -1,0 +1,1859 @@
+{
+  "version": "1",
+  "count": 50,
+  "note": "Expectations for future engine; current app not yet aligned",
+  "scenarios": [
+    {
+      "id": "T01",
+      "title": "Слабая миопия SV бюджет",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -1.25,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 28,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "min_price",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 12000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A",
+        "reject_patterns": [
+          "index>=1.74 as optimal"
+        ],
+        "client_text_forbid": [
+          "лечит",
+          "идеальное зрение"
+        ]
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T02",
+      "title": "Средняя миопия хочет тоньше",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -3.5,
+            "cyl": -0.75,
+            "ax": 180,
+            "add": null
+          },
+          "os": {
+            "sph": -3.25,
+            "cyl": -0.5,
+            "ax": 10,
+            "add": null
+          },
+          "pd": 63,
+          "age": 32,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "thin",
+          "thickness": 3,
+          "photochromic": "no",
+          "budgetPair": 25000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A",
+        "prefer": [
+          "index>=1.60"
+        ],
+        "forbid_promise": [
+          "exact_thickness_mm"
+        ]
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T03",
+      "title": "Высокая миопия",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -8.0,
+            "cyl": -1.0,
+            "ax": 5,
+            "add": null
+          },
+          "os": {
+            "sph": -7.5,
+            "cyl": -0.75,
+            "ax": 175,
+            "add": null
+          },
+          "pd": 64,
+          "age": 35,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "thin",
+          "thickness": 3,
+          "photochromic": "no",
+          "budgetPair": 40000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B",
+        "reject": [
+          "index 1.50 as optimal"
+        ]
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T04",
+      "title": "Гиперметропия",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": 2.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": 2.75,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 60,
+          "age": 40,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 20000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A",
+        "note": "plus_center_thickness"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T05",
+      "title": "Астигматизм средний",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.0,
+            "cyl": -2.0,
+            "ax": 90,
+            "add": null
+          },
+          "os": {
+            "sph": -1.75,
+            "cyl": -1.75,
+            "ax": 85,
+            "add": null
+          },
+          "pd": 62,
+          "age": 30,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "anti_glare",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 20000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T06",
+      "title": "Анизометропия",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -4.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 29,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 25000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "C",
+        "escalation": "anisometropia"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T07",
+      "title": "Разный cyl",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -3.0,
+            "cyl": -0.5,
+            "ax": 10,
+            "add": null
+          },
+          "os": {
+            "sph": -3.0,
+            "cyl": -2.5,
+            "ax": 170,
+            "add": null
+          },
+          "pd": 61,
+          "age": 33,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 25000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T08",
+      "title": "Чтение",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": 1.0,
+            "cyl": null,
+            "ax": null,
+            "add": 2.0
+          },
+          "os": {
+            "sph": 1.0,
+            "cyl": null,
+            "ax": null,
+            "add": 2.0
+          },
+          "pd": 60,
+          "age": 55,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "reading",
+          "priority": "comfort",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 15000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B",
+        "progressive": "estimate_only"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T09",
+      "title": "Постоянное ношение",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 26,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "max_quality",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 30000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T10",
+      "title": "Компьютер",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -1.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -1.75,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 31,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "computer",
+          "priority": "computer",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 20000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A",
+        "client_text_forbid": [
+          "защищает зрение от компьютера"
+        ]
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T11",
+      "title": "Вождение + фотохром",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 63,
+          "age": 38,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "car",
+          "priority": "photochromic",
+          "thickness": 2,
+          "photochromic": "yes",
+          "budgetPair": 35000,
+          "frameType": "full_rim",
+          "drivesOften": true
+        }
+      },
+      "expected": {
+        "level": "B",
+        "warnings": [
+          "windshield_UV"
+        ]
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T12",
+      "title": "Вождение без фотохрома",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 45,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "car",
+          "priority": "anti_glare",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 20000,
+          "frameType": "full_rim",
+          "drivesOften": true
+        }
+      },
+      "expected": {
+        "level": "A"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T13",
+      "title": "Фотохром ежедневно",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -3.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -3.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 34,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "photochromic",
+          "thickness": 2,
+          "photochromic": "yes",
+          "budgetPair": 30000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A",
+        "require": [
+          "all_three_photochromic"
+        ]
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T14",
+      "title": "Поляризация",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 30,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "distance",
+          "priority": "anti_glare",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 20000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B",
+        "reject": [
+          "polar_plano_for_nonzero"
+        ]
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T15",
+      "title": "Ночное вождение",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -1.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -1.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 40,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "car",
+          "priority": "anti_glare",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 25000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T16",
+      "title": "Премиум запрос",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -4.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -4.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 36,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "max_quality",
+          "thickness": 3,
+          "photochromic": "no",
+          "budgetPair": null,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T17",
+      "title": "Жёсткий бюджет",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 27,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "min_price",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 8000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A",
+        "no_decoy": true
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T18",
+      "title": "Безободковая",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -5.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -5.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 41,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "thin",
+          "thickness": 3,
+          "photochromic": "no",
+          "budgetPair": 35000,
+          "frameType": "rimless",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T19",
+      "title": "Крупная оправа",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -6.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -6.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 64,
+          "age": 30,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "thin",
+          "thickness": 3,
+          "photochromic": "no",
+          "budgetPair": 40000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B",
+        "forbid_promise": [
+          "exact_edge_thickness"
+        ]
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T20",
+      "title": "Маленькая оправа",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -4.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -4.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 60,
+          "age": 29,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "min_price",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 15000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T21",
+      "title": "ADD одна пара",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": 0.5,
+            "cyl": null,
+            "ax": null,
+            "add": 2.0
+          },
+          "os": {
+            "sph": 0.5,
+            "cyl": null,
+            "ax": null,
+            "add": 2.0
+          },
+          "pd": null,
+          "age": 52,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "unknown",
+          "budgetPair": 40000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "C",
+        "progressive": "range_only"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T22",
+      "title": "Офис 45+",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": 1.5
+          },
+          "os": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": 1.5
+          },
+          "pd": 62,
+          "age": 48,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "computer",
+          "priority": "computer",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 30000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T23",
+      "title": "Возраст 50 без ADD",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 50,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 25000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B",
+        "forbid": [
+          "auto_progressive_from_age_only"
+        ]
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T24",
+      "title": "Детский",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 55,
+          "age": 10,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 15000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "C"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T25",
+      "title": "Kids plus",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": 2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": 2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 54,
+          "age": 8,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "min_price",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 10000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "C"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T26",
+      "title": "Бифокал",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": 1.0,
+            "cyl": null,
+            "ax": null,
+            "add": 2.5
+          },
+          "os": {
+            "sph": 1.0,
+            "cyl": null,
+            "ax": null,
+            "add": 2.5
+          },
+          "pd": 62,
+          "age": 60,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "min_price",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 20000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T27",
+      "title": "Молодой компьютер",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 24,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "computer",
+          "priority": "comfort",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 20000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T28",
+      "title": "Прогрессив опытный",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -1.5,
+            "cyl": null,
+            "ax": null,
+            "add": 2.0
+          },
+          "os": {
+            "sph": -1.5,
+            "cyl": null,
+            "ax": null,
+            "add": 2.0
+          },
+          "pd": 63,
+          "age": 58,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "max_quality",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": null,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T29",
+      "title": "Плохая адаптация progressive",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": 2.25
+          },
+          "os": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": 2.25
+          },
+          "pd": 62,
+          "age": 55,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 40000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "C"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T30",
+      "title": "Нет PD при ADD",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": 0.75,
+            "cyl": null,
+            "ax": null,
+            "add": 1.75
+          },
+          "os": {
+            "sph": 0.75,
+            "cyl": null,
+            "ax": null,
+            "add": 1.75
+          },
+          "pd": null,
+          "age": 49,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "work",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 30000,
+          "frameType": "unknown",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "C"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T31",
+      "title": "Нет рецепта",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": null,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": null,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": null,
+          "age": null,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "min_price",
+          "thickness": 1,
+          "photochromic": "unknown",
+          "budgetPair": 15000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "C"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T32",
+      "title": "OCR низкий",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -3.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -3.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 30,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "thin",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 20000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "C",
+        "do_not_alter_rx": true
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T33",
+      "title": "Руль и затемнение",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 35,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "car",
+          "priority": "photochromic",
+          "thickness": 2,
+          "photochromic": "yes",
+          "budgetPair": 25000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T34",
+      "title": "Самые тонкие при -0.75",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -0.75,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -0.75,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 22,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "thin",
+          "thickness": 3,
+          "photochromic": "no",
+          "budgetPair": null,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A",
+        "optimal_not_174": true
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T35",
+      "title": "Маркетплейс возражение",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 30,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "min_price",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 10000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A",
+        "no_pressure": true
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T36",
+      "title": "Только вставить",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -1.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -1.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 44,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "min_price",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 8000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T37",
+      "title": "Призма",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 40,
+          "prism": {
+            "od": "2Δ BO"
+          }
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 40000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "C"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T38",
+      "title": "SPH -10",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -10.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -10.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 37,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "thin",
+          "thickness": 3,
+          "photochromic": "no",
+          "budgetPair": null,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T39",
+      "title": "Плюс высокий",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": 6.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": 6.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 42,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "thin",
+          "thickness": 3,
+          "photochromic": "no",
+          "budgetPair": 40000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T40",
+      "title": "Фото оправы без размеров",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -3.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -3.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 28,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "thin",
+          "thickness": 3,
+          "photochromic": "no",
+          "budgetPair": 20000,
+          "frameType": "unknown",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B",
+        "forbid_promise": [
+          "exact_thickness"
+        ]
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T41",
+      "title": "Срочно склад",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 30,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "min_price",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 12000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A",
+        "prefer": [
+          "stock"
+        ]
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T42",
+      "title": "Rodenstock премиум",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -3.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -3.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 40,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "max_quality",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": null,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B",
+        "do_not_use_invented_sph_envelope": true
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T43",
+      "title": "Минеральное стекло",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -1.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 70,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "min_price",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 8000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T44",
+      "title": "Office vs progressive",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -0.5,
+            "cyl": null,
+            "ax": null,
+            "add": 1.75
+          },
+          "os": {
+            "sph": -0.5,
+            "cyl": null,
+            "ax": null,
+            "add": 1.75
+          },
+          "pd": 62,
+          "age": 47,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "computer",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 35000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T45",
+      "title": "Хамелеон + компьютер",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 33,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "computer",
+          "priority": "photochromic",
+          "thickness": 2,
+          "photochromic": "yes",
+          "budgetPair": 30000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T46",
+      "title": "Леска",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -4.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -4.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 39,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "thin",
+          "thickness": 3,
+          "photochromic": "no",
+          "budgetPair": 30000,
+          "frameType": "semi_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "B"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T47",
+      "title": "Разнообразие портфеля",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.75,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.5,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 31,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "no",
+          "budgetPair": 25000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A",
+        "portfolio": "diverse"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T48",
+      "title": "Без бюджета",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": -2.0,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": 62,
+          "age": 29,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "comfort",
+          "thickness": 2,
+          "photochromic": "unknown",
+          "budgetPair": null,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "A"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T49",
+      "title": "Старые очки без рецепта",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": null,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "os": {
+            "sph": null,
+            "cyl": null,
+            "ax": null,
+            "add": null
+          },
+          "pd": null,
+          "age": null,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "min_price",
+          "thickness": 1,
+          "photochromic": "no",
+          "budgetPair": 10000,
+          "frameType": "full_rim",
+          "drivesOften": null
+        }
+      },
+      "expected": {
+        "level": "C"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    },
+    {
+      "id": "T50",
+      "title": "Сложный комбинированный",
+      "input": {
+        "prescription": {
+          "od": {
+            "sph": -7.0,
+            "cyl": -2.5,
+            "ax": 20,
+            "add": 2.0
+          },
+          "os": {
+            "sph": -6.5,
+            "cyl": -2.0,
+            "ax": 160,
+            "add": 2.0
+          },
+          "pd": null,
+          "age": 56,
+          "prism": null
+        },
+        "answers": {
+          "purpose": "daily",
+          "priority": "thin",
+          "thickness": 3,
+          "photochromic": "yes",
+          "budgetPair": 50000,
+          "frameType": "rimless",
+          "drivesOften": true
+        }
+      },
+      "expected": {
+        "level": "C"
+      },
+      "status": "spec_only_engine_not_rewired_yet"
+    }
+  ]
+}
