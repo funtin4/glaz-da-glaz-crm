@@ -1,7 +1,15 @@
 import type { ReactNode } from 'react';
 import { Link } from 'react-router-dom';
 
-export function Shell({ children, right }: { children: ReactNode; right?: ReactNode }) {
+export function Shell({
+  children,
+  right,
+  masterMode = true,
+}: {
+  children: ReactNode;
+  right?: ReactNode;
+  masterMode?: boolean;
+}) {
   return (
     <div className="app-shell">
       <header className="topbar">
@@ -9,17 +17,17 @@ export function Shell({ children, right }: { children: ReactNode; right?: ReactN
           <div className="logo">Г</div>
           <div>
             <strong>Глаз Да Глаз</strong>
-            <span>Цифровой подбор линз</span>
+            <span>{masterMode ? 'Вставка линз · Курск' : 'Подбор линз'}</span>
           </div>
         </Link>
         {right ?? (
           <Link className="staff-link" to="/staff">
-            Для консультанта
+            Мне (Авито)
           </Link>
         )}
       </header>
       <main className="main">{children}</main>
-      <p className="footer-note">Не каталог — консультация. Цены за пару линз + оценка работы.</p>
+      <p className="footer-note">Напишите в Авито — вставлю линзы в вашу оправу</p>
     </div>
   );
 }
@@ -61,9 +69,9 @@ export function ThicknessVisual({
   onChange: (v: 1 | 2 | 3) => void;
 }) {
   const items: Array<{ v: 1 | 2 | 3; title: string; hint: string; h: number }> = [
-    { v: 1, title: 'Стандартные', hint: 'Обычная толщина', h: 54 },
-    { v: 2, title: 'Тоньше', hint: 'Заметно легче', h: 34 },
-    { v: 3, title: 'Максимально тонкие', hint: 'Для высоких диоптрий', h: 18 },
+    { v: 1, title: 'Обычные', hint: 'Как в простых очках', h: 54 },
+    { v: 2, title: 'Потоньше', hint: 'Аккуратнее смотрятся', h: 34 },
+    { v: 3, title: 'Очень тонкие', hint: 'Если диоптрии большие', h: 18 },
   ];
   return (
     <div className="thickness">

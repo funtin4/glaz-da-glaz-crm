@@ -1,7 +1,8 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Link, useNavigate, useParams } from 'react-router-dom';
+import { useParams, useSearchParams } from 'react-router-dom';
 import { RecommendationCards } from '../components/RecommendationCards';
 import { OptionButton, Progress, Shell, ThicknessVisual } from '../components/ui';
+import { softenWarning } from '../engine/clientCopy';
 import { recommendedThinness } from '../engine/rules';
 import {
   chooseTier,
@@ -36,35 +37,21 @@ function hasRx(rx: Prescription): boolean {
   return rx.od.sph != null || rx.os.sph != null;
 }
 
-function buildSteps(answers: Answers, rx: Prescription): Step[] {
+function buildSteps(answers: Answers, rx: Prescription, fromAvito: boolean): Step[] {
   const steps: Step[] = ['welcome'];
-  if (!hasRx(rx)) steps.push('rx');
+  // Avito: master already has the recipe photo — client never fills OD/SPH
+  if (!hasRx(rx) && !fromAvito) steps.push('rx');
   steps.push('purpose', 'priority');
-
-  const skipThickness =
-    answers.priority === 'thin' ||
-    (hasRx(rx) && recommendedThinness(rx, answers.frameType) >= 3 && answers.priority === 'min_price');
-  // Always ask thickness unless priority already = thin (we auto-set)
   if (answers.priority !== 'thin') steps.push('thickness');
-  else {
-    // auto
-  }
-
-  const skipPhoto =
-    answers.priority === 'photochromic' ||
-    answers.purpose === 'car'; // still ask for car? Better ask - drive photo vs clear
-  // For car we still ask photo; for priority photochromic we auto yes
   if (answers.priority !== 'photochromic') steps.push('photo');
-
   steps.push('budget', 'results');
-  void skipThickness;
-  void skipPhoto;
   return steps;
 }
 
 export function SelectPage() {
   const { code = '' } = useParams();
-  const nav = useNavigate();
+  const [search] = useSearchParams();
+  const staffMode = search.get('me') === '1';
   const [session, setSession] = useState<SessionRecord | null>(null);
   const [stepIdx, setStepIdx] = useState(0);
   const [error, setError] = useState('');
@@ -72,23 +59,24 @@ export function SelectPage() {
   useEffect(() => {
     const s = getSession(code);
     if (!s) {
-      setError('Сессия не найдена. Попросите консультанта прислать новую ссылку.');
+      setError('Ссылка устарела. Напишите мне в Авито — пришлю новую.');
       return;
     }
     setSession(s);
     setStepIdx(0);
   }, [code]);
 
+  const fromAvito = session?.channel === 'avito' || session?.channel === 'staff';
+
   const steps = useMemo(
-    () => (session ? buildSteps(session.answers, session.prescription) : ['welcome']),
-    [session],
+    () => (session ? buildSteps(session.answers, session.prescription, fromAvito) : ['welcome']),
+    [session, fromAvito],
   );
   const step = steps[Math.min(stepIdx, steps.length - 1)] as Step;
 
   function patchAnswers(partial: Partial<Answers>) {
     if (!session) return;
     const answers = { ...session.answers, ...partial };
-    // adaptive autoset
     if (partial.priority === 'thin' && answers.thickness == null) answers.thickness = 3;
     if (partial.priority === 'photochromic') answers.photochromic = 'yes';
     const next = saveAnswers(session.code, answers);
@@ -101,19 +89,20 @@ export function SelectPage() {
     if (next) setSession({ ...next });
   }
 
-  function next() {
+  function goNext() {
     if (!session) return;
-    if (step === 'budget' || (step !== 'results' && steps[stepIdx + 1] === 'results')) {
-      // ensure thickness default from optics
+    const aboutToResults = steps[stepIdx + 1] === 'results' || step === 'budget';
+    if (aboutToResults && step !== 'results') {
       const a = { ...session.answers };
       if (a.thickness == null) a.thickness = recommendedThinness(session.prescription, a.frameType);
       if (a.priority === 'photochromic') a.photochromic = 'yes';
       if (a.photochromic == null) a.photochromic = 'unknown';
+      // Avito without rx: still recommend with soft defaults
       saveAnswers(session.code, a);
       const updated = runRecommend(session.code);
       if (updated) {
         setSession(updated);
-        setStepIdx(steps.indexOf('results') >= 0 ? steps.indexOf('results') : stepIdx + 1);
+        setStepIdx(steps.indexOf('results'));
         return;
       }
     }
@@ -134,11 +123,8 @@ export function SelectPage() {
     return (
       <Shell>
         <div className="panel">
-          <h2>Ссылка недействительна</h2>
+          <h2>Ссылка не открылась</h2>
           <p className="lead">{error}</p>
-          <Link className="btn solid" to="/staff" style={{ display: 'inline-block', textDecoration: 'none' }}>
-            Создать новую сессию
-          </Link>
         </div>
       </Shell>
     );
@@ -148,64 +134,57 @@ export function SelectPage() {
     return (
       <Shell>
         <div className="panel">
-          <p className="lead">Загрузка…</p>
+          <p className="lead">Секунду…</p>
         </div>
       </Shell>
     );
   }
 
   const progressStep = step === 'results' ? steps.length : stepIdx + 1;
-  const progressTotal = steps.length;
+  const clientWarnings = (session.recommendation?.warnings ?? [])
+    .map(softenWarning)
+    .filter((w): w is string => Boolean(w));
 
   return (
-    <Shell
-      right={
-        <span className="staff-link">
-          сессия <span className="code-pill">{session.code}</span>
-        </span>
-      }
-    >
+    <Shell right={<span className="staff-link">подбор линз</span>}>
       {step === 'welcome' ? (
         <section className="hero">
-          <h1>Глаз Да Глаз</h1>
+          <h1>Давайте подберём линзы</h1>
           <p>
             {hasRx(session.prescription)
-              ? 'Мы уже получили ваш рецепт. Осталось несколько коротких вопросов — и покажем лучшие варианты.'
-              : 'Ответьте на несколько простых вопросов. Каталог из сотен линз останется за кулисами.'}
+              ? 'Рецепт у меня есть. Пара простых вопросов — и покажу три варианта под вас. Без сложных названий.'
+              : fromAvito
+                ? 'Напишите мне рецепт в Авито, если ещё не отправили. А пока ответьте на пару вопросов — так я быстрее попаду в нужную цену и комфорт.'
+                : 'Пара простых вопросов — покажу три понятных варианта. Цифры с рецепта, если есть, можно ввести дальше.'}
           </p>
           <div className="hero-actions">
-            <button type="button" className="btn primary" onClick={next}>
-              Начать подбор
+            <button type="button" className="btn primary" onClick={goNext}>
+              Поехали
             </button>
           </div>
         </section>
       ) : (
         <div className="panel">
-          <Progress step={progressStep} total={progressTotal} />
+          <Progress step={progressStep} total={steps.length} />
 
           {step === 'rx' && (
-            <RxStep
-              rx={session.prescription}
-              onChange={patchRx}
-              onNext={next}
-              onBack={back}
-            />
+            <RxStep rx={session.prescription} onChange={patchRx} onNext={goNext} onBack={back} />
           )}
 
           {step === 'purpose' && (
             <>
-              <h2>Для чего нужны очки?</h2>
-              <p className="lead">Выберите главный сценарий — от этого зависит тип линз.</p>
+              <h2>Очки в основном для чего?</h2>
+              <p className="lead">Выберите одно главное.</p>
               <div className="options">
                 {(
                   [
-                    ['daily', 'Постоянное ношение'],
-                    ['distance', 'Только для дали'],
-                    ['reading', 'Для чтения'],
-                    ['computer', 'Для компьютера'],
-                    ['car', 'Для автомобиля'],
-                    ['work', 'Для работы'],
-                    ['unknown', 'Не знаю'],
+                    ['daily', 'Ношу почти всегда'],
+                    ['distance', 'Смотреть вдаль / на улицу'],
+                    ['reading', 'Читать / телефон'],
+                    ['computer', 'Компьютер'],
+                    ['car', 'За рулём'],
+                    ['work', 'На работе'],
+                    ['unknown', 'Пока не знаю'],
                   ] as Array<[Purpose, string]>
                 ).map(([id, label]) => (
                   <OptionButton
@@ -216,28 +195,46 @@ export function SelectPage() {
                   />
                 ))}
               </div>
-              <FrameRow
-                value={session.answers.frameType}
-                onChange={(frameType) => patchAnswers({ frameType })}
-              />
-              <Nav onBack={back} onNext={next} disabled={!session.answers.purpose} />
+              <div style={{ marginTop: 16 }}>
+                <p className="lead" style={{ marginBottom: 8 }}>
+                  Оправа какая?
+                </p>
+                <div className="options">
+                  {(
+                    [
+                      ['full_rim', 'Обычная, с ободком'],
+                      ['semi_rim', 'На леске / полуободок'],
+                      ['rimless', 'На винтиках, без ободка'],
+                      ['unknown', 'Пока без оправы / не знаю'],
+                    ] as Array<[FrameType, string]>
+                  ).map(([id, label]) => (
+                    <OptionButton
+                      key={id}
+                      title={label}
+                      selected={session.answers.frameType === id}
+                      onClick={() => patchAnswers({ frameType: id })}
+                    />
+                  ))}
+                </div>
+              </div>
+              <Nav onBack={back} onNext={goNext} disabled={!session.answers.purpose} />
             </>
           )}
 
           {step === 'priority' && (
             <>
-              <h2>Что важнее всего?</h2>
-              <p className="lead">Один приоритет. Остальное эксперт учтёт сам.</p>
+              <h2>Что важнее?</h2>
+              <p className="lead">Одно главное — остальное учту сам.</p>
               <div className="options">
                 {(
                   [
-                    ['min_price', 'Минимальная цена'],
-                    ['thin', 'Тонкие линзы'],
-                    ['comfort', 'Максимальный комфорт'],
-                    ['computer', 'Защита от компьютера'],
-                    ['photochromic', 'Затемнение на солнце'],
-                    ['anti_glare', 'Минимум бликов'],
-                    ['max_quality', 'Максимальное качество'],
+                    ['min_price', 'Чтобы недорого'],
+                    ['thin', 'Чтобы не толстые'],
+                    ['comfort', 'Чтобы было комфортно'],
+                    ['computer', 'Чтобы глаза меньше уставали у экрана'],
+                    ['photochromic', 'Чтобы темнели на солнце'],
+                    ['anti_glare', 'Чтобы не бликовали'],
+                    ['max_quality', 'Хочу получше, готов доплатить'],
                   ] as Array<[Priority, string]>
                 ).map(([id, label]) => (
                   <OptionButton
@@ -248,31 +245,31 @@ export function SelectPage() {
                   />
                 ))}
               </div>
-              <Nav onBack={back} onNext={next} disabled={!session.answers.priority} />
+              <Nav onBack={back} onNext={goNext} disabled={!session.answers.priority} />
             </>
           )}
 
           {step === 'thickness' && (
             <>
-              <h2>Насколько важна тонкость?</h2>
-              <p className="lead">Без цифр и индексов — просто как хотите видеть линзы в оправе.</p>
+              <h2>Линзы потоньше нужны?</h2>
+              <p className="lead">Так понятнее, чем цифры с упаковки.</p>
               <ThicknessVisual
                 value={session.answers.thickness}
                 onChange={(thickness: ThicknessPref) => patchAnswers({ thickness })}
               />
-              <Nav onBack={back} onNext={next} disabled={!session.answers.thickness} />
+              <Nav onBack={back} onNext={goNext} disabled={!session.answers.thickness} />
             </>
           )}
 
           {step === 'photo' && (
             <>
-              <h2>Хотите, чтобы линзы темнели на солнце?</h2>
-              <p className="lead">Если не уверены — выберите «Не знаю», подберём с запасом вариантов.</p>
+              <h2>Чтобы на улице сами темнели?</h2>
+              <p className="lead">Как очки-хамелеон. Если не уверены — «Не знаю».</p>
               <div className="options">
                 {(
                   [
-                    ['yes', 'Да'],
-                    ['no', 'Нет'],
+                    ['yes', 'Да, хочу'],
+                    ['no', 'Нет, обычные светлые'],
                     ['unknown', 'Не знаю'],
                   ] as Array<[PhotoPref, string]>
                 ).map(([id, label]) => (
@@ -284,21 +281,21 @@ export function SelectPage() {
                   />
                 ))}
               </div>
-              <Nav onBack={back} onNext={next} disabled={!session.answers.photochromic} />
+              <Nav onBack={back} onNext={goNext} disabled={!session.answers.photochromic} />
             </>
           )}
 
           {step === 'budget' && (
             <>
-              <h2>Ориентировочный бюджет</h2>
-              <p className="lead">За пару линз. Работу по оправе посчитаем отдельно.</p>
+              <h2>На линзы примерно сколько?</h2>
+              <p className="lead">Только линзы. За вставку скажу отдельно — обычно 800–2000 ₽.</p>
               <div className="options">
                 {[
-                  [8000, 'До 8 000 ₽'],
-                  [15000, 'До 15 000 ₽'],
-                  [25000, 'До 25 000 ₽'],
-                  [40000, 'До 40 000 ₽'],
-                  [null, 'Без ограничений'],
+                  [8000, 'До 8 тысяч'],
+                  [15000, 'До 15 тысяч'],
+                  [25000, 'До 25 тысяч'],
+                  [40000, 'До 40 тысяч'],
+                  [null, 'Как скажете, лишь бы хорошо'],
                 ].map(([val, label]) => (
                   <OptionButton
                     key={String(label)}
@@ -310,7 +307,7 @@ export function SelectPage() {
               </div>
               <Nav
                 onBack={back}
-                onNext={next}
+                onNext={goNext}
                 nextLabel="Показать варианты"
                 disabled={session.answers.budgetPair === undefined}
               />
@@ -319,20 +316,16 @@ export function SelectPage() {
 
           {step === 'results' && session.recommendation && (
             <>
-              <h2>Ваши варианты</h2>
-              <p className="lead">
-                Из {session.recommendation.eligibleCount} подходящих позиций эксперт оставил три.
-                Технические названия — только в «Подробнее».
-              </p>
+              <h2>Вот что я бы поставил</h2>
+              <p className="lead">Три варианта. Средний — то, что ставлю чаще всего.</p>
               {session.chosen ? (
                 <div className="success">
-                  Выбор сохранён. Консультант салона увидит вариант в сессии {session.code}. Можно
-                  написать нам в Авито или приехать на Косухина 37А.
+                  Принял. Напишите мне в Авито «беру вот этот» — уточним оправу и срок.
                 </div>
               ) : null}
-              {session.recommendation.warnings.length ? (
+              {clientWarnings.length ? (
                 <div className="warns">
-                  {session.recommendation.warnings.map((w) => (
+                  {clientWarnings.map((w) => (
                     <div key={w}>{w}</div>
                   ))}
                 </div>
@@ -343,6 +336,7 @@ export function SelectPage() {
                 premium={session.recommendation.premium}
                 onChoose={onChoose}
                 chosenTier={session.chosen?.tier ?? null}
+                staffMode={staffMode}
               />
               <div className="nav-row">
                 <button type="button" className="btn quiet" onClick={back}>
@@ -351,15 +345,17 @@ export function SelectPage() {
                 <button
                   type="button"
                   className="btn quiet"
-                  onClick={() => {
-                    setStepIdx(hasRx(session.prescription) ? 1 : 1);
-                    nav(`/${session.code}`);
-                    setStepIdx(steps.indexOf('purpose'));
-                  }}
+                  onClick={() => setStepIdx(steps.indexOf('purpose'))}
                 >
-                  Пройти заново
+                  Заново
                 </button>
               </div>
+              {staffMode ? (
+                <p className="lead" style={{ marginTop: 12 }}>
+                  Режим мастера · код {session.code} · подходящих в базе{' '}
+                  {session.recommendation.eligibleCount}
+                </p>
+              ) : null}
             </>
           )}
         </div>
@@ -372,7 +368,7 @@ function Nav({
   onBack,
   onNext,
   disabled,
-  nextLabel = 'Далее',
+  nextLabel = 'Дальше',
 }: {
   onBack: () => void;
   onNext: () => void;
@@ -387,34 +383,6 @@ function Nav({
       <button type="button" className="btn solid" onClick={onNext} disabled={disabled}>
         {nextLabel}
       </button>
-    </div>
-  );
-}
-
-function FrameRow({
-  value,
-  onChange,
-}: {
-  value: FrameType;
-  onChange: (v: FrameType) => void;
-}) {
-  return (
-    <div style={{ marginTop: 16 }}>
-      <p className="lead" style={{ marginBottom: 8 }}>
-        Какая оправа? (влияет на толщину)
-      </p>
-      <div className="options">
-        {(
-          [
-            ['full_rim', 'Ободковая'],
-            ['semi_rim', 'Полуободковая'],
-            ['rimless', 'Безободковая'],
-            ['unknown', 'Пока не знаю'],
-          ] as Array<[FrameType, string]>
-        ).map(([id, label]) => (
-          <OptionButton key={id} title={label} selected={value === id} onClick={() => onChange(id)} />
-        ))}
-      </div>
     </div>
   );
 }
@@ -440,26 +408,22 @@ function RxStep({
 
   return (
     <>
-      <h2>Ваш рецепт</h2>
-      <p className="lead">Можно заполнить приблизительно — консультант уточнит в салоне.</p>
+      <h2>Цифры с рецепта</h2>
+      <p className="lead">
+        Если рецепт уже отправили в Авито — можно пропустить и написать мне. Иначе сфотографируйте
+        листочек и перепишите верхние числа.
+      </p>
       <div className="rx-grid">
-        <div className="eye-label">Правый глаз (OD)</div>
-        <Field label="SPH" value={rx.od.sph} onChange={(v) => setEye('od', 'sph', v)} />
-        <Field label="CYL" value={rx.od.cyl} onChange={(v) => setEye('od', 'cyl', v)} />
-        <Field label="AX" value={rx.od.ax} onChange={(v) => setEye('od', 'ax', v)} />
-        <Field label="ADD" value={rx.od.add} onChange={(v) => setEye('od', 'add', v)} />
-        <div className="eye-label">Левый глаз (OS)</div>
-        <Field label="SPH" value={rx.os.sph} onChange={(v) => setEye('os', 'sph', v)} />
-        <Field label="CYL" value={rx.os.cyl} onChange={(v) => setEye('os', 'cyl', v)} />
-        <Field label="AX" value={rx.os.ax} onChange={(v) => setEye('os', 'ax', v)} />
-        <Field label="ADD" value={rx.os.add} onChange={(v) => setEye('os', 'add', v)} />
-        <Field
-          label="PD"
-          value={rx.pd}
-          onChange={(v) =>
-            onChange({ ...rx, pd: v.trim() === '' ? null : Number(v.replace(',', '.')) })
-          }
-        />
+        <div className="eye-label">Правый глаз</div>
+        <Field label="Сфера" value={rx.od.sph} onChange={(v) => setEye('od', 'sph', v)} />
+        <Field label="Цилиндр" value={rx.od.cyl} onChange={(v) => setEye('od', 'cyl', v)} />
+        <Field label="Ось" value={rx.od.ax} onChange={(v) => setEye('od', 'ax', v)} />
+        <Field label="Для чтения" value={rx.od.add} onChange={(v) => setEye('od', 'add', v)} />
+        <div className="eye-label">Левый глаз</div>
+        <Field label="Сфера" value={rx.os.sph} onChange={(v) => setEye('os', 'sph', v)} />
+        <Field label="Цилиндр" value={rx.os.cyl} onChange={(v) => setEye('os', 'cyl', v)} />
+        <Field label="Ось" value={rx.os.ax} onChange={(v) => setEye('os', 'ax', v)} />
+        <Field label="Для чтения" value={rx.os.add} onChange={(v) => setEye('os', 'add', v)} />
         <Field
           label="Возраст"
           value={rx.age}
@@ -468,7 +432,22 @@ function RxStep({
           }
         />
       </div>
-      <Nav onBack={onBack} onNext={onNext} disabled={rx.od.sph == null && rx.os.sph == null} />
+      <div className="nav-row">
+        <button type="button" className="btn quiet" onClick={onBack}>
+          Назад
+        </button>
+        <button type="button" className="btn quiet" onClick={onNext}>
+          Пропустить
+        </button>
+        <button
+          type="button"
+          className="btn solid"
+          onClick={onNext}
+          disabled={rx.od.sph == null && rx.os.sph == null}
+        >
+          Дальше
+        </button>
+      </div>
     </>
   );
 }

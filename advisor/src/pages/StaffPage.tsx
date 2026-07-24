@@ -8,7 +8,6 @@ import { emptyRx } from '../engine/types';
 export function StaffPage() {
   const [rx, setRx] = useState<Prescription>(emptyRx());
   const [name, setName] = useState('');
-  const [phone, setPhone] = useState('');
   const [note, setNote] = useState('');
   const [budget, setBudget] = useState<number | null>(15000);
   const [created, setCreated] = useState<string | null>(null);
@@ -28,7 +27,6 @@ export function StaffPage() {
       channel: 'avito',
       agentNote: note,
       clientName: name,
-      clientPhone: phone,
       budgetPair: budget,
     });
     setCreated(s.code);
@@ -39,39 +37,41 @@ export function StaffPage() {
       ? `${window.location.origin}${import.meta.env.BASE_URL}${created}`
       : '';
 
+  const staffLink = link ? `${link}?me=1` : '';
+
   return (
     <Shell>
       <div className="panel">
-        <h2>Кабинет консультанта</h2>
+        <h2>Ссылка для Авито</h2>
         <p className="lead">
-          Создайте ссылку за 20 секунд и отправьте клиенту в Авито. Рецепт уже будет внутри сессии.
+          Вбили рецепт с фото клиента → скопировали ссылку в чат. Клиент не увидит индексы и бренды —
+          только простые вопросы и 3 варианта.
         </p>
 
         <div className="rx-grid">
           <div className="field" style={{ gridColumn: 'span 2' }}>
-            <label>Клиент</label>
+            <label>Как в Авито зовут</label>
             <input value={name} onChange={(e) => setName(e.target.value)} placeholder="Имя" />
           </div>
           <div className="field" style={{ gridColumn: 'span 2' }}>
-            <label>Телефон</label>
-            <input value={phone} onChange={(e) => setPhone(e.target.value)} placeholder="8…" />
+            <label>Заметка себе</label>
+            <input
+              value={note}
+              onChange={(e) => setNote(e.target.value)}
+              placeholder="своя оправа, хочет хамелеон…"
+            />
           </div>
 
-          <div className="eye-label">OD</div>
+          <div className="eye-label">Правый (OD)</div>
           <Num label="SPH" value={rx.od.sph} onChange={(v) => setEye('od', 'sph', v)} />
           <Num label="CYL" value={rx.od.cyl} onChange={(v) => setEye('od', 'cyl', v)} />
           <Num label="AX" value={rx.od.ax} onChange={(v) => setEye('od', 'ax', v)} />
           <Num label="ADD" value={rx.od.add} onChange={(v) => setEye('od', 'add', v)} />
-          <div className="eye-label">OS</div>
+          <div className="eye-label">Левый (OS)</div>
           <Num label="SPH" value={rx.os.sph} onChange={(v) => setEye('os', 'sph', v)} />
           <Num label="CYL" value={rx.os.cyl} onChange={(v) => setEye('os', 'cyl', v)} />
           <Num label="AX" value={rx.os.ax} onChange={(v) => setEye('os', 'ax', v)} />
           <Num label="ADD" value={rx.os.add} onChange={(v) => setEye('os', 'add', v)} />
-          <Num
-            label="PD"
-            value={rx.pd}
-            onChange={(v) => setRx({ ...rx, pd: v.trim() === '' ? null : Number(v) })}
-          />
           <Num
             label="Возраст"
             value={rx.age}
@@ -80,58 +80,60 @@ export function StaffPage() {
         </div>
 
         <div className="field" style={{ marginTop: 8 }}>
-          <label>Бюджет пары (префилл)</label>
+          <label>Бюджет, который обсуждали</label>
           <select
             value={budget ?? ''}
             onChange={(e) => setBudget(e.target.value === '' ? null : Number(e.target.value))}
           >
-            <option value="8000">До 8 000</option>
-            <option value="15000">До 15 000</option>
-            <option value="25000">До 25 000</option>
-            <option value="40000">До 40 000</option>
-            <option value="">Без ограничений</option>
+            <option value="8000">До 8 тыс</option>
+            <option value="15000">До 15 тыс</option>
+            <option value="25000">До 25 тыс</option>
+            <option value="40000">До 40 тыс</option>
+            <option value="">Без потолка</option>
           </select>
-        </div>
-        <div className="field" style={{ marginTop: 10 }}>
-          <label>Заметка агента</label>
-          <input
-            value={note}
-            onChange={(e) => setNote(e.target.value)}
-            placeholder="Напр.: хочет хамелеон, оправа своя ободковая"
-          />
         </div>
 
         <div className="nav-row">
           <Link to="/" className="btn quiet" style={{ textDecoration: 'none' }}>
-            На сайт
+            На главную
           </Link>
           <button type="button" className="btn solid" onClick={create}>
-            Создать ссылку
+            Сделать ссылку
           </button>
         </div>
 
         {created ? (
           <div className="success" style={{ marginTop: 16 }}>
-            Ссылка:{' '}
+            <div style={{ marginBottom: 8 }}>Клиенту в Авито:</div>
             <a href={link} target="_blank" rel="noreferrer">
               {link}
             </a>
-            <div style={{ marginTop: 8 }}>
+            <div style={{ marginTop: 10, display: 'flex', gap: 8, flexWrap: 'wrap' }}>
+              <button type="button" className="btn quiet" onClick={() => navigator.clipboard.writeText(link)}>
+                Копировать
+              </button>
               <button
                 type="button"
                 className="btn quiet"
-                onClick={() => navigator.clipboard.writeText(link)}
+                onClick={() =>
+                  navigator.clipboard.writeText(
+                    `По этой ссылке ответьте на пару вопросов — подберу линзы без сложных названий:\n${link}`,
+                  )
+                }
               >
-                Скопировать
+                Текст для Авито
               </button>
+              <a className="btn quiet" href={staffLink} style={{ textDecoration: 'none' }}>
+                Открыть как я (?me=1)
+              </a>
             </div>
           </div>
         ) : null}
       </div>
 
       <div className="panel" style={{ marginTop: 16 }}>
-        <h2>Последние сессии</h2>
-        <p className="lead">Хранятся локально в браузере (MVP). В проде — CRM API.</p>
+        <h2>Последние ссылки</h2>
+        <p className="lead">Пока в этом телефоне/браузере. Потом уедет в CRM.</p>
         <div className="options">
           {sessions.length === 0 ? (
             <div className="option" style={{ cursor: 'default' }}>
@@ -141,16 +143,14 @@ export function StaffPage() {
             sessions.map((s) => (
               <Link
                 key={s.code}
-                to={`/${s.code}`}
+                to={`/${s.code}?me=1`}
                 className="option"
                 style={{ textDecoration: 'none', color: 'inherit' }}
               >
-                <span className="code-pill">{s.code}</span> {s.clientName || 'Без имени'} ·{' '}
-                {s.channel}
+                <span className="code-pill">{s.code}</span> {s.clientName || 'без имени'}
                 <small>
                   {new Date(s.createdAt).toLocaleString('ru-RU')}
-                  {s.chosen ? ` · выбран ${s.chosen.tier}` : ''}
-                  {s.recommendation ? ` · ${s.recommendation.eligibleCount} eligible` : ''}
+                  {s.chosen ? ` · выбрал ${s.chosen.tier}` : ''}
                 </small>
               </Link>
             ))

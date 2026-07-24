@@ -1,6 +1,11 @@
 import { useState } from 'react';
 import type { ScoredLens, Tier } from '../engine/types';
-import { formatMoney, tierLabel } from '../engine/recommend';
+import {
+  clientReasons,
+  clientTitle,
+  priceLine,
+  tierClientLabel,
+} from '../engine/clientCopy';
 
 export function RecommendationCards({
   practical,
@@ -8,7 +13,7 @@ export function RecommendationCards({
   premium,
   onChoose,
   chosenTier,
-  staffMode,
+  staffMode = false,
 }: {
   practical: ScoredLens | null;
   optimal: ScoredLens | null;
@@ -55,64 +60,61 @@ function RecoCard({
   featured: boolean;
   chosen: boolean;
   onChoose: () => void;
-  staffMode?: boolean;
+  staffMode: boolean;
 }) {
   const [open, setOpen] = useState(false);
   const lens = item.lens;
-  const price =
-    item.pairPrice === item.pairPriceMax
-      ? formatMoney(item.pairPrice)
-      : `${formatMoney(item.pairPrice)} – ${formatMoney(item.pairPriceMax)}`;
+  const price = priceLine(item);
+  const reasons = clientReasons(item);
 
   return (
     <article className={`reco ${featured ? 'optimal' : ''}`}>
-      <div className="badge">
-        {featured ? 'Рекомендуем' : tierLabel(tier)}
-      </div>
-      <h3>{lens.displayName}</h3>
-      <div className="price">{price}</div>
-      <div className="price-note">
-        пара линз · работа ≈ {formatMoney(item.laborEstimate)} · итого от{' '}
-        {formatMoney(item.totalEstimate)}
-      </div>
+      <div className="badge">{tierClientLabel(tier, featured)}</div>
+      <h3>{clientTitle(lens)}</h3>
+      <div className="price">{price.main}</div>
+      <div className="price-note">{price.sub}</div>
       <ul className="reasons">
-        {item.clientReasons.map((r) => (
+        {reasons.map((r) => (
           <li key={r}>{r}</li>
         ))}
       </ul>
       <div style={{ display: 'grid', gap: 8 }}>
         <button type="button" className={`btn ${featured ? 'solid' : 'quiet'} block`} onClick={onChoose}>
-          {chosen ? 'Выбрано ✓' : 'Хочу этот вариант'}
+          {chosen ? 'Выбрал ✓ напишите мне в Авито' : 'Беру этот'}
         </button>
         <button type="button" className="btn quiet block" onClick={() => setOpen((v) => !v)}>
-          {open ? 'Скрыть подробности' : 'Подробнее'}
+          {open ? 'Свернуть' : 'Чем отличаются'}
         </button>
       </div>
       {open ? (
         <div className="tech">
-          <div>
-            <b>Для мастера:</b> {lens.supplier} · {lens.name}
-          </div>
-          <div>
-            Индекс {lens.index ?? '—'} · {lens.coating} · {lens.stockType === 'rx' ? 'рецепт' : 'склад'}
-          </div>
-          <div>
-            SPH {lens.sphMin ?? '—'}…{lens.sphMax ?? '—'}
-            {lens.cylMax != null ? ` · CYL до ${Math.abs(lens.cylMax)}` : ''}
-            {lens.diameter ? ` · Ø ${lens.diameter}` : ''}
-          </div>
-          {(staffMode || true) && item.boostReasons.length ? (
-            <div style={{ marginTop: 8 }}>
-              <b>Почему сработало:</b> {item.boostReasons.slice(0, 4).join('; ')}
-            </div>
-          ) : null}
           {lens.drawbacks.length ? (
-            <div style={{ marginTop: 6 }}>
-              <b>Учесть:</b> {lens.drawbacks.join('; ')}
+            <div>
+              <b>Честно:</b> {lens.drawbacks.map(softenDrawback).join('. ')}
+            </div>
+          ) : (
+            <div>Нормальный вариант, без подводных камней для вашего случая.</div>
+          )}
+          {staffMode ? (
+            <div style={{ marginTop: 10, opacity: 0.85 }}>
+              <b>Себе:</b> {lens.supplier} · {lens.name} · {lens.index} · {lens.coating} ·{' '}
+              {formatMoneyPair(item)}
             </div>
           ) : null}
         </div>
       ) : null}
     </article>
   );
+}
+
+function softenDrawback(d: string): string {
+  if (/толще/i.test(d)) return 'При сильных диоптриях будут заметнее в оправе';
+  if (/блик/i.test(d)) return 'Без хорошего покрытия чаще бликуют';
+  if (/стекло|тяжел|разобь/i.test(d)) return 'Стекло тяжелее и может разбиться';
+  if (/лобов|машин/i.test(d)) return 'В машине темнеют слабее обычных «хамелеонов»';
+  return d.replace(/1\.\d{2}|HMC|AR |UV-?\d*/gi, '').trim() || d;
+}
+
+function formatMoneyPair(item: ScoredLens): string {
+  return `${item.pairPrice}₽/пара`;
 }
