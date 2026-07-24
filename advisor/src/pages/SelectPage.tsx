@@ -321,7 +321,8 @@ export function SelectPage() {
             <>
               <h2>Вот что я бы поставил</h2>
               <p className="lead">
-                Три варианта. Средний — как я обычно ставлю. Бренды названы открыто.
+                Три разных по смыслу варианта: попроще, как обычно ставлю, и с доплатой за тонкость /
+                покрытие / бренд.
               </p>
               {session.chosen ? <div className="success">{ctaAfterChoice()}</div> : null}
               {clientWarnings.length ? (
@@ -335,6 +336,7 @@ export function SelectPage() {
                 practical={session.recommendation.practical}
                 optimal={session.recommendation.optimal}
                 premium={session.recommendation.premium}
+                compare={session.recommendation.compare}
                 onChoose={onChoose}
                 chosenTier={session.chosen?.tier ?? null}
                 staffMode={staffMode}

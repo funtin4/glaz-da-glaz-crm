@@ -6,7 +6,7 @@ import {
   photoCarDisclaimer,
 } from './ownerConfig';
 
-export const RULESET_VERSION = '2026.07.2-owner';
+export const RULESET_VERSION = '2026.07.3-compare';
 
 /** Strongest sphere magnitude across both eyes (absolute). */
 export function maxAbsSph(rx: Prescription): number {

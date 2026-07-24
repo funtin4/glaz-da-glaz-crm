@@ -257,12 +257,63 @@ function caseChildEscalation() {
   console.log('✓ child escalation to Moscow salon');
 }
 
-function caseBrandsVisible() {
-  assert(brandsVisible(), 'brands visible');
-  const lens = getCatalog()[0];
-  const title = clientTitle(lens);
-  assert(title.includes(lens.supplier), `title should include brand, got ${title}`);
-  console.log('✓ brands in client title', title);
+function casePortfolioDiffers() {
+  const rx: Prescription = {
+    ...emptyRx(),
+    od: { sph: -2.5, cyl: -0.5, ax: 10, add: null },
+    os: { sph: -2.25, cyl: -0.75, ax: 170, add: null },
+    age: 34,
+  };
+  const answers: Answers = {
+    ...emptyAnswers(),
+    purpose: 'daily',
+    priority: 'comfort',
+    thickness: 2,
+    photochromic: 'no',
+    budgetPair: 25000,
+    frameType: 'full_rim',
+  };
+  const rec = recommend(rx, answers);
+  assert(rec.practical && rec.optimal && rec.premium, 'need 3 tiers');
+  assert(rec.compare, 'need compare notes');
+  const ids = new Set([rec.practical!.lens.id, rec.optimal!.lens.id, rec.premium!.lens.id]);
+  assert(ids.size === 3, 'three distinct SKUs');
+
+  const prices = [rec.practical!.pairPrice, rec.optimal!.pairPrice, rec.premium!.pairPrice];
+  const span = Math.max(...prices) - Math.min(...prices);
+  assert(span >= 1000 || differentiationOk(rec), `portfolio should differ in price or axes, span=${span}`);
+
+  for (const tier of ['practical', 'optimal', 'premium'] as const) {
+    const note = rec.compare!.byTier[tier];
+    assert(note.vsOthers.length >= 1, `${tier} needs vsOthers`);
+    assert(
+      note.vsOthers.some((l) => /₽|покрыт|тон|толщ|бренд|Дешевле|Дороже|Экономия|Доплата|середина/i.test(l)) ||
+        (note.moneyStory != null && note.moneyStory.length > 0),
+      `${tier} compare must talk money or product axes`,
+    );
+  }
+  console.log(
+    '✓ portfolio differs',
+    rec.practical!.pairPrice,
+    rec.optimal!.pairPrice,
+    rec.premium!.pairPrice,
+    rec.compare!.byTier.premium.moneyStory,
+  );
+}
+
+function differentiationOk(rec: ReturnType<typeof recommend>): boolean {
+  const a = rec.practical!.lens;
+  const b = rec.optimal!.lens;
+  const c = rec.premium!.lens;
+  const axes = (x: typeof a, y: typeof a) => {
+    let d = 0;
+    if (x.supplier !== y.supplier) d++;
+    if (x.thinness !== y.thinness) d++;
+    if (x.coatingLevel !== y.coatingLevel) d++;
+    if (Math.abs((x.index ?? 0) - (y.index ?? 0)) >= 0.05) d++;
+    return d;
+  };
+  return axes(a, b) + axes(b, c) >= 2;
 }
 
 caseLowMyopia();
@@ -275,5 +326,14 @@ casePhotoFilter();
 caseSoftBudget();
 caseRodenstockSphNotHardFiltered();
 caseChildEscalation();
+casePortfolioDiffers();
 caseBrandsVisible();
 console.log('All engine fixtures passed');
+
+function caseBrandsVisible() {
+  assert(brandsVisible(), 'brands visible');
+  const lens = getCatalog()[0];
+  const title = clientTitle(lens);
+  assert(title.includes(lens.supplier), `title should include brand, got ${title}`);
+  console.log('✓ brands in client title', title);
+}

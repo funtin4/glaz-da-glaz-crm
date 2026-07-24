@@ -5,6 +5,7 @@ import {
   photoCarDisclaimer,
   salonEscalationText,
 } from './ownerConfig';
+import { comparePortfolio, pickDiversifiedPortfolio, tierFaceReasons } from './portfolio';
 import {
   RULESET_VERSION,
   evaluateSoftRules,
@@ -85,41 +86,6 @@ export function scoreLens(lens: LensSku, rx: Prescription, answers: Answers): Sc
   };
 }
 
-function diversityKey(lens: LensSku): string {
-  return [
-    lens.supplier,
-    lens.index,
-    lens.photochromic ? 'ph' : 'cl',
-    lens.blueFilter ? 'bl' : 'nb',
-    lens.type,
-    Math.round(lens.pricePairMin / 3000),
-  ].join('|');
-}
-
-function pickBest(
-  pool: ScoredLens[],
-  predicate: (s: ScoredLens) => boolean,
-  used: Set<string>,
-): ScoredLens | null {
-  const candidates = pool
-    .filter((s) => predicate(s) && !used.has(s.lens.id))
-    .sort((a, b) => b.score - a.score || a.pairPrice - b.pairPrice);
-  for (const c of candidates) {
-    const key = diversityKey(c.lens);
-    const sameFamily = [...used].some((id) => {
-      const other = pool.find((p) => p.lens.id === id);
-      return other && diversityKey(other.lens) === key;
-    });
-    if (!sameFamily) {
-      used.add(c.lens.id);
-      return c;
-    }
-  }
-  const fallback = candidates[0];
-  if (fallback) used.add(fallback.lens.id);
-  return fallback ?? null;
-}
-
 export type RecoLevel = 'A' | 'B' | 'C';
 
 export function assessLevel(rx: Prescription, answers: Answers, hasProgressivePick: boolean): RecoLevel {
@@ -178,55 +144,21 @@ export function recommend(rx: Prescription, answers: Answers): RecommendationSet
   const typed = eligible.filter((s) => family.prefer.includes(s.lens.type));
   const pool = typed.length >= 3 ? typed : eligible;
 
-  const budget = answers.budgetPair;
-  const used = new Set<string>();
+  const picked = pickDiversifiedPortfolio(pool, answers.budgetPair);
+  const compare = comparePortfolio(picked.practical, picked.optimal, picked.premium);
 
-  const practical = pickBest(
-    pool,
-    (s) => {
-      if (answers.priority === 'min_price') return true;
-      if (budget != null) return s.pairPrice <= budget * 0.85;
-      const prices = pool.map((p) => p.pairPrice).sort((a, b) => a - b);
-      const cut = prices[Math.floor(prices.length * 0.4)] ?? s.pairPrice;
-      return s.pairPrice <= cut && s.score > 40;
-    },
-    used,
-  );
-
-  const optimal = pickBest(
-    pool,
-    (s) => {
-      // soft budget: allow slightly over for best score
-      if (budget != null) return s.pairPrice <= budget * 1.25;
-      return s.score >= (pool[0]?.score ?? 0) - 25;
-    },
-    used,
-  );
-
-  const premium = pickBest(
-    pool,
-    (s) => {
-      if (answers.priority === 'min_price') return s.lens.coatingLevel >= 3 && s.score > 45;
-      return (
-        s.lens.coatingLevel >= 3 ||
-        s.lens.comfort >= 4 ||
-        s.lens.supplier === 'Rodenstock' ||
-        s.lens.supplier === 'Shamir' ||
-        s.lens.thinness >= 3
-      );
-    },
-    used,
-  );
-
-  const fill = (current: ScoredLens | null): ScoredLens | null => {
-    if (current) return current;
-    return pickBest(pool, () => true, used);
-  };
+  // Replace generic engine bullets with “why this tier vs the other two”
+  for (const tier of ['practical', 'optimal', 'premium'] as Tier[]) {
+    const item = picked[tier];
+    if (!item) continue;
+    item.clientReasons = tierFaceReasons(tier, item, compare);
+  }
 
   const result: RecommendationSet = {
-    practical: fill(practical),
-    optimal: fill(optimal),
-    premium: fill(premium),
+    practical: picked.practical,
+    optimal: picked.optimal,
+    premium: picked.premium,
+    compare,
     warnings,
     rulesetVersion: RULESET_VERSION,
     eligibleCount: eligible.length,

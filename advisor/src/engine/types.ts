@@ -114,10 +114,23 @@ export interface ScoredLens {
 
 export type Tier = 'practical' | 'optimal' | 'premium';
 
+export interface TierCompareNote {
+  tier: Tier;
+  hook: string;
+  vsOthers: string[];
+  moneyStory: string | null;
+}
+
+export interface PortfolioCompareNote {
+  intro: string;
+  byTier: Record<Tier, TierCompareNote>;
+}
+
 export interface RecommendationSet {
   practical: ScoredLens | null;
   optimal: ScoredLens | null;
   premium: ScoredLens | null;
+  compare: PortfolioCompareNote | null;
   warnings: string[];
   rulesetVersion: string;
   eligibleCount: number;

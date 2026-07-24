@@ -1,7 +1,6 @@
 import { useState } from 'react';
-import type { ScoredLens, Tier } from '../engine/types';
+import type { PortfolioCompareNote, ScoredLens, Tier } from '../engine/types';
 import {
-  clientReasons,
   clientTitle,
   ctaAfterChoice,
   ctaPhoneHref,
@@ -14,6 +13,7 @@ export function RecommendationCards({
   practical,
   optimal,
   premium,
+  compare,
   onChoose,
   chosenTier,
   staffMode = false,
@@ -21,10 +21,12 @@ export function RecommendationCards({
   practical: ScoredLens | null;
   optimal: ScoredLens | null;
   premium: ScoredLens | null;
+  compare: PortfolioCompareNote | null;
   onChoose: (tier: Tier, skuId: string) => void;
   chosenTier: Tier | null;
   staffMode?: boolean;
 }) {
+  const [openDiff, setOpenDiff] = useState(false);
   const items: Array<{ tier: Tier; item: ScoredLens | null }> = [
     { tier: 'practical', item: practical },
     { tier: 'optimal', item: optimal },
@@ -32,20 +34,56 @@ export function RecommendationCards({
   ];
 
   return (
-    <div className="reco-grid three">
-      {items.map(({ tier, item }) =>
-        item ? (
-          <RecoCard
-            key={tier}
-            tier={tier}
-            item={item}
-            featured={tier === 'optimal'}
-            chosen={chosenTier === tier}
-            onChoose={() => onChoose(tier, item.lens.id)}
-            staffMode={staffMode}
-          />
-        ) : null,
-      )}
+    <div className="reco-wrap">
+      {compare ? (
+        <div className="compare-panel">
+          <p className="compare-intro">{compare.intro}</p>
+          <button
+            type="button"
+            className="btn quiet block"
+            onClick={() => setOpenDiff((v) => !v)}
+          >
+            {openDiff ? 'Скрыть сравнение' : 'Чем отличаются эти три варианта'}
+          </button>
+          {openDiff ? (
+            <div className="compare-grid">
+              {items.map(({ tier, item }) => {
+                if (!item) return null;
+                const note = compare.byTier[tier];
+                return (
+                  <div key={tier} className={`compare-col ${tier === 'optimal' ? 'featured' : ''}`}>
+                    <div className="compare-label">{tierClientLabel(tier, tier === 'optimal')}</div>
+                    <div className="compare-price">{priceLine(item).main}</div>
+                    {note.moneyStory ? <p className="compare-money">{note.moneyStory}</p> : null}
+                    <ul className="reasons compact">
+                      {note.vsOthers.map((line) => (
+                        <li key={line}>{line}</li>
+                      ))}
+                    </ul>
+                  </div>
+                );
+              })}
+            </div>
+          ) : null}
+        </div>
+      ) : null}
+
+      <div className="reco-grid three">
+        {items.map(({ tier, item }) =>
+          item ? (
+            <RecoCard
+              key={tier}
+              tier={tier}
+              item={item}
+              compare={compare}
+              featured={tier === 'optimal'}
+              chosen={chosenTier === tier}
+              onChoose={() => onChoose(tier, item.lens.id)}
+              staffMode={staffMode}
+            />
+          ) : null,
+        )}
+      </div>
     </div>
   );
 }
@@ -53,6 +91,7 @@ export function RecommendationCards({
 function RecoCard({
   tier,
   item,
+  compare,
   featured,
   chosen,
   onChoose,
@@ -60,6 +99,7 @@ function RecoCard({
 }: {
   tier: Tier;
   item: ScoredLens;
+  compare: PortfolioCompareNote | null;
   featured: boolean;
   chosen: boolean;
   onChoose: () => void;
@@ -68,11 +108,13 @@ function RecoCard({
   const [open, setOpen] = useState(false);
   const lens = item.lens;
   const price = priceLine(item);
-  const reasons = clientReasons(item);
+  const note = compare?.byTier[tier];
+  const reasons = (item.clientReasons.length ? item.clientReasons : note?.vsOthers ?? []).slice(0, 4);
 
   return (
     <article className={`reco ${featured ? 'optimal' : ''}`}>
       <div className="badge">{tierClientLabel(tier, featured)}</div>
+      {note?.hook ? <div className="reco-hook">{note.hook}</div> : null}
       <h3>{clientTitle(lens)}</h3>
       <div className="price">{price.main}</div>
       <div className="price-note">{price.sub}</div>
@@ -94,11 +136,26 @@ function RecoCard({
           </div>
         ) : null}
         <button type="button" className="btn quiet block" onClick={() => setOpen((v) => !v)}>
-          {open ? 'Свернуть' : 'Чем отличаются'}
+          {open ? 'Свернуть' : 'Подробнее про этот вариант'}
         </button>
       </div>
       {open ? (
         <div className="tech">
+          {note?.moneyStory ? (
+            <div style={{ marginBottom: 8 }}>
+              <b>Про цену:</b> {note.moneyStory}
+            </div>
+          ) : null}
+          {note?.vsOthers.length ? (
+            <div style={{ marginBottom: 8 }}>
+              <b>Чем отличается от соседних:</b>
+              <ul className="reasons compact" style={{ marginTop: 6 }}>
+                {note.vsOthers.map((line) => (
+                  <li key={line}>{line}</li>
+                ))}
+              </ul>
+            </div>
+          ) : null}
           {lens.drawbacks.length ? (
             <div>
               <b>Честно:</b> {lens.drawbacks.map(softenDrawback).join('. ')}
