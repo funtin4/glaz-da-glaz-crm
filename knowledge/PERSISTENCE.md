@@ -9,19 +9,19 @@
 Читать **в этом порядке**:
 
 1. `/workspace/knowledge/PERSISTENCE.md` (этот файл)
-2. `/workspace/docs/optics-knowledge/research-report.md` — выводы, запреты, план
-3. `/workspace/docs/optics-knowledge/13-sources.md` — приоритет источников и надёжность
-4. `/workspace/docs/optics-knowledge/15-open-questions.md` — что ещё не утверждено владельцем
-5. Тематические файлы по задаче:
+2. `/workspace/knowledge/domain-facts.json` — машинные факты (`confirmed` / `expert_judgment` / `unknown`)
+3. `/workspace/docs/optics-knowledge/research-report.md` — выводы, запреты, план
+4. `/workspace/docs/optics-knowledge/13-sources.md` — приоритет источников и надёжность (`[SRC-…]`)
+5. `/workspace/docs/optics-knowledge/15-open-questions.md` — что ещё не утверждено владельцем
+6. Ядро оптики `01`–`08` (рецепт, типы, материалы, дизайны, покрытия, фотохром/sun, progressive, office)
+7. Тематические файлы по задаче:
    - `09-frame-and-thickness.md` — оправа, толщина, blank, rimless
    - `10-sales-consultation.md` — консультация, 3 опции, Авито-поток
    - `11-objections.md` — ответы на возражения
    - `12-safety-and-escalation.md` — уровни A/B/C, эскалация
    - `14-glossary.md` — термины RU/EN
-6. При работе с каталогом: `/workspace/data/lenses.json` и сырые прайсы `/workspace/data/raw/`
-7. При работе с продуктом: `/workspace/docs/PRODUCT_AUDIT.md`, `/workspace/docs/ARCHITECTURE.md`
-
-Дополнительные файлы пакета `01`–`08` (если появятся в той же папке) — читать после `research-report.md` и до правок правил.
+8. При работе с каталогом: `/workspace/data/lenses.json` и сырые прайсы `/workspace/data/raw/`
+9. При работе с продуктом: `/workspace/docs/PRODUCT_AUDIT.md`, `/workspace/docs/ARCHITECTURE.md`
 
 ---
 
@@ -47,7 +47,16 @@
 
 ```
 /workspace/knowledge/PERSISTENCE.md          ← точка входа для агентов
+/workspace/knowledge/domain-facts.json       ← структурированные факты для движка
 /workspace/docs/optics-knowledge/
+  01-prescription-basics.md
+  02-lens-types.md
+  03-materials-and-indexes.md
+  04-lens-designs.md
+  05-coatings.md
+  06-photochromic-and-sun.md
+  07-progressive-lenses.md
+  08-office-lenses.md
   09-frame-and-thickness.md
   10-sales-consultation.md
   11-objections.md
