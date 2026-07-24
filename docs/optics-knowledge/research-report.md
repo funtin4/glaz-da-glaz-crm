@@ -246,13 +246,21 @@
 
 ## 14. Явное заявление о коде
 
-**В этой исследовательской фазе прикладной код не изменялся.**
+**Масштабная переработка UI и recommendation engine не выполнялась.**
 
-Не менялись: UI подборщика, recommendation engine (`rules.ts`, `recommend.ts`, `clientCopy.ts`), каталог SKU, CRM `index.html`, сборщики прайсов.
+Не менялись: клиентский мастер, скоринг в `advisor/src/engine/rules.ts` / `recommend.ts`, CRM `index.html`.
 
-Изменения фазы: только markdown-знания в:
+Добавлены **только** артефакты знаний и данных (вне runtime-логики приложения):
 
-- `/workspace/docs/optics-knowledge/` (`09`–`15`, `research-report.md`)
-- `/workspace/knowledge/PERSISTENCE.md`
+- `/docs/optics-knowledge/` (`01`–`17`, `research-report.md`)
+- `/knowledge/` (`domain-facts.json`, `PERSISTENCE.md`, `PACK_INDEX.json`)
+- `/data/normalized/catalog.json` — нормализация с полями confidence; **не подключалась** к SPA
+- `/rules/rules.draft.json`
+- `/content/copy-policy.md`
+- `/tests/scenarios/scenarios_v1.json` (50 сценариев-спецификаций)
 
-Внедрение правил в код — отдельная задача после ответов владельца на `15-open-questions.md`.
+### Критичный дефект текущего runtime-каталога
+
+`advisor/src/data/lenses.json` для Rodenstock содержит **искусственные** диапазоны SPH (типовые «конверты»), которых **нет** в HTML-прайсе. Это нарушение правила «не придумывать характеристики». При доработке engine должен читать `data/normalized/catalog.json`, где у Rodenstock `sphere_min/max = null` и `field_confidence.sphere = unknown_not_in_price_list`.
+
+Внедрение правил в код — **только после** ответов владельца на `15-open-questions.md` и явного согласования плана ниже.
