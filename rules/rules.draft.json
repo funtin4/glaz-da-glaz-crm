@@ -138,15 +138,15 @@
     },
     {
       "id": "W004_blue_filter_claims",
-      "name": "Честные формулировки blue filter",
-      "description": "Запрет клиентских фраз про лечение/защиту сетчатки/снятие любой усталости. Допустимо: фильтрует часть сине-фиолетового + часто идёт с AR; комфорт индивидуален. Cochrane 2023: мало пользы против eye strain.",
+      "name": "Blue-filter только по запросу + честные формулировки",
+      "description": "Владелец: предлагать если клиент просит. Запрет медицинских обещаний (Cochrane).",
       "layer": 5,
-      "condition": "sku.blue_filter OR priority=computer",
-      "action": "content_constraint",
+      "condition": "priority!=computer AND purpose!=computer → do_not_force_blue_filter; if shown → honest copy only",
+      "action": "content_constraint + soft_upsell_only_on_request",
       "priority": 80,
-      "source": "Cochrane_CD013244_2023",
+      "source": "owner_config_2026-07-24 + Cochrane_CD013244_2023",
       "confidence": "high",
-      "approval_status": "approved_logic_pending_qa",
+      "approval_status": "owner_approved",
       "last_reviewed": "2026-07-24"
     },
     {
