@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Листовка A4 - 6 штук</title>
+<style>
+  :root {
+    --ink: #111;
+    --muted: #555;
+    --paper: #fff;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    margin: 0;
+    background: #eef1f5;
+    color: var(--ink);
+    font-family: Arial, Helvetica, sans-serif;
+  }
+
+  .screen-note {
+    max-width: 900px;
+    margin: 24px auto;
+    padding: 18px 22px;
+    border: 1px solid #d7dde5;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, .08);
+    line-height: 1.45;
+  }
+
+  .screen-note h1 {
+    margin: 0 0 8px;
+    font-size: 24px;
+  }
+
+  .screen-note p {
+    margin: 6px 0;
+  }
+
+  .sheet {
+    width: 210mm;
+    height: 297mm;
+    margin: 24px auto;
+    padding: 8mm 5mm;
+    display: grid;
+    grid-template-columns: repeat(3, 66.666mm);
+    grid-template-rows: repeat(2, 132mm);
+    align-content: center;
+    justify-content: center;
+    gap: 10mm 0;
+    background: var(--paper);
+    box-shadow: 0 20px 55px rgba(0, 0, 0, .15);
+  }
+
+  .slot {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .slot::before,
+  .slot::after {
+    content: "";
+    position: absolute;
+    inset: 3mm;
+    pointer-events: none;
+  }
+
+  .slot::before {
+    border-top: .25mm solid #b9b9b9;
+    border-bottom: .25mm solid #b9b9b9;
+  }
+
+  .slot::after {
+    border-left: .25mm solid #b9b9b9;
+    border-right: .25mm solid #b9b9b9;
+  }
+
+  .flyer {
+    width: 62mm;
+    height: 90mm;
+    padding: 4.2mm 3.6mm 3.3mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+    background: #fff;
+    border: .28mm solid #111;
+    color: #111;
+    text-align: center;
+  }
+
+  .eyebrow {
+    width: 100%;
+    margin: 0 0 2.6mm;
+    display: flex;
+    justify-content: space-between;
+    letter-spacing: .65mm;
+    font-size: 2.45mm;
+    font-weight: 700;
+    color: #555;
+    text-transform: uppercase;
+  }
+
+  .title-small {
+    margin: 0;
+    font-size: 4.25mm;
+    line-height: .9;
+    font-weight: 900;
+    letter-spacing: -.16mm;
+    text-transform: uppercase;
+  }
+
+  .title-main {
+    margin: .3mm 0 1.8mm;
+    font-size: 13.1mm;
+    line-height: .86;
+    font-weight: 950;
+    letter-spacing: -.75mm;
+    text-transform: uppercase;
+  }
+
+  .glasses {
+    width: 52mm;
+    height: 23mm;
+    margin: 0 0 2.2mm;
+    flex: 0 0 auto;
+  }
+
+  .offer {
+    margin: 0 0 3.1mm;
+    max-width: 48mm;
+    font-size: 2.55mm;
+    line-height: 1.08;
+    font-weight: 700;
+  }
+
+  .benefits {
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 1.3mm;
+    margin-top: auto;
+    padding: 2.4mm 0 2.6mm;
+    border-top: .28mm solid #111;
+    border-bottom: .28mm solid #111;
+  }
+
+  .benefit {
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: .9mm;
+    font-size: 1.9mm;
+    line-height: 1.05;
+    font-weight: 700;
+  }
+
+  .benefit svg {
+    width: 5.4mm;
+    height: 5.4mm;
+    stroke: #111;
+    stroke-width: 1.6;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  .footer {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1.1fr;
+    gap: 2mm;
+    padding-top: 2.2mm;
+    font-size: 2.15mm;
+    line-height: 1;
+    font-weight: 900;
+  }
+
+  .footer-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.1mm;
+    white-space: nowrap;
+  }
+
+  .footer svg {
+    width: 3.1mm;
+    height: 3.1mm;
+    stroke: #111;
+    stroke-width: 1.9;
+    fill: none;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+
+  @page {
+    size: A4 portrait;
+    margin: 0;
+  }
+
+  @media print {
+    html,
+    body {
+      width: 210mm;
+      height: 297mm;
+      background: #fff;
+    }
+
+    .screen-note {
+      display: none;
+    }
+
+    .sheet {
+      margin: 0;
+      box-shadow: none;
+      page-break-after: avoid;
+    }
+  }
+</style>
+</head>
+<body>
+  <section class="screen-note">
+    <h1>Листовка для печати на A4</h1>
+    <p>Макет пересобран в векторном виде: текст, иконки и очки будут четкими при печати.</p>
+    <p>Печатайте этот файл как A4, масштаб 100%, без автоматического подгона. На листе размещено 6 листовок.</p>
+  </section>
+
+  <main class="sheet" aria-label="A4 лист с 6 листовками">
+    <section class="slot">
+      <article class="flyer">
+        <div class="eyebrow"><span>ГЛАЗ</span><span>ДА</span><span>ГЛАЗ</span></div>
+        <h2 class="title-small">СОЛНЦЕЗАЩИТНЫЕ ЛИНЗЫ</h2>
+        <h1 class="title-main">В ПОДАРОК</h1>
+
+        <svg class="glasses" viewBox="0 0 520 230" role="img" aria-label="Очки">
+          <defs>
+            <linearGradient id="lensShade" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0" stop-color="#777"/>
+              <stop offset=".52" stop-color="#292929"/>
+              <stop offset="1" stop-color="#050505"/>
+            </linearGradient>
+          </defs>
+          <path d="M37 60 C82 39 159 38 213 66 C229 75 233 90 226 111 L199 191 C193 208 178 216 159 211 L78 191 C55 185 44 173 39 151 L22 78 C20 70 25 64 37 60 Z" fill="#fff" stroke="#111" stroke-width="15"/>
+          <path d="M307 66 C363 38 440 39 483 60 C494 65 500 72 498 80 L481 151 C476 173 464 185 442 191 L360 211 C342 216 326 208 321 191 L294 111 C287 90 291 75 307 66 Z" fill="url(#lensShade)" stroke="#111" stroke-width="15"/>
+          <path d="M226 104 C245 90 274 90 294 104" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/>
+          <path d="M22 77 C-7 67 -16 54 -21 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/>
+          <path d="M499 77 C530 67 538 54 543 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/>
+        </svg>
+
+        <p class="offer">Закажите очки для зрения - и получите пару солнцезащитных линз для ваших очков бесплатно.</p>
+
+        <div class="benefits">
+          <div class="benefit">
+            <svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9 20v-6h6v6"/></svg>
+            <span>Срок акции<br>ограничен</span>
+          </div>
+          <div class="benefit">
+            <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.9 4.9 7 7M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>
+            <span>Для яркого<br>солнца</span>
+          </div>
+          <div class="benefit">
+            <svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="3"/></svg>
+            <span>Комфортная<br>защита зрения</span>
+          </div>
+        </div>
+
+        <div class="footer">
+          <div class="footer-item">
+            <svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-13a7 7 0 1 0-14 0c0 6.8 7 13 7 13Z"/><circle cx="12" cy="9" r="2.2"/></svg>
+            <span>Косухина 37А</span>
+          </div>
+          <div class="footer-item">
+            <svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.7 19.7 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8L7.7 9.8a16 16 0 0 0 6.5 6.5l1.3-1.3a2 2 0 0 1 1.8-.6l3 .5a2 2 0 0 1 1.7 2Z"/></svg>
+            <span>8(919)2706164</span>
+          </div>
+        </div>
+      </article>
+    </section>
+    <section class="slot">
+      <article class="flyer">
+        <div class="eyebrow"><span>ГЛАЗ</span><span>ДА</span><span>ГЛАЗ</span></div><h2 class="title-small">СОЛНЦЕЗАЩИТНЫЕ ЛИНЗЫ</h2><h1 class="title-main">В ПОДАРОК</h1>
+        <svg class="glasses" viewBox="0 0 520 230" role="img" aria-label="Очки"><defs><linearGradient id="lensShade2" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#777"/><stop offset=".52" stop-color="#292929"/><stop offset="1" stop-color="#050505"/></linearGradient></defs><path d="M37 60 C82 39 159 38 213 66 C229 75 233 90 226 111 L199 191 C193 208 178 216 159 211 L78 191 C55 185 44 173 39 151 L22 78 C20 70 25 64 37 60 Z" fill="#fff" stroke="#111" stroke-width="15"/><path d="M307 66 C363 38 440 39 483 60 C494 65 500 72 498 80 L481 151 C476 173 464 185 442 191 L360 211 C342 216 326 208 321 191 L294 111 C287 90 291 75 307 66 Z" fill="url(#lensShade2)" stroke="#111" stroke-width="15"/><path d="M226 104 C245 90 274 90 294 104" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/><path d="M22 77 C-7 67 -16 54 -21 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/><path d="M499 77 C530 67 538 54 543 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/></svg>
+        <p class="offer">Закажите очки для зрения - и получите пару солнцезащитных линз для ваших очков бесплатно.</p>
+        <div class="benefits"><div class="benefit"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9 20v-6h6v6"/></svg><span>Срок акции<br>ограничен</span></div><div class="benefit"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.9 4.9 7 7M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>Для яркого<br>солнца</span></div><div class="benefit"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="3"/></svg><span>Комфортная<br>защита зрения</span></div></div>
+        <div class="footer"><div class="footer-item"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-13a7 7 0 1 0-14 0c0 6.8 7 13 7 13Z"/><circle cx="12" cy="9" r="2.2"/></svg><span>Косухина 37А</span></div><div class="footer-item"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.7 19.7 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8L7.7 9.8a16 16 0 0 0 6.5 6.5l1.3-1.3a2 2 0 0 1 1.8-.6l3 .5a2 2 0 0 1 1.7 2Z"/></svg><span>8(919)2706164</span></div></div>
+      </article>
+    </section>
+    <section class="slot">
+      <article class="flyer">
+        <div class="eyebrow"><span>ГЛАЗ</span><span>ДА</span><span>ГЛАЗ</span></div><h2 class="title-small">СОЛНЦЕЗАЩИТНЫЕ ЛИНЗЫ</h2><h1 class="title-main">В ПОДАРОК</h1>
+        <svg class="glasses" viewBox="0 0 520 230" role="img" aria-label="Очки"><defs><linearGradient id="lensShade3" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#777"/><stop offset=".52" stop-color="#292929"/><stop offset="1" stop-color="#050505"/></linearGradient></defs><path d="M37 60 C82 39 159 38 213 66 C229 75 233 90 226 111 L199 191 C193 208 178 216 159 211 L78 191 C55 185 44 173 39 151 L22 78 C20 70 25 64 37 60 Z" fill="#fff" stroke="#111" stroke-width="15"/><path d="M307 66 C363 38 440 39 483 60 C494 65 500 72 498 80 L481 151 C476 173 464 185 442 191 L360 211 C342 216 326 208 321 191 L294 111 C287 90 291 75 307 66 Z" fill="url(#lensShade3)" stroke="#111" stroke-width="15"/><path d="M226 104 C245 90 274 90 294 104" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/><path d="M22 77 C-7 67 -16 54 -21 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/><path d="M499 77 C530 67 538 54 543 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/></svg>
+        <p class="offer">Закажите очки для зрения - и получите пару солнцезащитных линз для ваших очков бесплатно.</p>
+        <div class="benefits"><div class="benefit"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9 20v-6h6v6"/></svg><span>Срок акции<br>ограничен</span></div><div class="benefit"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.9 4.9 7 7M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>Для яркого<br>солнца</span></div><div class="benefit"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="3"/></svg><span>Комфортная<br>защита зрения</span></div></div>
+        <div class="footer"><div class="footer-item"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-13a7 7 0 1 0-14 0c0 6.8 7 13 7 13Z"/><circle cx="12" cy="9" r="2.2"/></svg><span>Косухина 37А</span></div><div class="footer-item"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.7 19.7 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8L7.7 9.8a16 16 0 0 0 6.5 6.5l1.3-1.3a2 2 0 0 1 1.8-.6l3 .5a2 2 0 0 1 1.7 2Z"/></svg><span>8(919)2706164</span></div></div>
+      </article>
+    </section>
+    <section class="slot">
+      <article class="flyer">
+        <div class="eyebrow"><span>ГЛАЗ</span><span>ДА</span><span>ГЛАЗ</span></div><h2 class="title-small">СОЛНЦЕЗАЩИТНЫЕ ЛИНЗЫ</h2><h1 class="title-main">В ПОДАРОК</h1>
+        <svg class="glasses" viewBox="0 0 520 230" role="img" aria-label="Очки"><defs><linearGradient id="lensShade4" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#777"/><stop offset=".52" stop-color="#292929"/><stop offset="1" stop-color="#050505"/></linearGradient></defs><path d="M37 60 C82 39 159 38 213 66 C229 75 233 90 226 111 L199 191 C193 208 178 216 159 211 L78 191 C55 185 44 173 39 151 L22 78 C20 70 25 64 37 60 Z" fill="#fff" stroke="#111" stroke-width="15"/><path d="M307 66 C363 38 440 39 483 60 C494 65 500 72 498 80 L481 151 C476 173 464 185 442 191 L360 211 C342 216 326 208 321 191 L294 111 C287 90 291 75 307 66 Z" fill="url(#lensShade4)" stroke="#111" stroke-width="15"/><path d="M226 104 C245 90 274 90 294 104" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/><path d="M22 77 C-7 67 -16 54 -21 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/><path d="M499 77 C530 67 538 54 543 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/></svg>
+        <p class="offer">Закажите очки для зрения - и получите пару солнцезащитных линз для ваших очков бесплатно.</p>
+        <div class="benefits"><div class="benefit"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9 20v-6h6v6"/></svg><span>Срок акции<br>ограничен</span></div><div class="benefit"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.9 4.9 7 7M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>Для яркого<br>солнца</span></div><div class="benefit"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="3"/></svg><span>Комфортная<br>защита зрения</span></div></div>
+        <div class="footer"><div class="footer-item"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-13a7 7 0 1 0-14 0c0 6.8 7 13 7 13Z"/><circle cx="12" cy="9" r="2.2"/></svg><span>Косухина 37А</span></div><div class="footer-item"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.7 19.7 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8L7.7 9.8a16 16 0 0 0 6.5 6.5l1.3-1.3a2 2 0 0 1 1.8-.6l3 .5a2 2 0 0 1 1.7 2Z"/></svg><span>8(919)2706164</span></div></div>
+      </article>
+    </section>
+    <section class="slot">
+      <article class="flyer">
+        <div class="eyebrow"><span>ГЛАЗ</span><span>ДА</span><span>ГЛАЗ</span></div><h2 class="title-small">СОЛНЦЕЗАЩИТНЫЕ ЛИНЗЫ</h2><h1 class="title-main">В ПОДАРОК</h1>
+        <svg class="glasses" viewBox="0 0 520 230" role="img" aria-label="Очки"><defs><linearGradient id="lensShade5" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#777"/><stop offset=".52" stop-color="#292929"/><stop offset="1" stop-color="#050505"/></linearGradient></defs><path d="M37 60 C82 39 159 38 213 66 C229 75 233 90 226 111 L199 191 C193 208 178 216 159 211 L78 191 C55 185 44 173 39 151 L22 78 C20 70 25 64 37 60 Z" fill="#fff" stroke="#111" stroke-width="15"/><path d="M307 66 C363 38 440 39 483 60 C494 65 500 72 498 80 L481 151 C476 173 464 185 442 191 L360 211 C342 216 326 208 321 191 L294 111 C287 90 291 75 307 66 Z" fill="url(#lensShade5)" stroke="#111" stroke-width="15"/><path d="M226 104 C245 90 274 90 294 104" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/><path d="M22 77 C-7 67 -16 54 -21 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/><path d="M499 77 C530 67 538 54 543 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/></svg>
+        <p class="offer">Закажите очки для зрения - и получите пару солнцезащитных линз для ваших очков бесплатно.</p>
+        <div class="benefits"><div class="benefit"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9 20v-6h6v6"/></svg><span>Срок акции<br>ограничен</span></div><div class="benefit"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.9 4.9 7 7M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>Для яркого<br>солнца</span></div><div class="benefit"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="3"/></svg><span>Комфортная<br>защита зрения</span></div></div>
+        <div class="footer"><div class="footer-item"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-13a7 7 0 1 0-14 0c0 6.8 7 13 7 13Z"/><circle cx="12" cy="9" r="2.2"/></svg><span>Косухина 37А</span></div><div class="footer-item"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.7 19.7 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8L7.7 9.8a16 16 0 0 0 6.5 6.5l1.3-1.3a2 2 0 0 1 1.8-.6l3 .5a2 2 0 0 1 1.7 2Z"/></svg><span>8(919)2706164</span></div></div>
+      </article>
+    </section>
+    <section class="slot">
+      <article class="flyer">
+        <div class="eyebrow"><span>ГЛАЗ</span><span>ДА</span><span>ГЛАЗ</span></div><h2 class="title-small">СОЛНЦЕЗАЩИТНЫЕ ЛИНЗЫ</h2><h1 class="title-main">В ПОДАРОК</h1>
+        <svg class="glasses" viewBox="0 0 520 230" role="img" aria-label="Очки"><defs><linearGradient id="lensShade6" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#777"/><stop offset=".52" stop-color="#292929"/><stop offset="1" stop-color="#050505"/></linearGradient></defs><path d="M37 60 C82 39 159 38 213 66 C229 75 233 90 226 111 L199 191 C193 208 178 216 159 211 L78 191 C55 185 44 173 39 151 L22 78 C20 70 25 64 37 60 Z" fill="#fff" stroke="#111" stroke-width="15"/><path d="M307 66 C363 38 440 39 483 60 C494 65 500 72 498 80 L481 151 C476 173 464 185 442 191 L360 211 C342 216 326 208 321 191 L294 111 C287 90 291 75 307 66 Z" fill="url(#lensShade6)" stroke="#111" stroke-width="15"/><path d="M226 104 C245 90 274 90 294 104" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/><path d="M22 77 C-7 67 -16 54 -21 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/><path d="M499 77 C530 67 538 54 543 43" fill="none" stroke="#111" stroke-width="15" stroke-linecap="round"/></svg>
+        <p class="offer">Закажите очки для зрения - и получите пару солнцезащитных линз для ваших очков бесплатно.</p>
+        <div class="benefits"><div class="benefit"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5"/><path d="M5.5 10.5V20h13v-9.5"/><path d="M9 20v-6h6v6"/></svg><span>Срок акции<br>ограничен</span></div><div class="benefit"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v3M12 19v3M4.9 4.9 7 7M17 17l2.1 2.1M2 12h3M19 12h3M4.9 19.1 7 17M17 7l2.1-2.1"/></svg><span>Для яркого<br>солнца</span></div><div class="benefit"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.5-6 9.5-6 9.5 6 9.5 6-3.5 6-9.5 6-9.5-6-9.5-6Z"/><circle cx="12" cy="12" r="3"/></svg><span>Комфортная<br>защита зрения</span></div></div>
+        <div class="footer"><div class="footer-item"><svg viewBox="0 0 24 24"><path d="M12 22s7-6.2 7-13a7 7 0 1 0-14 0c0 6.8 7 13 7 13Z"/><circle cx="12" cy="9" r="2.2"/></svg><span>Косухина 37А</span></div><div class="footer-item"><svg viewBox="0 0 24 24"><path d="M22 16.9v3a2 2 0 0 1-2.2 2 19.7 19.7 0 0 1-8.6-3.1 19.3 19.3 0 0 1-6-6A19.7 19.7 0 0 1 2.1 4.2 2 2 0 0 1 4.1 2h3a2 2 0 0 1 2 1.7l.5 3a2 2 0 0 1-.6 1.8L7.7 9.8a16 16 0 0 0 6.5 6.5l1.3-1.3a2 2 0 0 1 1.8-.6l3 .5a2 2 0 0 1 1.7 2Z"/></svg><span>8(919)2706164</span></div></div>
+      </article>
+    </section>
+  </main>
+</body>
+</html>
