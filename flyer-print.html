@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<title>Листовка — Глаз да глаз</title>
+<style>
+  @page { size: A4; margin: 5.5mm; }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html, body {
+    width: 210mm;
+    height: 297mm;
+    font-family: Arial, Helvetica, sans-serif;
+    color: #000;
+    background: #fff;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .sheet {
+    width: 199mm;
+    height: 286mm;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 2.8mm;
+  }
+  .flyer {
+    border: 1.6px solid #000;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    background: #fff;
+  }
+  .inner {
+    flex: 1;
+    padding: 3.6mm 3.8mm 2.4mm;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    justify-content: space-between;
+  }
+  .top { width: 100%; }
+  .logo {
+    display: inline-flex;
+    align-items: center;
+    gap: 1.8mm;
+    margin-bottom: 2.2mm;
+  }
+  .logo svg { width: 6.6mm; height: 6.6mm; display: block; }
+  .logo span {
+    font-size: 11.5px;
+    font-weight: 800;
+    line-height: 1;
+  }
+  .headline {
+    font-size: 14px;
+    font-weight: 900;
+    line-height: 1.05;
+    text-transform: uppercase;
+    letter-spacing: -0.01em;
+    margin-bottom: 1.8mm;
+  }
+  .lead {
+    font-size: 8.8px;
+    line-height: 1.25;
+    max-width: 80mm;
+    margin: 0 auto 1.5mm;
+  }
+  .glasses {
+    width: 68mm;
+    height: 28mm;
+    margin: 0.8mm auto 1.2mm;
+  }
+  .glasses svg { width: 100%; height: 100%; display: block; }
+  .benefits {
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    gap: 1mm;
+    padding-top: 1.5mm;
+    border-top: 1px solid #000;
+  }
+  .benefit {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1mm;
+  }
+  .icon {
+    width: 7.4mm;
+    height: 7.4mm;
+    border: 1.25px solid #000;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .icon svg { width: 4mm; height: 4mm; display: block; }
+  .benefit p {
+    font-size: 7.2px;
+    line-height: 1.1;
+    font-weight: 700;
+  }
+  .footer {
+    background: #000;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 2mm;
+    padding: 2.1mm 3mm;
+    font-size: 8.8px;
+    font-weight: 700;
+  }
+  .footer .item {
+    display: flex;
+    align-items: center;
+    gap: 1.3mm;
+    white-space: nowrap;
+  }
+  .footer svg { width: 3.1mm; height: 3.1mm; flex: 0 0 auto; }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<article class="flyer">
+  <div class="inner">
+    <div class="top">
+      <div class="logo">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="#000" stroke-width="2.2"/><ellipse cx="20" cy="20" rx="12" ry="7.5" fill="none" stroke="#000" stroke-width="2"/><circle cx="20" cy="20" r="4.2" fill="#000"/><circle cx="21.4" cy="18.6" r="1.2" fill="#fff"/></svg>
+        <span>Глаз да глаз</span>
+      </div>
+      <h1 class="headline">Солнцезащитные<br>линзы в подарок</h1>
+      <p class="lead">Закажите очки для зрения — и получите пару солнцезащитных линз для вторых очков бесплатно.</p>
+      <div class="glasses">
+        <svg viewBox="0 0 320 120" aria-hidden="true">
+          <defs>
+            <linearGradient id="tint0" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a2a2a"/>
+              <stop offset="55%" stop-color="#111"/>
+              <stop offset="100%" stop-color="#000"/>
+            </linearGradient>
+          </defs>
+          <path d="M138 52c10-12 34-12 44 0" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M34 54 L6 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M286 54 L314 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <rect x="34" y="30" width="104" height="66" rx="22" fill="#fff" stroke="#000" stroke-width="6"/>
+          <path d="M58 52c12-10 46-10 58 0" fill="none" stroke="#000" stroke-width="1.8" opacity=".22"/>
+          <path d="M62 72c18 8 46 8 64 0" fill="none" stroke="#000" stroke-width="1.4" opacity=".12"/>
+          <rect x="182" y="30" width="104" height="66" rx="22" fill="url(#tint0)" stroke="#000" stroke-width="6"/>
+          <path d="M206 52c12-10 46-10 58 0" fill="none" stroke="#fff" stroke-width="2" opacity=".28"/>
+          <circle cx="242" cy="58" r="4" fill="#fff" opacity=".18"/>
+        </svg>
+      </div>
+    </div>
+    <div class="benefits">
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V20h12v-9.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/><path d="M10 20v-5h4v5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/></svg></div><p>Одни очки<br>для помещения</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="#000" stroke-width="2.2"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.4 5.4l1.8 1.8M16.8 16.8l1.8 1.8M18.6 5.4l-1.8 1.8M7.2 16.8l-1.8 1.8" stroke="#000" stroke-width="2.2" stroke-linecap="round"/></svg></div><p>Вторые для<br>яркого солнца</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.8-6.2 9.5-6.2S21.5 12 21.5 12 17.7 18.2 12 18.2 2.5 12 2.5 12Z" fill="none" stroke="#000" stroke-width="2.1"/><circle cx="12" cy="12" r="2.8" fill="#000"/></svg></div><p>Бесплатная<br>проверка зрения</p></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 22s7-7.2 7-12.2A7 7 0 0 0 5 9.8C5 14.8 12 22 12 22Z"/><circle cx="12" cy="9.8" r="2.4" fill="#000"/></svg><span>Косухина 37а</span></div>
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M7.2 3.8h3.1l1.2 4.2-2 1.2a12.4 12.4 0 0 0 5.3 5.3l1.2-2 4.2 1.2v3.1c0 .8-.6 1.4-1.4 1.4A15.8 15.8 0 0 1 3.8 5.2c0-.8.6-1.4 1.4-1.4Z"/></svg><span>89192706164</span></div>
+  </div>
+</article>
+<article class="flyer">
+  <div class="inner">
+    <div class="top">
+      <div class="logo">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="#000" stroke-width="2.2"/><ellipse cx="20" cy="20" rx="12" ry="7.5" fill="none" stroke="#000" stroke-width="2"/><circle cx="20" cy="20" r="4.2" fill="#000"/><circle cx="21.4" cy="18.6" r="1.2" fill="#fff"/></svg>
+        <span>Глаз да глаз</span>
+      </div>
+      <h1 class="headline">Солнцезащитные<br>линзы в подарок</h1>
+      <p class="lead">Закажите очки для зрения — и получите пару солнцезащитных линз для вторых очков бесплатно.</p>
+      <div class="glasses">
+        <svg viewBox="0 0 320 120" aria-hidden="true">
+          <defs>
+            <linearGradient id="tint1" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a2a2a"/>
+              <stop offset="55%" stop-color="#111"/>
+              <stop offset="100%" stop-color="#000"/>
+            </linearGradient>
+          </defs>
+          <path d="M138 52c10-12 34-12 44 0" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M34 54 L6 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M286 54 L314 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <rect x="34" y="30" width="104" height="66" rx="22" fill="#fff" stroke="#000" stroke-width="6"/>
+          <path d="M58 52c12-10 46-10 58 0" fill="none" stroke="#000" stroke-width="1.8" opacity=".22"/>
+          <path d="M62 72c18 8 46 8 64 0" fill="none" stroke="#000" stroke-width="1.4" opacity=".12"/>
+          <rect x="182" y="30" width="104" height="66" rx="22" fill="url(#tint1)" stroke="#000" stroke-width="6"/>
+          <path d="M206 52c12-10 46-10 58 0" fill="none" stroke="#fff" stroke-width="2" opacity=".28"/>
+          <circle cx="242" cy="58" r="4" fill="#fff" opacity=".18"/>
+        </svg>
+      </div>
+    </div>
+    <div class="benefits">
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V20h12v-9.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/><path d="M10 20v-5h4v5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/></svg></div><p>Одни очки<br>для помещения</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="#000" stroke-width="2.2"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.4 5.4l1.8 1.8M16.8 16.8l1.8 1.8M18.6 5.4l-1.8 1.8M7.2 16.8l-1.8 1.8" stroke="#000" stroke-width="2.2" stroke-linecap="round"/></svg></div><p>Вторые для<br>яркого солнца</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.8-6.2 9.5-6.2S21.5 12 21.5 12 17.7 18.2 12 18.2 2.5 12 2.5 12Z" fill="none" stroke="#000" stroke-width="2.1"/><circle cx="12" cy="12" r="2.8" fill="#000"/></svg></div><p>Бесплатная<br>проверка зрения</p></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 22s7-7.2 7-12.2A7 7 0 0 0 5 9.8C5 14.8 12 22 12 22Z"/><circle cx="12" cy="9.8" r="2.4" fill="#000"/></svg><span>Косухина 37а</span></div>
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M7.2 3.8h3.1l1.2 4.2-2 1.2a12.4 12.4 0 0 0 5.3 5.3l1.2-2 4.2 1.2v3.1c0 .8-.6 1.4-1.4 1.4A15.8 15.8 0 0 1 3.8 5.2c0-.8.6-1.4 1.4-1.4Z"/></svg><span>89192706164</span></div>
+  </div>
+</article>
+<article class="flyer">
+  <div class="inner">
+    <div class="top">
+      <div class="logo">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="#000" stroke-width="2.2"/><ellipse cx="20" cy="20" rx="12" ry="7.5" fill="none" stroke="#000" stroke-width="2"/><circle cx="20" cy="20" r="4.2" fill="#000"/><circle cx="21.4" cy="18.6" r="1.2" fill="#fff"/></svg>
+        <span>Глаз да глаз</span>
+      </div>
+      <h1 class="headline">Солнцезащитные<br>линзы в подарок</h1>
+      <p class="lead">Закажите очки для зрения — и получите пару солнцезащитных линз для вторых очков бесплатно.</p>
+      <div class="glasses">
+        <svg viewBox="0 0 320 120" aria-hidden="true">
+          <defs>
+            <linearGradient id="tint2" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a2a2a"/>
+              <stop offset="55%" stop-color="#111"/>
+              <stop offset="100%" stop-color="#000"/>
+            </linearGradient>
+          </defs>
+          <path d="M138 52c10-12 34-12 44 0" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M34 54 L6 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M286 54 L314 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <rect x="34" y="30" width="104" height="66" rx="22" fill="#fff" stroke="#000" stroke-width="6"/>
+          <path d="M58 52c12-10 46-10 58 0" fill="none" stroke="#000" stroke-width="1.8" opacity=".22"/>
+          <path d="M62 72c18 8 46 8 64 0" fill="none" stroke="#000" stroke-width="1.4" opacity=".12"/>
+          <rect x="182" y="30" width="104" height="66" rx="22" fill="url(#tint2)" stroke="#000" stroke-width="6"/>
+          <path d="M206 52c12-10 46-10 58 0" fill="none" stroke="#fff" stroke-width="2" opacity=".28"/>
+          <circle cx="242" cy="58" r="4" fill="#fff" opacity=".18"/>
+        </svg>
+      </div>
+    </div>
+    <div class="benefits">
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V20h12v-9.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/><path d="M10 20v-5h4v5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/></svg></div><p>Одни очки<br>для помещения</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="#000" stroke-width="2.2"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.4 5.4l1.8 1.8M16.8 16.8l1.8 1.8M18.6 5.4l-1.8 1.8M7.2 16.8l-1.8 1.8" stroke="#000" stroke-width="2.2" stroke-linecap="round"/></svg></div><p>Вторые для<br>яркого солнца</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.8-6.2 9.5-6.2S21.5 12 21.5 12 17.7 18.2 12 18.2 2.5 12 2.5 12Z" fill="none" stroke="#000" stroke-width="2.1"/><circle cx="12" cy="12" r="2.8" fill="#000"/></svg></div><p>Бесплатная<br>проверка зрения</p></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 22s7-7.2 7-12.2A7 7 0 0 0 5 9.8C5 14.8 12 22 12 22Z"/><circle cx="12" cy="9.8" r="2.4" fill="#000"/></svg><span>Косухина 37а</span></div>
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M7.2 3.8h3.1l1.2 4.2-2 1.2a12.4 12.4 0 0 0 5.3 5.3l1.2-2 4.2 1.2v3.1c0 .8-.6 1.4-1.4 1.4A15.8 15.8 0 0 1 3.8 5.2c0-.8.6-1.4 1.4-1.4Z"/></svg><span>89192706164</span></div>
+  </div>
+</article>
+<article class="flyer">
+  <div class="inner">
+    <div class="top">
+      <div class="logo">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="#000" stroke-width="2.2"/><ellipse cx="20" cy="20" rx="12" ry="7.5" fill="none" stroke="#000" stroke-width="2"/><circle cx="20" cy="20" r="4.2" fill="#000"/><circle cx="21.4" cy="18.6" r="1.2" fill="#fff"/></svg>
+        <span>Глаз да глаз</span>
+      </div>
+      <h1 class="headline">Солнцезащитные<br>линзы в подарок</h1>
+      <p class="lead">Закажите очки для зрения — и получите пару солнцезащитных линз для вторых очков бесплатно.</p>
+      <div class="glasses">
+        <svg viewBox="0 0 320 120" aria-hidden="true">
+          <defs>
+            <linearGradient id="tint3" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a2a2a"/>
+              <stop offset="55%" stop-color="#111"/>
+              <stop offset="100%" stop-color="#000"/>
+            </linearGradient>
+          </defs>
+          <path d="M138 52c10-12 34-12 44 0" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M34 54 L6 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M286 54 L314 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <rect x="34" y="30" width="104" height="66" rx="22" fill="#fff" stroke="#000" stroke-width="6"/>
+          <path d="M58 52c12-10 46-10 58 0" fill="none" stroke="#000" stroke-width="1.8" opacity=".22"/>
+          <path d="M62 72c18 8 46 8 64 0" fill="none" stroke="#000" stroke-width="1.4" opacity=".12"/>
+          <rect x="182" y="30" width="104" height="66" rx="22" fill="url(#tint3)" stroke="#000" stroke-width="6"/>
+          <path d="M206 52c12-10 46-10 58 0" fill="none" stroke="#fff" stroke-width="2" opacity=".28"/>
+          <circle cx="242" cy="58" r="4" fill="#fff" opacity=".18"/>
+        </svg>
+      </div>
+    </div>
+    <div class="benefits">
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V20h12v-9.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/><path d="M10 20v-5h4v5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/></svg></div><p>Одни очки<br>для помещения</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="#000" stroke-width="2.2"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.4 5.4l1.8 1.8M16.8 16.8l1.8 1.8M18.6 5.4l-1.8 1.8M7.2 16.8l-1.8 1.8" stroke="#000" stroke-width="2.2" stroke-linecap="round"/></svg></div><p>Вторые для<br>яркого солнца</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.8-6.2 9.5-6.2S21.5 12 21.5 12 17.7 18.2 12 18.2 2.5 12 2.5 12Z" fill="none" stroke="#000" stroke-width="2.1"/><circle cx="12" cy="12" r="2.8" fill="#000"/></svg></div><p>Бесплатная<br>проверка зрения</p></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 22s7-7.2 7-12.2A7 7 0 0 0 5 9.8C5 14.8 12 22 12 22Z"/><circle cx="12" cy="9.8" r="2.4" fill="#000"/></svg><span>Косухина 37а</span></div>
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M7.2 3.8h3.1l1.2 4.2-2 1.2a12.4 12.4 0 0 0 5.3 5.3l1.2-2 4.2 1.2v3.1c0 .8-.6 1.4-1.4 1.4A15.8 15.8 0 0 1 3.8 5.2c0-.8.6-1.4 1.4-1.4Z"/></svg><span>89192706164</span></div>
+  </div>
+</article>
+<article class="flyer">
+  <div class="inner">
+    <div class="top">
+      <div class="logo">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="#000" stroke-width="2.2"/><ellipse cx="20" cy="20" rx="12" ry="7.5" fill="none" stroke="#000" stroke-width="2"/><circle cx="20" cy="20" r="4.2" fill="#000"/><circle cx="21.4" cy="18.6" r="1.2" fill="#fff"/></svg>
+        <span>Глаз да глаз</span>
+      </div>
+      <h1 class="headline">Солнцезащитные<br>линзы в подарок</h1>
+      <p class="lead">Закажите очки для зрения — и получите пару солнцезащитных линз для вторых очков бесплатно.</p>
+      <div class="glasses">
+        <svg viewBox="0 0 320 120" aria-hidden="true">
+          <defs>
+            <linearGradient id="tint4" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a2a2a"/>
+              <stop offset="55%" stop-color="#111"/>
+              <stop offset="100%" stop-color="#000"/>
+            </linearGradient>
+          </defs>
+          <path d="M138 52c10-12 34-12 44 0" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M34 54 L6 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M286 54 L314 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <rect x="34" y="30" width="104" height="66" rx="22" fill="#fff" stroke="#000" stroke-width="6"/>
+          <path d="M58 52c12-10 46-10 58 0" fill="none" stroke="#000" stroke-width="1.8" opacity=".22"/>
+          <path d="M62 72c18 8 46 8 64 0" fill="none" stroke="#000" stroke-width="1.4" opacity=".12"/>
+          <rect x="182" y="30" width="104" height="66" rx="22" fill="url(#tint4)" stroke="#000" stroke-width="6"/>
+          <path d="M206 52c12-10 46-10 58 0" fill="none" stroke="#fff" stroke-width="2" opacity=".28"/>
+          <circle cx="242" cy="58" r="4" fill="#fff" opacity=".18"/>
+        </svg>
+      </div>
+    </div>
+    <div class="benefits">
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V20h12v-9.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/><path d="M10 20v-5h4v5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/></svg></div><p>Одни очки<br>для помещения</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="#000" stroke-width="2.2"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.4 5.4l1.8 1.8M16.8 16.8l1.8 1.8M18.6 5.4l-1.8 1.8M7.2 16.8l-1.8 1.8" stroke="#000" stroke-width="2.2" stroke-linecap="round"/></svg></div><p>Вторые для<br>яркого солнца</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.8-6.2 9.5-6.2S21.5 12 21.5 12 17.7 18.2 12 18.2 2.5 12 2.5 12Z" fill="none" stroke="#000" stroke-width="2.1"/><circle cx="12" cy="12" r="2.8" fill="#000"/></svg></div><p>Бесплатная<br>проверка зрения</p></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 22s7-7.2 7-12.2A7 7 0 0 0 5 9.8C5 14.8 12 22 12 22Z"/><circle cx="12" cy="9.8" r="2.4" fill="#000"/></svg><span>Косухина 37а</span></div>
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M7.2 3.8h3.1l1.2 4.2-2 1.2a12.4 12.4 0 0 0 5.3 5.3l1.2-2 4.2 1.2v3.1c0 .8-.6 1.4-1.4 1.4A15.8 15.8 0 0 1 3.8 5.2c0-.8.6-1.4 1.4-1.4Z"/></svg><span>89192706164</span></div>
+  </div>
+</article>
+<article class="flyer">
+  <div class="inner">
+    <div class="top">
+      <div class="logo">
+        <svg viewBox="0 0 40 40" aria-hidden="true"><circle cx="20" cy="20" r="18.5" fill="none" stroke="#000" stroke-width="2.2"/><ellipse cx="20" cy="20" rx="12" ry="7.5" fill="none" stroke="#000" stroke-width="2"/><circle cx="20" cy="20" r="4.2" fill="#000"/><circle cx="21.4" cy="18.6" r="1.2" fill="#fff"/></svg>
+        <span>Глаз да глаз</span>
+      </div>
+      <h1 class="headline">Солнцезащитные<br>линзы в подарок</h1>
+      <p class="lead">Закажите очки для зрения — и получите пару солнцезащитных линз для вторых очков бесплатно.</p>
+      <div class="glasses">
+        <svg viewBox="0 0 320 120" aria-hidden="true">
+          <defs>
+            <linearGradient id="tint5" x1="0" y1="0" x2="1" y2="1">
+              <stop offset="0%" stop-color="#2a2a2a"/>
+              <stop offset="55%" stop-color="#111"/>
+              <stop offset="100%" stop-color="#000"/>
+            </linearGradient>
+          </defs>
+          <path d="M138 52c10-12 34-12 44 0" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M34 54 L6 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <path d="M286 54 L314 46" fill="none" stroke="#000" stroke-width="6" stroke-linecap="round"/>
+          <rect x="34" y="30" width="104" height="66" rx="22" fill="#fff" stroke="#000" stroke-width="6"/>
+          <path d="M58 52c12-10 46-10 58 0" fill="none" stroke="#000" stroke-width="1.8" opacity=".22"/>
+          <path d="M62 72c18 8 46 8 64 0" fill="none" stroke="#000" stroke-width="1.4" opacity=".12"/>
+          <rect x="182" y="30" width="104" height="66" rx="22" fill="url(#tint5)" stroke="#000" stroke-width="6"/>
+          <path d="M206 52c12-10 46-10 58 0" fill="none" stroke="#fff" stroke-width="2" opacity=".28"/>
+          <circle cx="242" cy="58" r="4" fill="#fff" opacity=".18"/>
+        </svg>
+      </div>
+    </div>
+    <div class="benefits">
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M3 11.5 12 4l9 7.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/><path d="M6 10.5V20h12v-9.5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/><path d="M10 20v-5h4v5" fill="none" stroke="#000" stroke-width="2.2" stroke-linejoin="round"/></svg></div><p>Одни очки<br>для помещения</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="4.2" fill="none" stroke="#000" stroke-width="2.2"/><path d="M12 2.8v2.6M12 18.6v2.6M2.8 12h2.6M18.6 12h2.6M5.4 5.4l1.8 1.8M16.8 16.8l1.8 1.8M18.6 5.4l-1.8 1.8M7.2 16.8l-1.8 1.8" stroke="#000" stroke-width="2.2" stroke-linecap="round"/></svg></div><p>Вторые для<br>яркого солнца</p></div>
+      <div class="benefit"><div class="icon"><svg viewBox="0 0 24 24"><path d="M2.5 12s3.8-6.2 9.5-6.2S21.5 12 21.5 12 17.7 18.2 12 18.2 2.5 12 2.5 12Z" fill="none" stroke="#000" stroke-width="2.1"/><circle cx="12" cy="12" r="2.8" fill="#000"/></svg></div><p>Бесплатная<br>проверка зрения</p></div>
+    </div>
+  </div>
+  <div class="footer">
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M12 22s7-7.2 7-12.2A7 7 0 0 0 5 9.8C5 14.8 12 22 12 22Z"/><circle cx="12" cy="9.8" r="2.4" fill="#000"/></svg><span>Косухина 37а</span></div>
+    <div class="item"><svg viewBox="0 0 24 24"><path fill="#fff" d="M7.2 3.8h3.1l1.2 4.2-2 1.2a12.4 12.4 0 0 0 5.3 5.3l1.2-2 4.2 1.2v3.1c0 .8-.6 1.4-1.4 1.4A15.8 15.8 0 0 1 3.8 5.2c0-.8.6-1.4 1.4-1.4Z"/></svg><span>89192706164</span></div>
+  </div>
+</article>
+</div>
+</body>
+</html>
