@@ -1,0 +1,19 @@
+{
+  "name": "AGARKOV CUSTOM CRM",
+  "short_name": "AGARKOV",
+  "description": "CRM для детейлинга, тонировки и полировки AGARKOV CUSTOM",
+  "start_url": "./detailing-crm.html",
+  "scope": "./",
+  "display": "standalone",
+  "background_color": "#0b1220",
+  "theme_color": "#0b1220",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "./agarkov-custom-icon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

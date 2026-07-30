@@ -4,6 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="apple-mobile-web-app-title" content="AGARKOV CUSTOM">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="theme-color" content="#0b1220">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="apple-touch-icon" href="agarkov-custom-icon.svg">
 <title>AGARKOV CUSTOM CRM</title>
 <style>
 :root{
@@ -267,6 +273,9 @@ function restoreClick(){gid('restoreFile').click()}function restore(e){let f=e.t
 function download(name,content,type){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
 function renderAll(){renderStats();renderOrders();renderClients();renderStatsBox();renderDatalists();renderCatalog()}
 renderItems();renderAll();
+if('serviceWorker' in navigator && location.protocol.startsWith('http')){
+  navigator.serviceWorker.register('./sw.js').catch(()=>{});
+}
 </script>
 </body>
 </html>
