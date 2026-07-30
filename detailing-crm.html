@@ -2,8 +2,9 @@
 <html lang="ru">
 <head>
 <meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>CRM - Тонировка Полировка Щигры</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="apple-mobile-web-app-title" content="AGARKOV CUSTOM">
+<title>AGARKOV CUSTOM CRM</title>
 <style>
 :root{
   --bg:#0b1220;--panel:#111827;--panel2:#172033;--card:#ffffff;--muted:#6b7280;--line:#e5e7eb;
@@ -11,7 +12,8 @@
   --shadow:0 18px 55px rgba(15,23,42,.14)
 }
 *{box-sizing:border-box}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#edf1f7;color:var(--text)}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;min-height:100svh;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#edf1f7;color:var(--text)}
 button,input,select,textarea{font:inherit}
 .app{display:grid;grid-template-columns:310px 1fr;min-height:100vh}
 .side{position:sticky;top:0;height:100vh;padding:22px;background:linear-gradient(180deg,var(--bg),var(--panel));color:#fff}
@@ -41,7 +43,20 @@ label{font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:950
 .notice{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:15px;padding:12px;font-size:13px;font-weight:800}.hidden{display:none}
 .print-only{display:none}
 @media(max-width:1080px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.grid{grid-template-columns:1fr}.form{grid-template-columns:repeat(2,1fr)}.w3,.w4,.actions,.items,.quick{grid-column:span 2}.money{grid-template-columns:repeat(2,1fr)}}
-@media(max-width:620px){.main{padding:14px}.form{grid-template-columns:1fr}.w2,.w3,.w4,.actions,.items,.quick{grid-column:span 1}.items-head,.item-row{grid-template-columns:1fr}.money{grid-template-columns:1fr}.kv{grid-template-columns:1fr}}
+@media(max-width:620px){
+  body{background:#f4f6fb}
+  .side{padding:calc(14px + env(safe-area-inset-top)) 12px 12px;height:auto;border-radius:0 0 24px 24px}
+  .brand{gap:11px;margin-bottom:10px}.logo{width:50px;height:50px;border-radius:17px;font-size:22px}.brand h1{font-size:24px;letter-spacing:.02em}.brand p{font-size:11px}
+  .stat{display:inline-block;width:calc(50% - 6px);margin:4px 2px;padding:10px;vertical-align:top}.stat span{font-size:9px}.stat b{font-size:19px}
+  .nav{display:flex;gap:7px;margin-top:10px;padding:2px 0 5px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}.nav::-webkit-scrollbar{display:none}.nav button{flex:0 0 auto;white-space:nowrap;border-radius:999px;padding:10px 12px;font-size:13px}
+  .main{padding:12px 10px calc(24px + env(safe-area-inset-bottom))}
+  .top{position:sticky;top:0;z-index:5;margin:0 0 10px;padding:8px 0;background:#f4f6fb}.search{min-width:100%;order:-1}.top .btn{flex:1 1 calc(33.333% - 7px);padding:10px 8px;font-size:12px}
+  input,select,textarea{font-size:16px;border-radius:14px;padding:12px}
+  .grid{gap:12px}.card{border-radius:18px;box-shadow:0 10px 28px rgba(15,23,42,.08)}.card h2{padding:14px 15px;font-size:18px}
+  .orders{max-height:none;padding:12px}.order{padding:12px}.oh{align-items:flex-start}.pill{font-size:11px}
+  .main .form{grid-template-columns:1fr;padding:14px;gap:10px}.w2,.w3,.w4,.actions,.items,.quick{grid-column:span 1}.items-head{display:none}.items-head,.item-row{grid-template-columns:1fr}.money{grid-template-columns:1fr}.kv{grid-template-columns:1fr}.actions .btn{flex:1 1 100%}
+  .quick .btn{flex:1 1 calc(50% - 8px);font-size:12px}.table-wrap{padding:12px}
+}
 @media print{
   body{background:#fff}.app{display:block}.side,.top,.screen{display:none!important}.print-only{display:block!important}
   .sheet{width:210mm;min-height:297mm;padding:10mm;background:#fff;color:#000;font-family:Arial,sans-serif}
@@ -56,10 +71,10 @@ label{font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:950
 <div class="app screen">
   <aside class="side">
     <div class="brand">
-      <div class="logo">TP</div>
+      <div class="logo">AC</div>
       <div>
-        <h1>Тонировка<br>Полировка Щигры</h1>
-        <p>CRM для записи, клиентов и оплат<br>+7 (951) 311-37-81 · Щигры, Лазарева</p>
+        <h1>AGARKOV<br>CUSTOM</h1>
+        <p>Детейлинг · тонировка · полировка<br>+7 (951) 311-37-81 · Щигры, Лазарева</p>
       </div>
     </div>
     <div class="stat"><span>Активные записи</span><b id="stActive">0</b></div>
@@ -168,8 +183,8 @@ label{font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:950
 <section class="print-only"><div class="sheet"><div class="blank" id="p1"></div><div class="blank" id="p2"></div></div></section>
 
 <script>
-const APP={name:'Тонировка Полировка Щигры CRM',version:'1.0',key:'tp_schigry_crm_v1'};
-const BUSINESS={name:'Тонировка Полировка Щигры',phone:'+7 (951) 311-37-81',address:'Щигры, ул. Лазарева',vk:'vk.ru/club240308872'};
+const APP={name:'AGARKOV CUSTOM CRM',version:'1.0',key:'agarkov_custom_crm_v1'};
+const BUSINESS={name:'AGARKOV CUSTOM',phone:'+7 (951) 311-37-81',address:'Щигры, ул. Лазарева',vk:'vk.ru/club240308872'};
 const DEFAULT_CATALOG=[
   {type:'Тонировка',name:'Тонировка задней полусферы',price:0},
   {type:'Тонировка',name:'Тонировка передних стекол',price:0},
@@ -226,8 +241,8 @@ function showPage(id,b){showPageById(id);document.querySelectorAll('.nav button'
 function showPageById(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));gid(id).classList.add('active')}
 function blank(o,title){let rows=(o.items||[]).map(i=>`<tr><td>${esc(i.name)}</td><td>${esc(i.qty)}</td><td>${money(i.price)}</td><td>${money(n(i.qty)*n(i.price))}</td></tr>`).join('');return `<div class="bhead"><h3>${BUSINESS.name}<br><small>${title}</small></h3><div><span class="orderNo">ЗАКАЗ №${o.number}</span><br>${BUSINESS.phone}<br>${BUSINESS.address}<br>${BUSINESS.vk}</div></div><div class="bgrid"><div>Дата записи: <b>${esc(o.date||'')}</b></div><div>Время: <b>${esc(o.time||'')}</b></div><div>Клиент: <b>${esc(o.client||'')}</b></div><div>Телефон: ${esc(o.phone||'')}</div><div>Авто: <b>${esc(o.car||'')}</b></div><div>Госномер: ${esc(o.plate||'')}</div><div>Тип: ${esc(o.type||'')}</div><div>Статус: ${esc(o.status||'')}</div><div class="full"><table class="itab"><tr><th>Услуга</th><th>Кол-во</th><th>Цена</th><th>Сумма</th></tr>${rows}</table></div><div>Итого: <b>${money(o.total)}</b></div><div>Оплачено: <b>${money(o.paid)}</b> · Остаток: <b>${money(o.rest)}</b></div><div class="full">Комментарий: ${esc(o.comment||'')}</div></div><div class="sign"><div>Подпись клиента: __________________</div><div>Подпись мастера: __________________</div></div>`}
 function printDoc(id){let o=db.orders.find(x=>x.id===id);if(!o)return;gid('p1').innerHTML=blank(o,'Бланк клиенту');gid('p2').innerHTML=blank(o,'Копия мастеру');window.print()}
-function exportExcel(){let h=['Дата создания','Дата записи','Время','№','Клиент','Телефон','Авто','Госномер','Источник','Тип','Статус','Услуги','Итого','Оплачено','Остаток','Комментарий'];let rows=db.orders.map(o=>[o.created,o.date,o.time,o.number,o.client,o.phone,o.car,o.plate,o.source,o.type,o.status,(o.items||[]).map(i=>i.name+' '+i.qty+'×'+i.price).join('; '),o.total,o.paid,o.rest,o.comment]);let html='<table><tr>'+h.map(x=>'<th>'+esc(x)+'</th>').join('')+'</tr>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+esc(c)+'</td>').join('')+'</tr>').join('')+'</table>';download('tonirovka_polirovka_schigry_orders.xls',html,'application/vnd.ms-excel;charset=utf-8')}
-function backup(){download('tonirovka_polirovka_schigry_backup_'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(db,null,2),'application/json')}
+function exportExcel(){let h=['Дата создания','Дата записи','Время','№','Клиент','Телефон','Авто','Госномер','Источник','Тип','Статус','Услуги','Итого','Оплачено','Остаток','Комментарий'];let rows=db.orders.map(o=>[o.created,o.date,o.time,o.number,o.client,o.phone,o.car,o.plate,o.source,o.type,o.status,(o.items||[]).map(i=>i.name+' '+i.qty+'×'+i.price).join('; '),o.total,o.paid,o.rest,o.comment]);let html='<table><tr>'+h.map(x=>'<th>'+esc(x)+'</th>').join('')+'</tr>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+esc(c)+'</td>').join('')+'</tr>').join('')+'</table>';download('agarkov_custom_orders.xls',html,'application/vnd.ms-excel;charset=utf-8')}
+function backup(){download('agarkov_custom_backup_'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(db,null,2),'application/json')}
 function restoreClick(){gid('restoreFile').click()}function restore(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let incoming=normalizeDb(JSON.parse(r.result));if(db.orders.length&&!confirm('Заменить текущую базу импортируемой?'))return;db=incoming;save();alert('База загружена')}catch(err){alert('Не удалось прочитать файл')}};r.readAsText(f)}
 function download(name,content,type){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
 function renderAll(){renderStats();renderOrders();renderClients();renderStatsBox();renderDatalists();renderCatalog()}
