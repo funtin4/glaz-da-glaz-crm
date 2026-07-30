@@ -1,0 +1,237 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CRM - Тонировка Полировка Щигры</title>
+<style>
+:root{
+  --bg:#0b1220;--panel:#111827;--panel2:#172033;--card:#ffffff;--muted:#6b7280;--line:#e5e7eb;
+  --accent:#f59e0b;--accent2:#ef4444;--green:#16a34a;--blue:#2563eb;--text:#111827;--soft:#f8fafc;
+  --shadow:0 18px 55px rgba(15,23,42,.14)
+}
+*{box-sizing:border-box}
+body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Arial,sans-serif;background:#edf1f7;color:var(--text)}
+button,input,select,textarea{font:inherit}
+.app{display:grid;grid-template-columns:310px 1fr;min-height:100vh}
+.side{position:sticky;top:0;height:100vh;padding:22px;background:linear-gradient(180deg,var(--bg),var(--panel));color:#fff}
+.brand{display:flex;gap:13px;align-items:center;margin-bottom:18px}
+.logo{width:58px;height:58px;border-radius:20px;background:linear-gradient(135deg,var(--accent),var(--accent2));display:flex;align-items:center;justify-content:center;font-size:28px;font-weight:1000;box-shadow:0 12px 28px rgba(245,158,11,.3)}
+.brand h1{margin:0;font-size:21px;line-height:1.05}.brand p{margin:5px 0 0;color:#cbd5e1;font-size:12px;line-height:1.35}
+.stat{background:rgba(255,255,255,.08);border:1px solid rgba(255,255,255,.12);border-radius:17px;padding:13px;margin:9px 0}
+.stat span{display:block;color:#cbd5e1;font-size:11px;font-weight:900;text-transform:uppercase;letter-spacing:.04em}.stat b{font-size:24px}
+.nav{display:grid;gap:8px;margin-top:17px}.nav button{border:0;border-radius:14px;padding:12px 13px;text-align:left;background:rgba(255,255,255,.08);color:#fff;font-weight:850;cursor:pointer}
+.nav button.active{background:linear-gradient(135deg,var(--accent),var(--accent2));color:#111}
+.main{padding:24px}.top{display:flex;gap:10px;align-items:center;margin-bottom:18px;flex-wrap:wrap}.search{flex:1;min-width:240px}
+input,select,textarea{width:100%;border:1px solid #d9e2ee;background:#fff;border-radius:13px;padding:10px 12px;color:#111}
+textarea{min-height:74px;resize:vertical}.search input{padding:14px 16px;border-radius:17px;box-shadow:0 8px 24px rgba(15,23,42,.06)}
+.btn{border:1px solid var(--line);background:#fff;color:#111;border-radius:13px;padding:11px 13px;font-weight:850;cursor:pointer}
+.btn.primary{border:0;background:linear-gradient(135deg,var(--accent),var(--accent2));color:#111}.btn.green{border:0;background:var(--green);color:#fff}.btn.red{border:0;background:#fee2e2;color:#991b1b}.btn.blue{border:0;background:var(--blue);color:#fff}.btn.small{padding:7px 9px;border-radius:10px;font-size:12px}
+.grid{display:grid;grid-template-columns:1.05fr .95fr;gap:18px}.card{background:rgba(255,255,255,.96);border:1px solid var(--line);border-radius:22px;box-shadow:var(--shadow);overflow:hidden}.card h2{margin:0;padding:17px 19px;border-bottom:1px solid var(--line);font-size:20px}
+.form{padding:18px 19px;display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.field{display:grid;gap:6px}.w2{grid-column:span 2}.w3{grid-column:span 3}.w4{grid-column:span 4}
+label{font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:950;letter-spacing:.035em}.actions{grid-column:span 4;display:flex;gap:9px;justify-content:flex-end;flex-wrap:wrap}
+.page{display:none}.page.active{display:block}.orders{display:grid;gap:10px;padding:15px;max-height:680px;overflow:auto}.order{background:#fff;border:1px solid var(--line);border-radius:17px;padding:14px;cursor:pointer}.order:hover{border-color:#fed7aa;box-shadow:0 10px 24px rgba(15,23,42,.10)}
+.oh{display:flex;justify-content:space-between;gap:8px}.name{font-size:16px;font-weight:950}.meta{font-size:13px;color:var(--muted);margin-top:5px;line-height:1.35}.pill{padding:6px 10px;border-radius:99px;font-size:12px;font-weight:950;white-space:nowrap}
+.new{background:#dbeafe;color:#1d4ed8}.work{background:#fef3c7;color:#92400e}.ready{background:#dcfce7;color:#166534}.done{background:#f3f4f6;color:#374151}.cancel{background:#fee2e2;color:#991b1b}
+.detail{padding:18px 19px;display:grid;gap:13px}.empty{padding:45px;text-align:center;color:var(--muted)}.kv{display:grid;grid-template-columns:145px 1fr;gap:8px;font-size:14px}
+.money{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.money div{background:var(--soft);border:1px solid var(--line);border-radius:15px;padding:12px}.money span{display:block;color:var(--muted);font-size:11px;font-weight:950;text-transform:uppercase}.money b{font-size:20px}
+.items{grid-column:span 4;border:1px solid var(--line);border-radius:17px;overflow:hidden;background:#fff}.items-head,.item-row{display:grid;grid-template-columns:1.3fr .45fr .7fr .7fr 42px;gap:8px;align-items:center;padding:9px;border-bottom:1px solid var(--line)}
+.items-head{background:#f3f6fb;color:var(--muted);font-size:12px;font-weight:950;text-transform:uppercase}.item-row input{padding:8px;border-radius:10px}.quick{grid-column:span 4;display:flex;gap:8px;flex-wrap:wrap}.quick .btn{font-size:12px;padding:9px 10px}
+.table-wrap{padding:17px;overflow:auto}.table{width:100%;border-collapse:collapse}.table th,.table td{padding:11px;border-bottom:1px solid var(--line);text-align:left;font-size:14px}.table th{font-size:12px;text-transform:uppercase;color:var(--muted);background:#f8fafc}
+.notice{background:#fffbeb;border:1px solid #fde68a;color:#92400e;border-radius:15px;padding:12px;font-size:13px;font-weight:800}.hidden{display:none}
+.print-only{display:none}
+@media(max-width:1080px){.app{grid-template-columns:1fr}.side{position:relative;height:auto}.grid{grid-template-columns:1fr}.form{grid-template-columns:repeat(2,1fr)}.w3,.w4,.actions,.items,.quick{grid-column:span 2}.money{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:620px){.main{padding:14px}.form{grid-template-columns:1fr}.w2,.w3,.w4,.actions,.items,.quick{grid-column:span 1}.items-head,.item-row{grid-template-columns:1fr}.money{grid-template-columns:1fr}.kv{grid-template-columns:1fr}}
+@media print{
+  body{background:#fff}.app{display:block}.side,.top,.screen{display:none!important}.print-only{display:block!important}
+  .sheet{width:210mm;min-height:297mm;padding:10mm;background:#fff;color:#000;font-family:Arial,sans-serif}
+  .blank{min-height:132mm;border:1.5px solid #111;margin-bottom:8mm;padding:7mm;display:grid;grid-template-rows:auto 1fr auto;page-break-inside:avoid}
+  .bhead{display:flex;justify-content:space-between;gap:12px;border-bottom:2px solid #111;padding-bottom:6px;margin-bottom:7px}.bhead h3{margin:0;font-size:19px}.bhead div{text-align:right;font-size:12px;line-height:1.35}
+  .orderNo{display:inline-block;border:2px solid #111;padding:4px 8px;font-size:21px;font-weight:950;margin-bottom:4px}.bgrid{display:grid;grid-template-columns:1fr 1fr;gap:6px 14px;font-size:13px}.full{grid-column:span 2}
+  .itab{border-collapse:collapse;width:100%;margin:4px 0}.itab th,.itab td{border:1px solid #555;padding:4px;text-align:left;font-size:12px}.itab th{background:#eee}.sign{display:grid;grid-template-columns:1fr 1fr;gap:16px;font-size:12px}
+}
+</style>
+</head>
+<body>
+<div class="app screen">
+  <aside class="side">
+    <div class="brand">
+      <div class="logo">TP</div>
+      <div>
+        <h1>Тонировка<br>Полировка Щигры</h1>
+        <p>CRM для записи, клиентов и оплат<br>+7 (951) 311-37-81 · Щигры, Лазарева</p>
+      </div>
+    </div>
+    <div class="stat"><span>Активные записи</span><b id="stActive">0</b></div>
+    <div class="stat"><span>Готово к выдаче</span><b id="stReady">0</b></div>
+    <div class="stat"><span>Остаток оплат</span><b id="stDebt">0 ₽</b></div>
+    <div class="stat"><span>Оплачено сегодня</span><b id="stToday">0 ₽</b></div>
+    <div class="nav">
+      <button type="button" class="active" onclick="showPage('orders',this)">🚗 Заказы</button>
+      <button type="button" onclick="showPage('newOrder',this)">➕ Новая запись</button>
+      <button type="button" onclick="showPage('clients',this)">👥 Клиенты</button>
+      <button type="button" onclick="showPage('stats',this)">📊 Статистика</button>
+      <button type="button" onclick="showPage('catalog',this)">🧰 Услуги</button>
+    </div>
+  </aside>
+  <main class="main">
+    <div class="top">
+      <div class="search"><input id="search" oninput="renderAll()" placeholder="Поиск: клиент, телефон, авто, номер, услуга"></div>
+      <button type="button" class="btn" onclick="exportExcel()">Экспорт Excel</button>
+      <button type="button" class="btn" onclick="backup()">💾 Сохранить базу</button>
+      <button type="button" class="btn" onclick="restoreClick()">Загрузить базу</button>
+      <input id="restoreFile" type="file" accept=".json" class="hidden" onchange="restore(event)">
+    </div>
+
+    <section id="orders" class="page active">
+      <div class="grid">
+        <div class="card"><h2>Все заказы <span id="countBadge"></span></h2><div class="orders" id="ordersList"></div></div>
+        <div class="card"><h2>Карточка заказа</h2><div id="detail" class="detail empty">Выберите заказ или создайте новую запись.</div></div>
+      </div>
+    </section>
+
+    <section id="newOrder" class="page">
+      <div class="card"><h2 id="formTitle">Новая запись</h2>
+        <div class="form">
+          <div class="field w2"><label>Клиент</label><input id="o_client" list="clientsList" oninput="suggestClient()" placeholder="Фамилия Имя"></div>
+          <div class="field w2"><label>Телефон</label><input id="o_phone" list="phonesList" oninput="suggestClient()" placeholder="+7 ..."></div>
+          <div id="clientHint" class="notice w4 hidden"></div>
+          <div class="field w2"><label>Автомобиль</label><input id="o_car" placeholder="Например: Toyota Camry"></div>
+          <div class="field"><label>Госномер</label><input id="o_plate" placeholder="А123ВС"></div>
+          <div class="field"><label>Источник</label><select id="o_source"><option>ВК</option><option>Avito</option><option>Звонок</option><option>Viber</option><option>Рекомендация</option><option>Повторный клиент</option></select></div>
+          <div class="field"><label>Дата</label><input id="o_date" type="date"></div>
+          <div class="field"><label>Время</label><input id="o_time" type="time"></div>
+          <div class="field"><label>Тип</label><select id="o_type"><option>Тонировка</option><option>Полировка</option><option>Мойка</option><option>Химчистка</option><option>Защита кузова</option><option>Другое</option></select></div>
+          <div class="field"><label>Статус</label><select id="o_status"><option>Запись</option><option>В работе</option><option>Готово</option><option>Выдано</option><option>Отмена</option></select></div>
+          <div class="quick">
+            <button type="button" class="btn" onclick="addCatalogItem('Тонировка задней полусферы')">+ Тонировка задней</button>
+            <button type="button" class="btn" onclick="addCatalogItem('Тонировка передних стекол')">+ Передние стекла</button>
+            <button type="button" class="btn" onclick="addCatalogItem('Снятие старой пленки')">+ Снятие пленки</button>
+            <button type="button" class="btn" onclick="addCatalogItem('Полировка кузова')">+ Полировка кузова</button>
+            <button type="button" class="btn" onclick="addCatalogItem('Полировка фар')">+ Полировка фар</button>
+            <button type="button" class="btn" onclick="addCatalogItem('Комплексная мойка')">+ Комплексная мойка</button>
+            <button type="button" class="btn" onclick="addCatalogItem('Химчистка салона')">+ Химчистка</button>
+            <button type="button" class="btn" onclick="addCatalogItem('Антидождь')">+ Антидождь</button>
+          </div>
+          <div class="items">
+            <div class="items-head"><div>Услуга / материал</div><div>Кол-во</div><div>Цена</div><div>Сумма</div><div></div></div>
+            <div id="itemsBox"></div>
+          </div>
+          <div class="field"><label>Итого</label><input id="o_total" readonly></div>
+          <div class="field"><label>Оплачено</label><input id="o_paid" oninput="calc()"></div>
+          <div class="field"><label>Доплата</label><input id="o_rest" readonly></div>
+          <div class="field"><label>Предоплата?</label><select id="o_prepay"><option>Нет</option><option>Да</option></select></div>
+          <div class="field w4"><label>Комментарий</label><textarea id="o_comment" placeholder="Пленка, пожелания, состояние кузова, что обещали клиенту"></textarea></div>
+          <div class="actions">
+            <button type="button" class="btn" onclick="clearForm()">Очистить</button>
+            <button type="button" class="btn primary" onclick="saveOrder()">Сохранить заказ</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="clients" class="page">
+      <div class="card"><h2>Клиенты и история</h2><div class="table-wrap"><table class="table" id="clientsTable"></table></div></div>
+    </section>
+
+    <section id="stats" class="page">
+      <div class="card"><h2>Статистика</h2>
+        <div class="form">
+          <div class="field"><label>Дата с</label><input id="stat_from" type="date" onchange="renderStatsBox()"></div>
+          <div class="field"><label>Дата по</label><input id="stat_to" type="date" onchange="renderStatsBox()"></div>
+          <div class="field"><label>Тип</label><select id="stat_type" onchange="renderStatsBox()"><option value="all">Все</option><option>Тонировка</option><option>Полировка</option><option>Мойка</option><option>Химчистка</option><option>Защита кузова</option><option>Другое</option></select></div>
+          <div class="field"><label>Статус</label><select id="stat_status" onchange="renderStatsBox()"><option value="all">Все</option><option>Запись</option><option>В работе</option><option>Готово</option><option>Выдано</option><option>Отмена</option></select></div>
+          <div class="field"><label>Быстро</label><select onchange="quickPeriod(this.value);this.value='';"><option value="">Выбрать</option><option value="today">Сегодня</option><option value="week">7 дней</option><option value="month">Этот месяц</option><option value="clear">Сбросить</option></select></div>
+        </div>
+        <div class="table-wrap" id="statsBox"></div>
+      </div>
+    </section>
+
+    <section id="catalog" class="page">
+      <div class="card"><h2>Справочник услуг</h2>
+        <div class="form">
+          <div class="field w2"><label>Название</label><input id="cat_name" placeholder="Например: Керамика 1 слой"></div>
+          <div class="field"><label>Цена</label><input id="cat_price" placeholder="0"></div>
+          <div class="field"><label>Категория</label><select id="cat_type"><option>Тонировка</option><option>Полировка</option><option>Мойка</option><option>Химчистка</option><option>Защита кузова</option><option>Другое</option></select></div>
+          <div class="actions"><button type="button" class="btn primary" onclick="addCatalog()">Добавить услугу</button></div>
+          <div class="field w4"><label>Список</label><div style="overflow:auto;max-height:420px"><table class="table" id="catalogTable"></table></div></div>
+        </div>
+      </div>
+    </section>
+
+    <datalist id="clientsList"></datalist>
+    <datalist id="phonesList"></datalist>
+    <datalist id="catalogList"></datalist>
+  </main>
+</div>
+
+<section class="print-only"><div class="sheet"><div class="blank" id="p1"></div><div class="blank" id="p2"></div></div></section>
+
+<script>
+const APP={name:'Тонировка Полировка Щигры CRM',version:'1.0',key:'tp_schigry_crm_v1'};
+const BUSINESS={name:'Тонировка Полировка Щигры',phone:'+7 (951) 311-37-81',address:'Щигры, ул. Лазарева',vk:'vk.ru/club240308872'};
+const DEFAULT_CATALOG=[
+  {type:'Тонировка',name:'Тонировка задней полусферы',price:0},
+  {type:'Тонировка',name:'Тонировка передних стекол',price:0},
+  {type:'Тонировка',name:'Атермальная пленка',price:0},
+  {type:'Тонировка',name:'Снятие старой пленки',price:0},
+  {type:'Полировка',name:'Полировка кузова',price:0},
+  {type:'Полировка',name:'Полировка фар',price:0},
+  {type:'Мойка',name:'Мойка кузова',price:0},
+  {type:'Мойка',name:'Комплексная мойка',price:0},
+  {type:'Химчистка',name:'Химчистка салона',price:0},
+  {type:'Защита кузова',name:'Воск / защитное покрытие',price:0},
+  {type:'Защита кузова',name:'Керамика / защитный состав',price:0},
+  {type:'Защита кузова',name:'Антидождь',price:0}
+];
+function emptyDb(){return {app:APP.name,version:APP.version,createdAt:new Date().toISOString(),updatedAt:new Date().toISOString(),orders:[],catalog:[...DEFAULT_CATALOG]}}
+function loadDb(){try{let raw=localStorage.getItem(APP.key);return raw?normalizeDb(JSON.parse(raw)):emptyDb()}catch(e){return emptyDb()}}
+function normalizeDb(data){data=data||emptyDb();if(!Array.isArray(data.orders))data.orders=[];if(!Array.isArray(data.catalog)||!data.catalog.length)data.catalog=[...DEFAULT_CATALOG];data.app=APP.name;data.version=data.version||APP.version;data.updatedAt=new Date().toISOString();return data}
+let db=loadDb(),editId=null,items=[];
+const gid=id=>document.getElementById(id), v=id=>(gid(id)?.value||'').trim(), sv=(id,x)=>{if(gid(id))gid(id).value=x??''};
+const n=x=>Number(String(x||'').replace(/\s/g,'').replace(',','.'))||0, money=x=>n(x).toLocaleString('ru-RU')+' ₽';
+const esc=x=>String(x??'').replaceAll('&','&amp;').replaceAll('<','&lt;').replaceAll('>','&gt;').replaceAll('"','&quot;').replaceAll("'","&#039;");
+function todayRu(){return new Date().toLocaleDateString('ru-RU')}function nowRu(){return new Date().toLocaleString('ru-RU')}
+function isoDate(d){return d.toISOString().slice(0,10)}function save(){db.updatedAt=new Date().toISOString();localStorage.setItem(APP.key,JSON.stringify(db));renderAll()}
+function nextNum(){return db.orders.reduce((m,o)=>Math.max(m,o.number||0),0)+1}
+function cls(s){return s==='Запись'?'new':s==='В работе'?'work':s==='Готово'?'ready':s==='Отмена'?'cancel':'done'}
+function addCatalogItem(name){let c=db.catalog.find(x=>x.name===name)||{name,price:0};items.push({name:c.name,qty:1,price:n(c.price)});renderItems()}
+function addCustomItem(){items.push({name:'',qty:1,price:0});renderItems()}
+function commitItem(i,field,value){if(!items[i])return;if(field==='name'){items[i].name=value;let c=db.catalog.find(x=>x.name===value);if(c&&!items[i].price)items[i].price=n(c.price)}if(field==='qty')items[i].qty=n(value);if(field==='price')items[i].price=n(value);renderItems()}
+function remItem(i){items.splice(i,1);renderItems()}
+function renderItems(){gid('itemsBox').innerHTML=items.map((it,i)=>`<div class="item-row"><input list="catalogList" value="${esc(it.name)}" onchange="commitItem(${i},'name',this.value)" placeholder="Услуга"><input value="${esc(it.qty)}" onchange="commitItem(${i},'qty',this.value)"><input value="${esc(it.price)}" onchange="commitItem(${i},'price',this.value)"><b>${money(n(it.qty)*n(it.price))}</b><button type="button" class="btn small red" onclick="remItem(${i})">×</button></div>`).join('')+`<div class="item-row"><button type="button" class="btn small" onclick="addCustomItem()">+ строка</button><span></span><span></span><span></span><span></span></div>`;calc()}
+function calc(){let total=items.reduce((s,i)=>s+n(i.qty)*n(i.price),0);sv('o_total',total);sv('o_rest',Math.max(total-n(v('o_paid')),0))}
+function clearForm(){editId=null;gid('formTitle').textContent='Новая запись';['client','phone','car','plate','date','time','paid','total','rest','comment'].forEach(k=>sv('o_'+k,''));sv('o_source','ВК');sv('o_type','Тонировка');sv('o_status','Запись');sv('o_prepay','Нет');items=[];gid('clientHint').classList.add('hidden');renderItems()}
+function saveOrder(){if(!v('o_client')&&!v('o_phone')){alert('Укажите клиента или телефон');return}let old=db.orders.find(x=>x.id===editId)||{};let o={id:editId||String(Date.now()),number:old.number||nextNum(),created:old.created||nowRu(),updated:nowRu(),client:v('o_client'),phone:v('o_phone'),car:v('o_car'),plate:v('o_plate'),source:v('o_source'),date:v('o_date'),time:v('o_time'),type:v('o_type'),status:v('o_status'),prepay:v('o_prepay'),items:[...items],total:n(v('o_total')),paid:n(v('o_paid')),rest:n(v('o_rest')),comment:v('o_comment')};let i=db.orders.findIndex(x=>x.id===o.id);i>=0?db.orders[i]=o:db.orders.unshift(o);clearForm();save();showPageById('orders');select(o.id)}
+function renderOrders(){let q=v('search').toLowerCase();let list=db.orders.filter(o=>[o.number,o.client,o.phone,o.car,o.plate,o.source,o.type,o.status,o.comment,...(o.items||[]).map(i=>i.name)].join(' ').toLowerCase().includes(q));gid('countBadge').textContent=list.length+' шт.';gid('ordersList').innerHTML=list.length?list.map(o=>`<div class="order" onclick="select('${o.id}')"><div class="oh"><div><div class="name">№${o.number} · ${esc(o.client||'Без имени')}</div><div class="meta">${esc(o.car||'Авто не указано')} ${o.plate?'· '+esc(o.plate):''}</div></div><span class="pill ${cls(o.status)}">${esc(o.status)}</span></div><div class="meta">${esc(o.type)} · ${esc(o.date||'без даты')} ${esc(o.time||'')}</div><div class="meta">${esc(o.phone||'')} · Итого: <b>${money(o.total)}</b> · Остаток: <b>${money(o.rest)}</b></div></div>`).join(''):'<div class="empty">Ничего не найдено</div>'}
+function select(id){let o=db.orders.find(x=>x.id===id);if(!o)return;let rows=(o.items||[]).map(i=>`${esc(i.name)} — ${esc(i.qty)} × ${money(i.price)} = ${money(n(i.qty)*n(i.price))}`).join('<br>');gid('detail').className='detail';gid('detail').innerHTML=`<div class="oh"><div><h2 style="padding:0;border:0;margin:0">Заказ №${o.number}</h2><div class="meta">Создан: ${esc(o.created)} · Обновлен: ${esc(o.updated||'')}</div></div><span class="pill ${cls(o.status)}">${esc(o.status)}</span></div><div class="kv"><b>Клиент</b><span>${esc(o.client||'')}</span></div><div class="kv"><b>Телефон</b><span>${esc(o.phone||'')}</span></div><div class="kv"><b>Автомобиль</b><span>${esc(o.car||'')} ${o.plate?'· '+esc(o.plate):''}</span></div><div class="kv"><b>Запись</b><span>${esc(o.date||'')} ${esc(o.time||'')} · ${esc(o.source||'')}</span></div><div class="kv"><b>Тип</b><span>${esc(o.type||'')}</span></div><div class="kv"><b>Состав</b><span>${rows||'—'}</span></div><div class="money"><div><span>Итого</span><b>${money(o.total)}</b></div><div><span>Оплачено</span><b>${money(o.paid)}</b></div><div><span>Остаток</span><b>${money(o.rest)}</b></div><div><span>Предоплата</span><b>${esc(o.prepay||'Нет')}</b></div></div>${o.rest>0?'<div class="notice">Остаток к оплате: '+money(o.rest)+'</div>':''}<div class="kv"><b>Комментарий</b><span>${esc(o.comment||'')}</span></div><div class="actions" style="justify-content:flex-start"><button type="button" class="btn primary" onclick="printDoc('${o.id}')">Печать</button><button type="button" class="btn" onclick="editOrder('${o.id}')">Редактировать</button><button type="button" class="btn green" onclick="setStatus('${o.id}','Готово')">Готово</button><button type="button" class="btn blue" onclick="setStatus('${o.id}','Выдано')">Выдано</button><button type="button" class="btn red" onclick="deleteOrder('${o.id}')">Удалить</button></div>`}
+function editOrder(id){let o=db.orders.find(x=>x.id===id);if(!o)return;editId=id;gid('formTitle').textContent='Редактирование заказа №'+o.number;sv('o_client',o.client);sv('o_phone',o.phone);sv('o_car',o.car);sv('o_plate',o.plate);sv('o_source',o.source||'ВК');sv('o_date',o.date);sv('o_time',o.time);sv('o_type',o.type||'Тонировка');sv('o_status',o.status||'Запись');sv('o_paid',o.paid);sv('o_prepay',o.prepay||'Нет');sv('o_comment',o.comment);items=[...(o.items||[])];renderItems();showPageById('newOrder')}
+function setStatus(id,s){let o=db.orders.find(x=>x.id===id);if(o){o.status=s;if(s==='Выдано')o.rest=0;o.updated=nowRu();save();select(id)}}
+function deleteOrder(id){if(confirm('Удалить заказ?')){db.orders=db.orders.filter(o=>o.id!==id);gid('detail').className='detail empty';gid('detail').innerHTML='Выберите заказ или создайте новую запись.';save()}}
+function renderStats(){gid('stActive').textContent=db.orders.filter(o=>!['Выдано','Отмена'].includes(o.status)).length;gid('stReady').textContent=db.orders.filter(o=>o.status==='Готово').length;gid('stDebt').textContent=money(db.orders.filter(o=>o.status!=='Отмена').reduce((s,o)=>s+n(o.rest),0));gid('stToday').textContent=money(db.orders.filter(o=>(o.created||'').startsWith(todayRu())).reduce((s,o)=>s+n(o.paid),0))}
+function clientKey(o){return (digits(o.phone)||o.client||'Без имени').trim()}function digits(x){return String(x||'').replace(/\D/g,'')}
+function renderClients(){let m={};db.orders.forEach(o=>{let k=clientKey(o);if(!m[k])m[k]={client:o.client,phone:o.phone,cars:new Set(),count:0,total:0,last:''};m[k].count++;m[k].total+=n(o.total);if(o.car)m[k].cars.add(o.car);m[k].last=o.created});let rows=Object.values(m).sort((a,b)=>b.count-a.count);gid('clientsTable').innerHTML='<tr><th>Клиент</th><th>Телефон</th><th>Авто</th><th>Визитов</th><th>Сумма</th><th>Последний визит</th></tr>'+rows.map(r=>`<tr><td>${esc(r.client||'—')}</td><td>${esc(r.phone||'—')}</td><td>${esc([...r.cars].join(', ')||'—')}</td><td>${r.count}</td><td>${money(r.total)}</td><td>${esc(r.last||'')}</td></tr>`).join('')}
+function parseDate(s){if(!s)return null;if(/^\d{4}-\d{2}-\d{2}$/.test(s))return new Date(s+'T00:00:00');let p=(String(s).split(',')[0]||'').split('.');return p.length>=3?new Date(Number(p[2]),Number(p[1])-1,Number(p[0])):null}
+function filteredStats(){let from=v('stat_from'),to=v('stat_to'),type=v('stat_type'),status=v('stat_status');let fromD=from?new Date(from+'T00:00:00'):null,toD=to?new Date(to+'T23:59:59'):null;return db.orders.filter(o=>{if(type&&type!=='all'&&o.type!==type)return false;if(status&&status!=='all'&&o.status!==status)return false;let d=parseDate(o.date)||parseDate(o.created);if(fromD&&d&&d<fromD)return false;if(toD&&d&&d>toD)return false;return true})}
+function renderStatsBox(){let arr=filteredStats();let total=arr.reduce((s,o)=>s+n(o.total),0),paid=arr.reduce((s,o)=>s+n(o.paid),0),debt=arr.reduce((s,o)=>s+n(o.rest),0);let byType={},byStatus={};arr.forEach(o=>{byType[o.type]=(byType[o.type]||0)+1;byStatus[o.status]=(byStatus[o.status]||0)+1});gid('statsBox').innerHTML=`<div class="money"><div><span>Заказов</span><b>${arr.length}</b></div><div><span>Итого</span><b>${money(total)}</b></div><div><span>Оплачено</span><b>${money(paid)}</b></div><div><span>Остаток</span><b>${money(debt)}</b></div></div><br><table class="table"><tr><th>Тип услуги</th><th>Количество</th></tr>${Object.keys(byType).map(k=>`<tr><td>${esc(k)}</td><td>${byType[k]}</td></tr>`).join('')}</table><br><table class="table"><tr><th>Статус</th><th>Количество</th></tr>${Object.keys(byStatus).map(k=>`<tr><td>${esc(k)}</td><td>${byStatus[k]}</td></tr>`).join('')}</table>`}
+function quickPeriod(kind){let d=new Date(),from='',to='';if(kind==='today')from=to=isoDate(d);if(kind==='week'){let f=new Date(d);f.setDate(f.getDate()-6);from=isoDate(f);to=isoDate(d)}if(kind==='month'){from=isoDate(new Date(d.getFullYear(),d.getMonth(),1));to=isoDate(d)}sv('stat_from',from);sv('stat_to',to);renderStatsBox()}
+function renderDatalists(){let clients=new Map(),phones=new Set();db.orders.forEach(o=>{if(o.client)clients.set(o.client,o.phone||'');if(o.phone)phones.add(o.phone)});gid('clientsList').innerHTML=[...clients.entries()].map(([name,phone])=>`<option value="${esc(name)}" label="${esc(phone)}"></option>`).join('');gid('phonesList').innerHTML=[...phones].map(p=>`<option value="${esc(p)}"></option>`).join('');gid('catalogList').innerHTML=(db.catalog||[]).map(c=>`<option value="${esc(c.name)}">${esc(c.type)} ${c.price?money(c.price):''}</option>`).join('')}
+function findClient(){let phoneD=digits(v('o_phone')),name=v('o_client').toLowerCase();return db.orders.find(o=>(phoneD&&digits(o.phone).includes(phoneD))||(name&&String(o.client||'').toLowerCase().includes(name)))}
+function suggestClient(){let h=gid('clientHint'),o=findClient();if(o){h.classList.remove('hidden');h.innerHTML=`Клиент уже был: <b>${esc(o.client||'')}</b> · ${esc(o.phone||'')} · ${esc(o.car||'')} <button type="button" class="btn small" onclick="pullClient()">Подтянуть</button>`}else{h.classList.add('hidden');h.innerHTML=''}}
+function pullClient(){let o=findClient();if(!o)return;sv('o_client',o.client);sv('o_phone',o.phone);sv('o_car',o.car);sv('o_plate',o.plate);sv('o_source','Повторный клиент');suggestClient()}
+function renderCatalog(){gid('catalogTable').innerHTML='<tr><th>Категория</th><th>Услуга</th><th>Цена</th><th></th></tr>'+(db.catalog||[]).map((c,i)=>`<tr><td>${esc(c.type)}</td><td>${esc(c.name)}</td><td>${money(c.price)}</td><td><button type="button" class="btn small red" onclick="deleteCatalog(${i})">Удалить</button></td></tr>`).join('')}
+function addCatalog(){let c={type:v('cat_type'),name:v('cat_name'),price:n(v('cat_price'))};if(!c.name){alert('Укажите название услуги');return}db.catalog.push(c);sv('cat_name','');sv('cat_price','');save()}
+function deleteCatalog(i){db.catalog.splice(i,1);save()}
+function showPage(id,b){showPageById(id);document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active')}
+function showPageById(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));gid(id).classList.add('active')}
+function blank(o,title){let rows=(o.items||[]).map(i=>`<tr><td>${esc(i.name)}</td><td>${esc(i.qty)}</td><td>${money(i.price)}</td><td>${money(n(i.qty)*n(i.price))}</td></tr>`).join('');return `<div class="bhead"><h3>${BUSINESS.name}<br><small>${title}</small></h3><div><span class="orderNo">ЗАКАЗ №${o.number}</span><br>${BUSINESS.phone}<br>${BUSINESS.address}<br>${BUSINESS.vk}</div></div><div class="bgrid"><div>Дата записи: <b>${esc(o.date||'')}</b></div><div>Время: <b>${esc(o.time||'')}</b></div><div>Клиент: <b>${esc(o.client||'')}</b></div><div>Телефон: ${esc(o.phone||'')}</div><div>Авто: <b>${esc(o.car||'')}</b></div><div>Госномер: ${esc(o.plate||'')}</div><div>Тип: ${esc(o.type||'')}</div><div>Статус: ${esc(o.status||'')}</div><div class="full"><table class="itab"><tr><th>Услуга</th><th>Кол-во</th><th>Цена</th><th>Сумма</th></tr>${rows}</table></div><div>Итого: <b>${money(o.total)}</b></div><div>Оплачено: <b>${money(o.paid)}</b> · Остаток: <b>${money(o.rest)}</b></div><div class="full">Комментарий: ${esc(o.comment||'')}</div></div><div class="sign"><div>Подпись клиента: __________________</div><div>Подпись мастера: __________________</div></div>`}
+function printDoc(id){let o=db.orders.find(x=>x.id===id);if(!o)return;gid('p1').innerHTML=blank(o,'Бланк клиенту');gid('p2').innerHTML=blank(o,'Копия мастеру');window.print()}
+function exportExcel(){let h=['Дата создания','Дата записи','Время','№','Клиент','Телефон','Авто','Госномер','Источник','Тип','Статус','Услуги','Итого','Оплачено','Остаток','Комментарий'];let rows=db.orders.map(o=>[o.created,o.date,o.time,o.number,o.client,o.phone,o.car,o.plate,o.source,o.type,o.status,(o.items||[]).map(i=>i.name+' '+i.qty+'×'+i.price).join('; '),o.total,o.paid,o.rest,o.comment]);let html='<table><tr>'+h.map(x=>'<th>'+esc(x)+'</th>').join('')+'</tr>'+rows.map(r=>'<tr>'+r.map(c=>'<td>'+esc(c)+'</td>').join('')+'</tr>').join('')+'</table>';download('tonirovka_polirovka_schigry_orders.xls',html,'application/vnd.ms-excel;charset=utf-8')}
+function backup(){download('tonirovka_polirovka_schigry_backup_'+new Date().toISOString().slice(0,10)+'.json',JSON.stringify(db,null,2),'application/json')}
+function restoreClick(){gid('restoreFile').click()}function restore(e){let f=e.target.files[0];if(!f)return;let r=new FileReader();r.onload=()=>{try{let incoming=normalizeDb(JSON.parse(r.result));if(db.orders.length&&!confirm('Заменить текущую базу импортируемой?'))return;db=incoming;save();alert('База загружена')}catch(err){alert('Не удалось прочитать файл')}};r.readAsText(f)}
+function download(name,content,type){let a=document.createElement('a');a.href=URL.createObjectURL(new Blob([content],{type}));a.download=name;a.click()}
+function renderAll(){renderStats();renderOrders();renderClients();renderStatsBox();renderDatalists();renderCatalog()}
+renderItems();renderAll();
+</script>
+</body>
+</html>
