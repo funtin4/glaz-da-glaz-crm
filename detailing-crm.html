@@ -56,6 +56,14 @@ label{font-size:11px;color:var(--muted);text-transform:uppercase;font-weight:950
   .orders{max-height:none;padding:12px}.order{padding:12px}.oh{align-items:flex-start}.pill{font-size:11px}
   .main .form{grid-template-columns:1fr;padding:14px;gap:10px}.w2,.w3,.w4,.actions,.items,.quick{grid-column:span 1}.items-head{display:none}.items-head,.item-row{grid-template-columns:1fr}.money{grid-template-columns:1fr}.kv{grid-template-columns:1fr}.actions .btn{flex:1 1 100%}
   .quick .btn{flex:1 1 calc(50% - 8px);font-size:12px}.table-wrap{padding:12px}
+  #catalogTable,#clientsTable{border-collapse:separate;border-spacing:0 10px}
+  #catalogTable tr:first-child,#clientsTable tr:first-child{display:none}
+  #catalogTable tr,#clientsTable tr{display:grid;gap:8px;padding:11px;border:1px solid var(--line);border-radius:15px;background:#fff}
+  #catalogTable td,#clientsTable td{display:block;border:0;padding:0}
+  #catalogTable td::before,#clientsTable td::before{display:block;margin-bottom:4px;color:var(--muted);font-size:10px;font-weight:950;text-transform:uppercase;letter-spacing:.04em}
+  #catalogTable td:nth-child(1)::before{content:"Категория"}#catalogTable td:nth-child(2)::before{content:"Услуга"}#catalogTable td:nth-child(3)::before{content:"Цена"}#catalogTable td:nth-child(4)::before{content:"Действия"}
+  #clientsTable td:nth-child(1)::before{content:"Клиент"}#clientsTable td:nth-child(2)::before{content:"Телефон"}#clientsTable td:nth-child(3)::before{content:"Авто"}#clientsTable td:nth-child(4)::before{content:"Визитов"}#clientsTable td:nth-child(5)::before{content:"Сумма"}#clientsTable td:nth-child(6)::before{content:"Последний визит"}
+  #catalogTable td:last-child{display:grid;grid-template-columns:1fr 1fr;gap:8px}#catalogTable .btn{width:100%;margin:0}
 }
 @media print{
   body{background:#fff}.app{display:block}.side,.top,.screen{display:none!important}.print-only{display:block!important}
@@ -234,8 +242,10 @@ function renderDatalists(){let clients=new Map(),phones=new Set();db.orders.forE
 function findClient(){let phoneD=digits(v('o_phone')),name=v('o_client').toLowerCase();return db.orders.find(o=>(phoneD&&digits(o.phone).includes(phoneD))||(name&&String(o.client||'').toLowerCase().includes(name)))}
 function suggestClient(){let h=gid('clientHint'),o=findClient();if(o){h.classList.remove('hidden');h.innerHTML=`Клиент уже был: <b>${esc(o.client||'')}</b> · ${esc(o.phone||'')} · ${esc(o.car||'')} <button type="button" class="btn small" onclick="pullClient()">Подтянуть</button>`}else{h.classList.add('hidden');h.innerHTML=''}}
 function pullClient(){let o=findClient();if(!o)return;sv('o_client',o.client);sv('o_phone',o.phone);sv('o_car',o.car);sv('o_plate',o.plate);sv('o_source','Повторный клиент');suggestClient()}
-function renderCatalog(){gid('catalogTable').innerHTML='<tr><th>Категория</th><th>Услуга</th><th>Цена</th><th></th></tr>'+(db.catalog||[]).map((c,i)=>`<tr><td>${esc(c.type)}</td><td>${esc(c.name)}</td><td>${money(c.price)}</td><td><button type="button" class="btn small red" onclick="deleteCatalog(${i})">Удалить</button></td></tr>`).join('')}
+function catalogTypeOptions(selected){let types=['Тонировка','Полировка','Мойка','Химчистка','Защита кузова','Другое'];return types.map(t=>`<option ${t===selected?'selected':''}>${esc(t)}</option>`).join('')}
+function renderCatalog(){gid('catalogTable').innerHTML='<tr><th>Категория</th><th>Услуга</th><th>Цена</th><th></th></tr>'+(db.catalog||[]).map((c,i)=>`<tr><td><select id="cat_type_${i}">${catalogTypeOptions(c.type)}</select></td><td><input id="cat_name_${i}" value="${esc(c.name)}"></td><td><input id="cat_price_${i}" value="${esc(c.price)}" inputmode="numeric"></td><td><button type="button" class="btn small green" onclick="updateCatalog(${i})">Сохранить</button> <button type="button" class="btn small red" onclick="deleteCatalog(${i})">Удалить</button></td></tr>`).join('')}
 function addCatalog(){let c={type:v('cat_type'),name:v('cat_name'),price:n(v('cat_price'))};if(!c.name){alert('Укажите название услуги');return}db.catalog.push(c);sv('cat_name','');sv('cat_price','');save()}
+function updateCatalog(i){let c=db.catalog[i];if(!c)return;let name=v('cat_name_'+i);if(!name){alert('Укажите название услуги');return}c.type=v('cat_type_'+i)||'Другое';c.name=name;c.price=n(v('cat_price_'+i));save()}
 function deleteCatalog(i){db.catalog.splice(i,1);save()}
 function showPage(id,b){showPageById(id);document.querySelectorAll('.nav button').forEach(x=>x.classList.remove('active'));if(b)b.classList.add('active')}
 function showPageById(id){document.querySelectorAll('.page').forEach(p=>p.classList.remove('active'));gid(id).classList.add('active')}
