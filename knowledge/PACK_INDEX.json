@@ -1,0 +1,53 @@
+{
+  "pack": "optics-knowledge-v1",
+  "created": "2026-07-24",
+  "docs": [
+    "docs/optics-knowledge/01-prescription-basics.md",
+    "docs/optics-knowledge/02-lens-types.md",
+    "docs/optics-knowledge/03-materials-and-indexes.md",
+    "docs/optics-knowledge/04-lens-designs.md",
+    "docs/optics-knowledge/05-coatings.md",
+    "docs/optics-knowledge/06-photochromic-and-sun.md",
+    "docs/optics-knowledge/07-progressive-lenses.md",
+    "docs/optics-knowledge/08-office-lenses.md",
+    "docs/optics-knowledge/09-frame-and-thickness.md",
+    "docs/optics-knowledge/10-sales-consultation.md",
+    "docs/optics-knowledge/11-objections.md",
+    "docs/optics-knowledge/12-safety-and-escalation.md",
+    "docs/optics-knowledge/13-sources.md",
+    "docs/optics-knowledge/14-glossary.md",
+    "docs/optics-knowledge/15-open-questions.md",
+    "docs/optics-knowledge/16-decision-model.md",
+    "docs/optics-knowledge/17-client-questions.md",
+    "docs/optics-knowledge/18-thickness-chart.md",
+    "docs/optics-knowledge/19-thickness-chart-bbgr.md",
+    "docs/optics-knowledge/research-report.md"
+  ],
+  "data_normalized": [
+    "data/normalized/catalog.json",
+    "data/normalized/catalog_summary.json"
+  ],
+  "knowledge": [
+    "knowledge/PACK_INDEX.json",
+    "knowledge/PERSISTENCE.md",
+    "knowledge/domain-facts.json",
+    "knowledge/thickness-chart-bbgr.json",
+    "knowledge/thickness-chart.json"
+  ],
+  "rules": [
+    "rules/rules.draft.json"
+  ],
+  "content": [
+    "content/copy-policy.md"
+  ],
+  "tests": [
+    "tests/scenarios/scenarios_v1.json"
+  ],
+  "raw_prices": [
+    "data/raw/MAXXEE_605b.html",
+    "data/raw/RODENSTOCK____________74fa.html",
+    "data/raw/Shamir__6b02.html",
+    "data/raw/Weiya______________001c.html"
+  ],
+  "do_not_change_app_until_owner_approval": true
+}

@@ -1,0 +1,62 @@
+{
+  "schema": "owner_config_v1",
+  "status": "approved_partial",
+  "approved_at": "2026-07-24",
+  "source": "owner_chat_answers",
+  "product": {
+    "positioning": "private_master_avito_plus_salon",
+    "brands_visible_to_client": true,
+    "hero_card": "optimal_as_i_usually_fit",
+    "show_two_alternatives": true,
+    "budget_mode": "soft",
+    "price_lists_are_retail": true,
+    "labor_separate_from_lenses": true,
+    "thickness_qualitative_ok_before_measure": true,
+    "progressive_price_without_pd_height": true,
+    "progressive_fabrication_still_needs_fitting": true,
+    "blue_filter_policy": "only_if_client_asks",
+    "photochromic_car_disclaimer_required": true,
+    "photochromic_car_darkening_note": "В автомобиле обычные фотохромные линзы темнеют заметно слабее, ориентир салона — примерно до 30–40%.",
+    "cta": {
+      "channels": ["avito", "phone"],
+      "phone": "89192706164",
+      "phone_display": "8 919 270-61-64"
+    },
+    "escalation_visit": {
+      "place": "salon_moscow",
+      "address": "Москва, ул. Декабристов, 21",
+      "hours": "ежедневно 10:00–20:00",
+      "message_ru": "Лучше подойти к нам в салон: Москва, ул. Декабристов, 21, ежедневно с 10:00 до 20:00. Там проверим рецепт и точно подберём."
+    }
+  },
+  "index_policy": {
+    "note": "Owner practice thresholds for recommendation scoring",
+    "index_160": {
+      "recommend_from_abs_sph": 0,
+      "comment": "Можно рекомендовать хоть с нулевой диоптрии"
+    },
+    "index_150_156": {
+      "max_recommend_abs_sph": 3.0,
+      "comment": "1.50–1.56 рекомендовать максимум до ±3.0"
+    },
+    "index_167": {
+      "strongly_prefer_from_abs_sph": 4.0,
+      "almost_required_band": [4.0, 5.0],
+      "comment": "1.67 почти обязателен от ±4.0…±5.0"
+    },
+    "index_174": {
+      "policy": "needs_clarification",
+      "comment": "Владелец не задал отдельный порог; не оверселлить при низком Rx"
+    }
+  },
+  "safety": {
+    "child_max_age_exclusive_online_full_auto": 16,
+    "comment": "До 16 лет — направлять в салон / не полноценный автозаказ"
+  },
+  "open_items": [
+    "index_174_threshold",
+    "rimless_min_edge_mm",
+    "avito_first_message_template_verbatim",
+    "progressive_remake_policy"
+  ]
+}

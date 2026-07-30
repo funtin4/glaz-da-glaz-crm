@@ -1,0 +1,130 @@
+{
+  "services": [
+    {
+      "id": "0ce534b2aa93",
+      "name": "Замена флекса",
+      "price": 2500,
+      "supplier": "Weiya",
+      "source": "Weiya______________001c.html"
+    },
+    {
+      "id": "79710baab6cf",
+      "name": "Замена заушника (1 шт)",
+      "price": 1000,
+      "supplier": "Weiya",
+      "source": "Weiya______________001c.html"
+    },
+    {
+      "id": "b094aed8149f",
+      "name": "Замена носовых упоров",
+      "price": 350,
+      "supplier": "Weiya",
+      "source": "Weiya______________001c.html"
+    },
+    {
+      "id": "6a595fa71c3e",
+      "name": "Изготовление: ободковые",
+      "price": 800,
+      "supplier": "Weiya",
+      "source": "Weiya______________001c.html"
+    },
+    {
+      "id": "5c43963b53bb",
+      "name": "Изготовление: полуободковые",
+      "price": 1300,
+      "supplier": "Weiya",
+      "source": "Weiya______________001c.html"
+    },
+    {
+      "id": "111519a4a7bf",
+      "name": "Изготовление: безободковые",
+      "price": 2000,
+      "supplier": "Weiya",
+      "source": "Weiya______________001c.html"
+    },
+    {
+      "id": "acc55df8ea2a",
+      "name": "В свою оправу (ободковая)",
+      "price": 1500,
+      "supplier": "Weiya",
+      "source": "Weiya______________001c.html"
+    },
+    {
+      "id": "8a3389aa4017",
+      "name": "В свою оправу (безободковая / полуободковая)",
+      "price": 2000,
+      "supplier": "Weiya",
+      "source": "Weiya______________001c.html"
+    },
+    {
+      "id": "18ad847ba814",
+      "name": "Тонировка однотонная",
+      "price": 1100,
+      "supplier": "Rodenstock",
+      "source": "RODENSTOCK____________74fa.html"
+    },
+    {
+      "id": "eca19e8a4b7c",
+      "name": "Тонировка градиентная",
+      "price": 1790,
+      "supplier": "Rodenstock",
+      "source": "RODENSTOCK____________74fa.html"
+    },
+    {
+      "id": "acc66b5a18cb",
+      "name": "Введение призмы",
+      "price": 4540,
+      "supplier": "Rodenstock",
+      "source": "RODENSTOCK____________74fa.html"
+    },
+    {
+      "id": "59d0435b5be4",
+      "name": "Оптимизация диаметра",
+      "price": 2070,
+      "supplier": "Rodenstock",
+      "source": "RODENSTOCK____________74fa.html"
+    },
+    {
+      "id": "e83fccfc4664",
+      "name": "Увеличение толщины по краю",
+      "price": 1520,
+      "supplier": "Rodenstock",
+      "source": "RODENSTOCK____________74fa.html"
+    },
+    {
+      "id": "db470b361470",
+      "name": "Изменение базовой кривизны",
+      "price": 2750,
+      "supplier": "Rodenstock",
+      "source": "RODENSTOCK____________74fa.html"
+    },
+    {
+      "id": "fc75cfd63c91",
+      "name": "Децентрация",
+      "price": 2750,
+      "supplier": "Rodenstock",
+      "source": "RODENSTOCK____________74fa.html"
+    },
+    {
+      "id": "5481bae16883",
+      "name": "Изготовление ободковых",
+      "price": 1000,
+      "supplier": "Салон",
+      "source": "CRM"
+    },
+    {
+      "id": "a27c16129964",
+      "name": "Изготовление полуободковых",
+      "price": 1500,
+      "supplier": "Салон",
+      "source": "CRM"
+    },
+    {
+      "id": "78150acfcd2e",
+      "name": "Изготовление безободковых",
+      "price": 2000,
+      "supplier": "Салон",
+      "source": "CRM"
+    }
+  ]
+}

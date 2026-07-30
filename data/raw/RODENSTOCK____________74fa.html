@@ -1,0 +1,399 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Прайс Rodenstock — Глаз Да Глаз</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #eef2f8; color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page {
+      width: 1536px; min-height: 2048px; margin: 0 auto 24px;
+      background: #fff; padding: 52px 44px 60px;
+    }
+    .header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px; padding-bottom: 18px; border-bottom: 3px solid #0A66D8;
+    }
+    .brand { display: flex; align-items: center; gap: 16px; }
+    .logo {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: linear-gradient(135deg, #0A66D8, #0952b0);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 800;
+    }
+    .brand h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1; }
+    .brand p { margin-top: 4px; font-size: 18px; color: #64748b; font-weight: 500; }
+    .badges { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .badge {
+      background: #eff6ff; color: #0A66D8; border: 2px solid #bfdbfe;
+      border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 700;
+    }
+    .badge.dark { background: #0f172a; color: #fff; border-color: #0f172a; }
+    .section-title {
+      font-size: 20px; font-weight: 800; color: #0A66D8;
+      margin: 20px 0 10px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::before {
+      content: ''; width: 7px; height: 22px; border-radius: 4px; background: #0A66D8;
+    }
+    table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      border: 1px solid #dbe4f0; border-radius: 12px; overflow: hidden;
+      margin-bottom: 8px;
+    }
+    thead th {
+      background: #0A66D8; color: #fff; text-align: center;
+      padding: 9px 6px; font-size: 12px; font-weight: 700; line-height: 1.25;
+    }
+    thead th.name { text-align: left; padding-left: 12px; }
+    tbody td {
+      padding: 9px 6px; border-bottom: 1px solid #e8edf5;
+      vertical-align: middle; font-size: 14px; text-align: center;
+    }
+    tbody td.name {
+      text-align: left; padding-left: 12px; font-weight: 700; font-size: 15px;
+    }
+    tbody tr:nth-child(even) td { background: #f8fafc; }
+    tbody tr:last-child td { border-bottom: none; }
+    .price { font-weight: 800; color: #0A66D8; white-space: nowrap; }
+    .empty { color: #cbd5e1; }
+    .sub { color: #64748b; font-size: 12px; font-weight: 500; margin-top: 1px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 8px; }
+    .card table { margin-bottom: 0; }
+    .footer { margin-top: 24px; text-align: center; color: #94a3b8; font-size: 14px; }
+    .hint { margin-top: 10px; text-align: center; color: #64748b; font-size: 13px; }
+    .coatings {
+      display: flex; flex-wrap: wrap; gap: 8px; margin-top: 8px;
+    }
+    .chip {
+      background: #f1f5f9; border: 1px solid #e2e8f0; border-radius: 999px;
+      padding: 6px 12px; font-size: 13px; font-weight: 600; color: #334155;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: Progressive + Bifocal -->
+  <div class="page" id="p1">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1>Глаз Да Глаз</h1>
+          <p>Прайс Rodenstock · прогрессив / бифокал</p>
+        </div>
+      </div>
+      <div class="badges">
+        <div class="badge dark">RODENSTOCK</div>
+        <div class="badge">Рецептурные · ₽/шт</div>
+      </div>
+    </div>
+
+    <div class="section-title">Прогрессивные линзы</div>
+    <table>
+      <thead>
+        <tr>
+          <th class="name">Модель</th>
+          <th>1.5</th>
+          <th>1.54<br>Photo</th>
+          <th>1.6</th>
+          <th>1.6<br>Photo</th>
+          <th>1.67</th>
+          <th>1.67<br>Photo</th>
+          <th>1.74</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">Pal Ultimate<br><span class="sub">Far / Flex / Near</span></td>
+          <td class="price">11 000</td>
+          <td class="price">16 500</td>
+          <td class="price">15 130</td>
+          <td class="price">22 000</td>
+          <td class="price">17 880</td>
+          <td class="price">26 130</td>
+          <td class="price">20 630</td>
+        </tr>
+        <tr>
+          <td class="name">Pal Supreme<br><span class="sub">Far / Flex / Near</span></td>
+          <td class="price">8 250</td>
+          <td class="price">13 750</td>
+          <td class="price">12 380</td>
+          <td class="price">19 250</td>
+          <td class="price">15 130</td>
+          <td class="price">23 380</td>
+          <td class="price">17 880</td>
+        </tr>
+        <tr>
+          <td class="name">Pal Organic<br><span class="sub">L / M / S</span></td>
+          <td class="price">4 280</td>
+          <td class="price">9 630</td>
+          <td class="price">8 250</td>
+          <td class="price">15 130</td>
+          <td class="price">11 000</td>
+          <td class="price">19 250</td>
+          <td class="price">13 750</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Бифокальные линзы</div>
+    <table>
+      <thead>
+        <tr>
+          <th class="name">Модель</th>
+          <th>1.5</th>
+          <th>1.54 Photo</th>
+          <th>1.6</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">Bifocal</td>
+          <td class="price">8 250</td>
+          <td class="price">13 750</td>
+          <td class="price">12 380</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="hint">White Label · стоимость с покрытием · дата прайса 10.02.2025</p>
+    <div class="footer">г. Курск · салон оптики «Глаз Да Глаз» · Rodenstock рецептурные</div>
+  </div>
+
+  <!-- PAGE 2: Office + Accommodation -->
+  <div class="page" id="p2">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1>Глаз Да Глаз</h1>
+          <p>Прайс Rodenstock · офис / аккомодация</p>
+        </div>
+      </div>
+      <div class="badges">
+        <div class="badge dark">RODENSTOCK</div>
+        <div class="badge">Рецептурные · ₽/шт</div>
+      </div>
+    </div>
+
+    <div class="section-title">Офисные линзы</div>
+    <table>
+      <thead>
+        <tr>
+          <th class="name">Модель</th>
+          <th>1.5</th>
+          <th>1.6</th>
+          <th>1.67</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">Near Vision Ultimate<br><span class="sub">Office / PC / Book</span></td>
+          <td class="price">11 000</td>
+          <td class="price">15 130</td>
+          <td class="price">17 880</td>
+        </tr>
+        <tr>
+          <td class="name">Near Vision Supreme<br><span class="sub">Office / PC / Book</span></td>
+          <td class="price">8 250</td>
+          <td class="price">12 380</td>
+          <td class="price">15 130</td>
+        </tr>
+        <tr>
+          <td class="name">Intermediate A/B</td>
+          <td class="price">4 280</td>
+          <td class="price">6 340</td>
+          <td class="price">11 140</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Поддержка аккомодации (+0.5 / +0.8 / +1.0)</div>
+    <table>
+      <thead>
+        <tr>
+          <th class="name">Модель</th>
+          <th>1.5</th>
+          <th>1.54<br>Photo</th>
+          <th>1.6</th>
+          <th>1.6<br>Photo</th>
+          <th>1.67</th>
+          <th>1.67<br>Photo</th>
+          <th>1.74</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">SV Ultimate Plus</td>
+          <td class="price">9 630</td>
+          <td class="price">15 130</td>
+          <td class="price">13 750</td>
+          <td class="price">20 630</td>
+          <td class="price">16 500</td>
+          <td class="price">24 750</td>
+          <td class="price">19 250</td>
+        </tr>
+        <tr>
+          <td class="name">SV Supreme Plus</td>
+          <td class="price">8 250</td>
+          <td class="price">13 750</td>
+          <td class="price">12 380</td>
+          <td class="price">19 250</td>
+          <td class="price">15 130</td>
+          <td class="price">23 380</td>
+          <td class="price">17 880</td>
+        </tr>
+        <tr>
+          <td class="name">SV Free Plus</td>
+          <td class="price">4 280</td>
+          <td class="price">9 630</td>
+          <td class="price">8 490</td>
+          <td class="price">15 130</td>
+          <td class="price">11 000</td>
+          <td class="price">19 250</td>
+          <td class="price">13 750</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">г. Курск · салон оптики «Глаз Да Глаз» · Rodenstock рецептурные</div>
+  </div>
+
+  <!-- PAGE 3: Single Vision + extras -->
+  <div class="page" id="p3">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1>Глаз Да Глаз</h1>
+          <p>Прайс Rodenstock · однофокальные + доп.</p>
+        </div>
+      </div>
+      <div class="badges">
+        <div class="badge dark">RODENSTOCK</div>
+        <div class="badge">Рецептурные · ₽/шт</div>
+      </div>
+    </div>
+
+    <div class="section-title">Однофокальные линзы</div>
+    <table>
+      <thead>
+        <tr>
+          <th class="name">Модель</th>
+          <th>1.5</th>
+          <th>1.5<br>Drive<br>Polar</th>
+          <th>1.5<br>Polar</th>
+          <th>1.54<br>Photo</th>
+          <th>1.6</th>
+          <th>1.6<br>Polar</th>
+          <th>1.6<br>Photo</th>
+          <th>1.67</th>
+          <th>1.67<br>Photo</th>
+          <th>1.74</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">SV Ultimate</td>
+          <td class="price">8 250</td>
+          <td class="price">26 130</td>
+          <td class="price">12 380</td>
+          <td class="price">13 750</td>
+          <td class="price">12 380</td>
+          <td class="price">17 880</td>
+          <td class="price">19 250</td>
+          <td class="price">15 130</td>
+          <td class="price">23 380</td>
+          <td class="price">17 880</td>
+        </tr>
+        <tr>
+          <td class="name">SV Supreme</td>
+          <td class="price">6 880</td>
+          <td class="price">22 000</td>
+          <td class="price">11 000</td>
+          <td class="price">12 380</td>
+          <td class="price">11 000</td>
+          <td class="price">16 500</td>
+          <td class="price">17 880</td>
+          <td class="price">13 750</td>
+          <td class="price">22 000</td>
+          <td class="price">16 500</td>
+        </tr>
+        <tr>
+          <td class="name">SV Organic AS</td>
+          <td class="price">4 950</td>
+          <td class="price">19 250</td>
+          <td class="price">8 250</td>
+          <td class="price">9 630</td>
+          <td class="price">7 700</td>
+          <td class="price">13 750</td>
+          <td class="price">15 130</td>
+          <td class="price">11 000</td>
+          <td class="price">17 880</td>
+          <td class="price">13 750</td>
+        </tr>
+        <tr>
+          <td class="name">SV Organic</td>
+          <td class="price">4 950</td>
+          <td class="price">19 250</td>
+          <td class="price">8 250</td>
+          <td class="price">9 630</td>
+          <td class="price">7 700</td>
+          <td class="price">13 750</td>
+          <td class="price">15 130</td>
+          <td class="price">11 000</td>
+          <td class="price">17 880</td>
+          <td class="empty">—</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="two-col">
+      <div>
+        <div class="section-title">Тонировки</div>
+        <table>
+          <thead><tr><th class="name">Услуга</th><th>Цена</th></tr></thead>
+          <tbody>
+            <tr><td class="name">Однотонные</td><td class="price">1 100</td></tr>
+            <tr><td class="name">Градиентные</td><td class="price">1 790</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <div>
+        <div class="section-title">Доп. услуги</div>
+        <table>
+          <thead><tr><th class="name">Услуга</th><th>Цена</th></tr></thead>
+          <tbody>
+            <tr><td class="name">Введение призмы</td><td class="price">4 540</td></tr>
+            <tr><td class="name">Оптимизация диаметра</td><td class="price">2 070</td></tr>
+            <tr><td class="name">Увеличение толщины по краю</td><td class="price">1 520</td></tr>
+            <tr><td class="name">Изменение базовой кривизны</td><td class="price">2 750</td></tr>
+            <tr><td class="name">Децентрация</td><td class="price">2 750</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="section-title">Покрытия (входят в стоимость)</div>
+    <div class="coatings">
+      <span class="chip">HS-AR</span>
+      <span class="chip">HS-AR+</span>
+      <span class="chip">HS-AR++</span>
+      <span class="chip">HS-AR+ blue</span>
+      <span class="chip">HS-AR++ drive</span>
+      <span class="chip">HS-AR++ drive sun</span>
+      <span class="chip">Mirror</span>
+    </div>
+
+    <p class="hint">White Label · дата прайса 10.02.2025</p>
+    <div class="footer">г. Курск · салон оптики «Глаз Да Глаз» · Rodenstock рецептурные</div>
+  </div>
+
+</body>
+</html>

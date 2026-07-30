@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8" />
+  <title>Прайс Maxxee — Глаз Да Глаз</title>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&display=swap');
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: #eef2f8; color: #0f172a;
+      -webkit-font-smoothing: antialiased;
+    }
+    .page {
+      width: 1536px; min-height: 2048px; margin: 0 auto 24px;
+      background: #fff; padding: 52px 48px 60px;
+    }
+    .header {
+      display: flex; align-items: center; justify-content: space-between;
+      margin-bottom: 24px; padding-bottom: 18px; border-bottom: 3px solid #0A66D8;
+    }
+    .brand { display: flex; align-items: center; gap: 16px; }
+    .logo {
+      width: 64px; height: 64px; border-radius: 16px;
+      background: linear-gradient(135deg, #0A66D8, #0952b0);
+      color: #fff; display: flex; align-items: center; justify-content: center;
+      font-size: 20px; font-weight: 800;
+    }
+    .brand h1 { font-size: 34px; font-weight: 800; letter-spacing: -0.5px; line-height: 1.1; }
+    .brand p { margin-top: 4px; font-size: 18px; color: #64748b; font-weight: 500; }
+    .badges { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; }
+    .badge {
+      background: #eff6ff; color: #0A66D8; border: 2px solid #bfdbfe;
+      border-radius: 999px; padding: 8px 14px; font-size: 14px; font-weight: 700;
+    }
+    .badge.dark { background: #0f172a; color: #fff; border-color: #0f172a; }
+    .section-title {
+      font-size: 20px; font-weight: 800; color: #0A66D8;
+      margin: 20px 0 10px; display: flex; align-items: center; gap: 10px;
+    }
+    .section-title::before {
+      content: ''; width: 7px; height: 22px; border-radius: 4px; background: #0A66D8;
+    }
+    table {
+      width: 100%; border-collapse: separate; border-spacing: 0;
+      border: 1px solid #dbe4f0; border-radius: 12px; overflow: hidden;
+      margin-bottom: 6px;
+    }
+    thead th {
+      background: #0A66D8; color: #fff; text-align: left;
+      padding: 10px 10px; font-size: 13px; font-weight: 700;
+    }
+    thead th.r { text-align: right; }
+    tbody td {
+      padding: 9px 10px; border-bottom: 1px solid #e8edf5;
+      vertical-align: middle; font-size: 15px;
+    }
+    tbody tr:nth-child(even) td { background: #f8fafc; }
+    tbody tr:last-child td { border-bottom: none; }
+    .name { font-weight: 700; }
+    .sub { color: #64748b; font-size: 12px; font-weight: 500; margin-top: 1px; }
+    .price { font-weight: 800; color: #0A66D8; white-space: nowrap; text-align: right; font-size: 16px; }
+    .footer { margin-top: 24px; text-align: center; color: #94a3b8; font-size: 14px; }
+    .hint { margin-top: 10px; text-align: center; color: #64748b; font-size: 13px; }
+  </style>
+</head>
+<body>
+
+  <!-- PAGE 1: STOCK -->
+  <div class="page" id="p1">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1>Глаз Да Глаз</h1>
+          <p>Прайс Maxxee · склад</p>
+        </div>
+      </div>
+      <div class="badges">
+        <div class="badge dark">MAXXEE</div>
+        <div class="badge">Склад · ₽/шт</div>
+      </div>
+    </div>
+
+    <div class="section-title">Однофокальные (склад)</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Модель</th><th>Индекс</th><th>Покрытие</th><th>SPH / Ø</th><th class="r">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><div class="name">Maxxee ASP</div><div class="sub">Асферика · бесцветные</div></td>
+          <td>1.67</td><td>Hard Clean</td><td>0 … −10 / +6 · Ø65–75</td>
+          <td class="price">5 672</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee ASP</div><div class="sub">Асферика · бесцветные</div></td>
+          <td>1.60</td><td>Hard Clean</td><td>0 … −10 / +6 · Ø65–75</td>
+          <td class="price">3 271</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee SP</div></td>
+          <td>1.60</td><td>Blue Cut</td><td>0 … −6 / +6 · Ø65/75</td>
+          <td class="price">4 347</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee SP</div></td>
+          <td>1.60</td><td>Hard Clean</td><td>0 … −8 / +6 · Ø65–75</td>
+          <td class="price">2 981</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee SP</div></td>
+          <td>1.60</td><td>Hard Multi</td><td>0 … −8 / +6 · Ø65–75</td>
+          <td class="price">2 567</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee SP</div></td>
+          <td>1.55</td><td>Hard Clean</td><td>0 … −6 / +6 · Ø65–72</td>
+          <td class="price">1 656</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee SP</div></td>
+          <td>1.50</td><td>Blue Cut</td><td>0 … −6 / +6 · Ø65/70</td>
+          <td class="price">2 898</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee SP</div></td>
+          <td>1.50</td><td>Hard Clean</td><td>+6 … −6 · Ø65/70</td>
+          <td class="price">1 346</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee SP</div></td>
+          <td>1.50</td><td>Hard Multi</td><td>+6 … −6 · Ø65/70</td>
+          <td class="price">1 076</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee SP</div></td>
+          <td>1.50</td><td>Uncoated</td><td>+6 … −6 · Ø65/70</td>
+          <td class="price">476</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee PHOTO 1.56</div><div class="sub">Brown / Gray</div></td>
+          <td>1.56</td><td>Hard Clean</td><td>0 … −6 / +4 · Ø65/70</td>
+          <td class="price">4 554</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee SP 1.56 UV</div></td>
+          <td>1.56</td><td>HMC Blue</td><td>+6 … −6 · Ø70</td>
+          <td class="price">1 408</td>
+        </tr>
+        <tr>
+          <td><div class="name">Maxxee Bifocal</div><div class="sub">Склад · только сферические</div></td>
+          <td>1.50</td><td>Hard Multi</td><td>+3 … −2 · Ø70</td>
+          <td class="price">5 506</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">г. Курск · салон оптики «Глаз Да Глаз» · Maxxee</div>
+  </div>
+
+  <!-- PAGE 2: Progressive RX -->
+  <div class="page" id="p2">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1>Глаз Да Глаз</h1>
+          <p>Прайс Maxxee · прогрессивные рецептурные</p>
+        </div>
+      </div>
+      <div class="badges">
+        <div class="badge dark">MAXXEE</div>
+        <div class="badge">Рецепт · ₽/шт</div>
+      </div>
+    </div>
+
+    <div class="section-title">Multifocal freeform plus · бесцветные</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Индекс</th><th>Blue Cut</th><th>Hard Clean</th><th>Hard Multi</th><th>SPH / Ø</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">1.67</td>
+          <td class="price">9 212</td><td class="price">9 005</td><td class="price">8 798</td>
+          <td><div class="sub">+8 … −13 · Cyl ≤ 4</div></td>
+        </tr>
+        <tr>
+          <td class="name">1.60</td>
+          <td class="price">6 624</td><td class="price">6 417</td><td class="price">6 210</td>
+          <td><div class="sub">+6.5 … −12 · Cyl ≤ 4</div></td>
+        </tr>
+        <tr>
+          <td class="name">1.50</td>
+          <td class="price">5 279</td><td class="price">5 072</td><td class="price">4 865</td>
+          <td><div class="sub">+6 … −8 · Cyl ≤ 4</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Multifocal freeform · бесцветные</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Индекс</th><th>Blue Cut</th><th>Hard Clean</th><th>Hard Multi</th><th>SPH / Ø</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">1.67</td>
+          <td class="price">7 866</td><td class="price">7 659</td><td class="price">7 452</td>
+          <td><div class="sub">+7 … −13 · Cyl ≤ 4</div></td>
+        </tr>
+        <tr>
+          <td class="name">1.60</td>
+          <td class="price">5 693</td><td class="price">5 486</td><td class="price">5 279</td>
+          <td><div class="sub">+6 … −10 · Cyl ≤ 4</div></td>
+        </tr>
+        <tr>
+          <td class="name">1.50</td>
+          <td class="price">4 451</td><td class="price">4 244</td><td class="price">4 037</td>
+          <td><div class="sub">+6 … −8 · Cyl ≤ 4</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Multifocal freeform plus Photo · Brown / Gray / Green</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Индекс</th><th>Blue Cut</th><th>Hard Clean</th><th>Hard Multi</th><th>SPH / Ø</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">1.67</td>
+          <td class="price">11 282</td><td class="price">11 075</td><td class="price">10 868</td>
+          <td><div class="sub">+8 … −13 · Cyl ≤ 4</div></td>
+        </tr>
+        <tr>
+          <td class="name">1.60</td>
+          <td class="price">8 694</td><td class="price">8 487</td><td class="price">8 280</td>
+          <td><div class="sub">+6.5 … −12 · Cyl ≤ 4</div></td>
+        </tr>
+        <tr>
+          <td class="name">1.50</td>
+          <td class="price">7 349</td><td class="price">7 142</td><td class="price">6 935</td>
+          <td><div class="sub">+6 … −8 · Cyl ≤ 4</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Multifocal freeform Photo · Brown / Gray</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Индекс</th><th>Blue Cut</th><th>Hard Clean</th><th>Hard Multi</th><th>SPH / Ø</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">1.67</td>
+          <td class="price">9 936</td><td class="price">9 729</td><td class="price">9 522</td>
+          <td><div class="sub">+7 … −13 · Cyl ≤ 4</div></td>
+        </tr>
+        <tr>
+          <td class="name">1.60</td>
+          <td class="price">7 763</td><td class="price">7 556</td><td class="price">7 349</td>
+          <td><div class="sub">+6 … −10 · Cyl ≤ 4</div></td>
+        </tr>
+        <tr>
+          <td class="name">1.50</td>
+          <td class="price">6 521</td><td class="price">6 314</td><td class="price">6 107</td>
+          <td><div class="sub">+6 … −8 · Cyl ≤ 4</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">г. Курск · салон оптики «Глаз Да Глаз» · Maxxee</div>
+  </div>
+
+  <!-- PAGE 3: Polar + SV RX + Bifocal RX -->
+  <div class="page" id="p3">
+    <div class="header">
+      <div class="brand">
+        <div class="logo">GD</div>
+        <div>
+          <h1>Глаз Да Глаз</h1>
+          <p>Прайс Maxxee · поляризация · однофокальные · бифокал</p>
+        </div>
+      </div>
+      <div class="badges">
+        <div class="badge dark">MAXXEE</div>
+        <div class="badge">Рецепт · ₽/шт</div>
+      </div>
+    </div>
+
+    <div class="section-title">Multifocal freeform plus Polar · Brown / Gray / American Grey</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Индекс</th><th>Hard Clean</th><th>Hard Multi</th><th>SPH / Ø</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">1.60</td>
+          <td class="price">7 452</td><td class="price">7 245</td>
+          <td><div class="sub">+6 … −10 · Cyl ≤ 4</div></td>
+        </tr>
+        <tr>
+          <td class="name">1.50</td>
+          <td class="price">6 107</td><td class="price">5 900</td>
+          <td><div class="sub">+3 … −8 · Cyl ≤ 4</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Однофокальные рецептурные · Maxxee SP</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Индекс</th><th>Blue Cut</th><th>Hard Clean</th><th>Hard Multi</th><th>SPH / Ø</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">1.67</td>
+          <td class="price">5 279</td><td class="price">5 072</td><td class="price">4 865</td>
+          <td><div class="sub">+10 … −15 · Cyl ≤ 4</div></td>
+        </tr>
+        <tr>
+          <td class="name">1.60</td>
+          <td class="price">4 140</td><td class="price">3 933</td><td class="price">3 726</td>
+          <td><div class="sub">+8 … −13 · Cyl ≤ 4</div></td>
+        </tr>
+        <tr>
+          <td class="name">1.50</td>
+          <td class="price">2 381</td><td class="price">2 174</td><td class="price">1 967</td>
+          <td><div class="sub">+8 … −10 · Cyl ≤ 4</div></td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="section-title">Бифокальные рецептурные · Maxxee Bifocal 1.50</div>
+    <table>
+      <thead>
+        <tr>
+          <th>Покрытие</th><th>SPH / Ø</th><th class="r">Цена</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td class="name">Hard Multi Coat</td>
+          <td>+5.50 … −6.00 · Ø70/75 · Cyl ≤ 4</td>
+          <td class="price">4 140</td>
+        </tr>
+        <tr>
+          <td class="name">Hard Coat</td>
+          <td>+5.50 … −6.00 · Ø70/75 · Cyl ≤ 4</td>
+          <td class="price">3 881</td>
+        </tr>
+        <tr>
+          <td class="name">Uncoated</td>
+          <td>+5.50 … −6.00 · Ø70/75 · Cyl ≤ 4</td>
+          <td class="price">3 674</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <p class="hint">Цены за 1 линзу · склад и рецепт разделены по листам</p>
+    <div class="footer">г. Курск · салон оптики «Глаз Да Глаз» · Maxxee</div>
+  </div>
+
+</body>
+</html>
