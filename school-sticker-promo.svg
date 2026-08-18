@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="70mm" height="105mm" viewBox="0 0 700 1050" role="img" aria-labelledby="title desc">
+  <title id="title">Back-to-school optical promotion sticker</title>
+  <desc id="desc">Editable vector recreation of a school promotion sticker with child illustration, discount badge, glasses drawings, and address footer.</desc>
+  <defs>
+    <style>
+      .blue { fill: #075aa5; }
+      .blue-dark { fill: #003f83; }
+      .blue-mid { fill: #1374bf; }
+      .cream { fill: #fff7ea; }
+      .ink { fill: #123961; }
+      .white { fill: #ffffff; }
+      .thin-outline { fill: none; stroke: #075aa5; stroke-width: 4; stroke-linecap: round; stroke-linejoin: round; }
+      .tiny { font-family: Arial, Helvetica, sans-serif; font-size: 18px; letter-spacing: .5px; }
+      .small { font-family: Arial, Helvetica, sans-serif; font-size: 24px; font-weight: 700; }
+      .body { font-family: Arial, Helvetica, sans-serif; font-size: 32px; font-weight: 700; }
+      .headline { font-family: Arial Black, Arial, Helvetica, sans-serif; font-size: 70px; font-weight: 900; letter-spacing: -2px; }
+      .headline-small { font-family: Arial Black, Arial, Helvetica, sans-serif; font-size: 60px; font-weight: 900; letter-spacing: -2px; }
+    </style>
+    <clipPath id="stickerClip">
+      <rect x="18" y="18" width="664" height="1014" rx="36" />
+    </clipPath>
+    <filter id="softShadow" x="-20%" y="-20%" width="140%" height="140%">
+      <feDropShadow dx="0" dy="8" stdDeviation="8" flood-color="#00457f" flood-opacity=".22"/>
+    </filter>
+  </defs>
+
+  <rect x="10" y="10" width="680" height="1030" rx="42" fill="#ffffff"/>
+  <rect x="18" y="18" width="664" height="1014" rx="36" class="cream"/>
+  <g clip-path="url(#stickerClip)">
+    <path d="M-40 135 C85 92 124 84 221 24 C194 93 131 155 32 200 C6 184 -18 163 -40 135Z" fill="#eaf4fb"/>
+    <path d="M424 -25 C560 54 640 56 756 24 L756 180 C651 146 540 152 456 199 C492 122 492 52 424 -25Z" fill="#e8f4fd"/>
+    <circle cx="618" cy="565" r="205" fill="#eef7fd"/>
+    <circle cx="66" cy="710" r="170" fill="#fff0d5"/>
+  </g>
+
+  <!-- Top optical logo -->
+  <g transform="translate(45 33)">
+    <path d="M13 18 C36 -5 88 -5 111 18 C88 40 36 40 13 18Z" class="thin-outline"/>
+    <circle cx="47" cy="18" r="8" class="blue"/>
+    <text x="0" y="62" class="tiny ink" font-weight="700">&#1043;&#1083;&#1072;&#1079; &#1076;&#1086; &#1043;&#1083;&#1072;&#1079;&#1072;</text>
+  </g>
+
+  <!-- Headline -->
+  <g transform="translate(44 118)">
+    <text x="0" y="0" class="headline blue">&#1043;&#1054;&#1058;&#1054;&#1042;&#1048;&#1052;&#1057;&#1071;</text>
+    <text x="0" y="72" class="headline-small blue">&#1050; &#1064;&#1050;&#1054;&#1051;&#1045;!</text>
+    <path d="M2 92 C80 82 177 84 289 100" class="thin-outline" stroke="#f39a28"/>
+  </g>
+
+  <!-- Discount badge -->
+  <g transform="translate(414 86)" filter="url(#softShadow)">
+    <path d="M26 0 H235 C250 0 262 12 262 27 V178 C262 193 250 205 235 205 H52 L25 234 L31 205 H26 C12 205 0 193 0 178 V27 C0 12 12 0 26 0Z" class="blue-mid"/>
+    <text x="132" y="40" text-anchor="middle" class="small white">&#1057;&#1050;&#1048;&#1044;&#1050;&#1040;</text>
+    <text x="132" y="116" text-anchor="middle" font-family="Arial Black, Arial, Helvetica, sans-serif" font-size="88" font-weight="900" fill="#ffffff">50%</text>
+    <text x="132" y="151" text-anchor="middle" class="small white">&#1085;&#1072; &#1086;&#1087;&#1088;&#1072;&#1074;&#1099;</text>
+    <text x="132" y="181" text-anchor="middle" class="tiny white" font-weight="700">&#1076;&#1083;&#1103; &#1076;&#1077;&#1090;&#1077;&#1081;</text>
+    <text x="132" y="207" text-anchor="middle" class="tiny white" font-weight="700">&#1080; &#1087;&#1086;&#1076;&#1088;&#1086;&#1089;&#1090;&#1082;&#1086;&#1074;</text>
+  </g>
+
+  <g transform="translate(455 318)" filter="url(#softShadow)">
+    <rect x="0" y="0" width="185" height="72" rx="36" class="white"/>
+    <text x="92" y="30" text-anchor="middle" class="tiny blue" font-weight="700">&#1076;&#1086; 30</text>
+    <text x="92" y="55" text-anchor="middle" class="tiny blue" font-weight="700">&#1089;&#1077;&#1085;&#1090;&#1103;&#1073;&#1088;&#1103;</text>
+  </g>
+
+  <!-- Child illustration -->
+  <g transform="translate(52 278)">
+    <path d="M88 420 C74 337 81 262 126 215 C178 159 280 165 327 222 C370 275 373 349 359 420Z" fill="#0e62aa"/>
+    <path d="M151 309 C118 332 91 379 80 462 L380 462 C366 382 337 333 301 310 C263 337 192 338 151 309Z" fill="#1f78be"/>
+    <path d="M108 462 C103 409 106 360 137 315" class="thin-outline" stroke="#ffffff" opacity=".55"/>
+    <path d="M348 462 C351 412 342 363 311 318" class="thin-outline" stroke="#ffffff" opacity=".55"/>
+    <path d="M166 293 C175 333 209 354 235 354 C262 354 294 334 301 293Z" fill="#f2b879"/>
+    <ellipse cx="233" cy="219" rx="113" ry="126" fill="#ffc98d"/>
+    <ellipse cx="126" cy="221" rx="19" ry="31" fill="#ffc98d"/>
+    <ellipse cx="340" cy="221" rx="19" ry="31" fill="#ffc98d"/>
+    <path d="M122 163 C132 70 199 38 269 63 C339 91 358 154 343 228 C325 173 297 143 262 125 C211 158 165 171 122 163Z" fill="#9a5525"/>
+    <path d="M146 137 C139 86 187 42 254 54 C227 80 194 108 146 137Z" fill="#7c421f"/>
+    <path d="M256 62 C316 60 358 107 352 168 C326 127 294 100 256 62Z" fill="#7c421f"/>
+    <circle cx="194" cy="224" r="12" class="ink"/>
+    <circle cx="273" cy="224" r="12" class="ink"/>
+    <path d="M218 260 C230 269 247 269 259 260" class="thin-outline" stroke="#8a4a23"/>
+    <path d="M181 191 H220 C237 191 250 204 250 221 C250 238 237 251 220 251 H181 C164 251 151 238 151 221 C151 204 164 191 181 191Z" fill="none" stroke="#074d8d" stroke-width="9"/>
+    <path d="M259 191 H298 C315 191 328 204 328 221 C328 238 315 251 298 251 H259 C242 251 229 238 229 221 C229 204 242 191 259 191Z" fill="none" stroke="#074d8d" stroke-width="9"/>
+    <path d="M250 219 C253 217 256 217 259 219" fill="none" stroke="#074d8d" stroke-width="8" stroke-linecap="round"/>
+    <path d="M151 218 L124 210 M328 218 L342 210" fill="none" stroke="#074d8d" stroke-width="8" stroke-linecap="round"/>
+    <path d="M176 184 C190 173 212 171 225 178 M258 178 C273 170 296 174 309 185" class="thin-outline" stroke="#70401e"/>
+  </g>
+
+  <!-- Decorative glasses and arrows -->
+  <g transform="translate(390 585)">
+    <path d="M30 92 C76 50 146 46 201 87" class="thin-outline" opacity=".25"/>
+    <path d="M6 144 C51 124 106 125 148 147 C177 126 234 122 285 142" class="thin-outline"/>
+    <path d="M16 156 C37 124 88 126 109 157 C93 190 38 190 16 156Z" fill="none" stroke="#075aa5" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M175 155 C197 124 248 126 269 158 C251 191 197 189 175 155Z" fill="none" stroke="#075aa5" stroke-width="7" stroke-linejoin="round"/>
+    <path d="M109 157 C129 148 154 148 175 155" fill="none" stroke="#075aa5" stroke-width="7" stroke-linecap="round"/>
+    <path d="M10 146 C-8 136 -22 119 -29 99 M271 147 C293 133 313 115 327 91" fill="none" stroke="#075aa5" stroke-width="5" stroke-linecap="round"/>
+    <path d="M73 234 C107 208 154 209 187 235 C164 258 101 259 73 234Z" fill="none" stroke="#075aa5" stroke-width="6" stroke-linejoin="round"/>
+    <path d="M19 261 C74 231 166 228 239 259" fill="none" stroke="#075aa5" stroke-width="4" stroke-linecap="round" opacity=".45"/>
+  </g>
+
+  <!-- Offer detail strip -->
+  <g transform="translate(415 454)">
+    <rect x="0" y="0" width="220" height="74" rx="20" fill="#ffffff" opacity=".95"/>
+    <text x="110" y="30" text-anchor="middle" class="tiny blue" font-weight="700">&#1044;&#1077;&#1090;&#1089;&#1082;&#1080;&#1077; &#1086;&#1087;&#1088;&#1072;&#1074;&#1099;</text>
+    <text x="110" y="56" text-anchor="middle" class="tiny blue" font-weight="700">&#1080; &#1087;&#1088;&#1086;&#1074;&#1077;&#1088;&#1082;&#1072; &#1079;&#1088;&#1077;&#1085;&#1080;&#1103;</text>
+  </g>
+
+  <!-- Footer address bar -->
+  <g transform="translate(0 895)">
+    <path d="M0 0 H700 V155 H0Z" class="blue-dark"/>
+    <rect x="28" y="25" width="92" height="92" rx="22" fill="#ffffff" opacity=".16"/>
+    <path d="M74 38 C52 38 35 55 35 77 C35 106 74 132 74 132 C74 132 113 106 113 77 C113 55 96 38 74 38Z" fill="#ffffff"/>
+    <circle cx="74" cy="77" r="17" class="blue-dark"/>
+    <text x="143" y="57" class="body white">&#1052;&#1072;&#1081;&#1089;&#1082;&#1080;&#1081; &#1088;&#1099;&#1085;&#1086;&#1082;</text>
+    <text x="145" y="91" class="tiny white" opacity=".92">&#1075;. &#1061;&#1072;&#1088;&#1100;&#1082;&#1086;&#1074;, &#1091;&#1083;. &#1040;&#1082;&#1072;&#1076;&#1077;&#1084;&#1080;&#1082;&#1072; &#1055;&#1072;&#1074;&#1083;&#1086;&#1074;&#1072;, 120</text>
+    <text x="145" y="122" class="tiny white" opacity=".86">&#1088;&#1103;&#1076; 1, &#1084;&#1077;&#1089;&#1090;&#1086; 15 &#8226; &#1091;&#1090;&#1086;&#1095;&#1085;&#1080;&#1090;&#1077; &#1072;&#1076;&#1088;&#1077;&#1089; &#1087;&#1077;&#1088;&#1077;&#1076; &#1087;&#1077;&#1095;&#1072;&#1090;&#1100;&#1102;</text>
+    <g transform="translate(536 40)">
+      <circle cx="0" cy="0" r="18" class="white"/>
+      <circle cx="52" cy="0" r="18" class="white"/>
+      <circle cx="104" cy="0" r="18" class="white"/>
+      <text x="0" y="7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#003f83">f</text>
+      <text x="52" y="7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#003f83">ig</text>
+      <text x="104" y="7" text-anchor="middle" font-family="Arial, Helvetica, sans-serif" font-size="18" font-weight="700" fill="#003f83">@</text>
+    </g>
+  </g>
+
+  <!-- Safe area and cutline guides. Hide these layers before final print if the print shop requests artwork only. -->
+  <rect x="18" y="18" width="664" height="1014" rx="36" fill="none" stroke="#ff5a5f" stroke-width="2" stroke-dasharray="10 8" opacity=".45"/>
+  <rect x="38" y="38" width="624" height="974" rx="28" fill="none" stroke="#075aa5" stroke-width="1.5" stroke-dasharray="6 8" opacity=".25"/>
+</svg>
