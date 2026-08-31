@@ -1,0 +1,51 @@
+{
+  "name": "glaz-da-glaz-crm-desktop",
+  "version": "3.4.0",
+  "description": "Desktop wrapper for the Glaz Da Glaz CRM.",
+  "main": "electron/main.js",
+  "private": true,
+  "scripts": {
+    "start": "electron .",
+    "dist": "electron-builder",
+    "dist:win32": "electron-builder --win portable --ia32",
+    "dist:win32:installer": "electron-builder --win nsis --ia32",
+    "dist:win64": "electron-builder --win portable --x64"
+  },
+  "build": {
+    "appId": "ru.glazdaglaz.crm",
+    "productName": "Glaz Da Glaz CRM",
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "index.html",
+      "README.txt",
+      "flyer-a4-6up.html",
+      "flyer-a4-6up.pdf",
+      "electron/**/*"
+    ],
+    "asar": true,
+    "win": {
+      "target": [
+        {
+          "target": "portable",
+          "arch": [
+            "ia32"
+          ]
+        }
+      ]
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "perMachine": false,
+      "shortcutName": "Glaz Da Glaz CRM",
+      "uninstallDisplayName": "Glaz Da Glaz CRM"
+    }
+  },
+  "devDependencies": {
+    "electron": "22.3.27",
+    "electron-builder": "^26.15.3"
+  }
+}
