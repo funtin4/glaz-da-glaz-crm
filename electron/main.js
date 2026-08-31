@@ -44,33 +44,33 @@ function createMenu() {
         ]
       : []),
     {
-      label: 'File',
+      label: 'Файл',
       submenu: [
-        { role: isMac ? 'close' : 'quit', label: isMac ? 'Close' : 'Exit' }
+        { role: isMac ? 'close' : 'quit', label: isMac ? 'Закрыть' : 'Выход' }
       ]
     },
     {
-      label: 'View',
+      label: 'Вид',
       submenu: [
-        { role: 'reload' },
-        { role: 'forceReload' },
+        { role: 'reload', label: 'Обновить' },
+        { role: 'forceReload', label: 'Обновить полностью' },
         { type: 'separator' },
-        { role: 'resetZoom' },
-        { role: 'zoomIn' },
-        { role: 'zoomOut' },
+        { role: 'resetZoom', label: 'Масштаб 100%' },
+        { role: 'zoomIn', label: 'Увеличить' },
+        { role: 'zoomOut', label: 'Уменьшить' },
         { type: 'separator' },
-        { role: 'togglefullscreen' }
+        { role: 'togglefullscreen', label: 'Полный экран' }
       ]
     },
     {
-      label: 'Help',
+      label: 'Помощь',
       submenu: [
         {
-          label: 'Data backup reminder',
+          label: 'Напоминание о резервной копии',
           click: (_menuItem, browserWindow) => {
             if (browserWindow) {
               browserWindow.webContents.executeJavaScript(
-                "alert('Data is stored on this computer. Use the \"Save database\" button before moving to another PC or reinstalling the app.');"
+                "alert('Данные хранятся на этом компьютере. Перед переносом на другой ПК или переустановкой используйте кнопку \"Сохранить базу\".');"
               );
             }
           }
