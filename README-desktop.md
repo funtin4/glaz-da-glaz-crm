@@ -15,10 +15,14 @@ npm start
 npm run dist:win32
 ```
 
-Electron is pinned to the newest stable release found with a published
-`win32-ia32` runtime archive. Newer Electron releases may be available for
-64-bit Windows only, so updating Electron should be followed by a test build of
-`npm run dist:win32`.
+Electron is pinned to `22.3.27` for Windows 8.1 compatibility. Electron 22 is
+the final major Electron release line that supports Windows 7, Windows 8, and
+Windows 8.1; Electron 23 and newer require Windows 10 or newer.
+
+This is a legacy compatibility build. Electron 22 is end-of-life, so npm may
+report vulnerabilities in its dependency tree. Updating Electron should only be
+done if support for Windows 8.1 is no longer required, and it must be followed
+by a test build of `npm run dist:win32`.
 
 The default 32-bit build creates a Windows `ia32` portable executable in
 `dist/`.

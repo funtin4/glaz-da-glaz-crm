@@ -9,11 +9,12 @@
     "dist": "electron-builder",
     "dist:win32": "electron-builder --win portable --ia32",
     "dist:win32:installer": "electron-builder --win nsis --ia32",
-    "dist:win64": "electron-builder --win --x64"
+    "dist:win64": "electron-builder --win portable --x64"
   },
   "build": {
     "appId": "ru.glazdaglaz.crm",
     "productName": "Glaz Da Glaz CRM",
+    "artifactName": "${productName}-${version}-${arch}.${ext}",
     "directories": {
       "output": "dist"
     },
@@ -44,7 +45,7 @@
     }
   },
   "devDependencies": {
-    "electron": "43.5.0",
+    "electron": "22.3.27",
     "electron-builder": "^26.15.3"
   }
 }
